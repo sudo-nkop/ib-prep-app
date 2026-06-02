@@ -1,0 +1,76 @@
+[
+  {
+    "id": "eng-b-hl-001",
+    "subjectId": "english-b-hl",
+    "topic": "Text Analysis",
+    "paper": 1,
+    "level": "HL",
+    "format": "ShortAnswer",
+    "commandTerm": "identify",
+    "marks": 4,
+    "prompt": "Read the following excerpt and answer the questions below.\n\n\"The city never sleeps, not really. Long after the restaurants have dimmed their lights and the last taxi has ferried its final passenger home, the city still breathes — the distant wail of a siren, the scrape of a cleaner's cart on polished floors, the hum of the ventilation systems that keep glass towers alive through the small hours. To love a city is to know it in these moments, when it strips away its performance and becomes, simply, itself.\"\n\n(a) Identify the tone of this passage. [1 mark]\n(b) Identify one literary device used by the author and explain its effect. [2 marks]\n(c) What does the author suggest about the nature of cities in the final sentence? [1 mark]",
+    "markScheme": "(a) Tone: contemplative/reflective/intimate/meditative [1 mark — accept any appropriate adjective with brief justification]\n(b) Any one device with explanation (2 marks):\n• Personification: the city 'breathes', 'strips away its performance', 'becomes itself' — gives the city human qualities, suggesting it has an authentic inner life beneath its public facade\n• Listing/asyndeton: 'distant wail of a siren, the scrape of a cleaner's cart, the hum of ventilation' — creates a rhythmic accumulation of sensory detail, conveying the layered, persistent sounds of the city at night\n• Extended metaphor: the city as a performer/person — frames urban life in terms of authenticity versus performance\n(c) The author suggests that a city's true nature is revealed not in its public, busy daytime performance but in its quiet, unguarded moments — implying that cities, like people, have an authentic self beneath the surface.  [1 mark]",
+    "exemplarAnswer": "(a) Contemplative/meditative — the pace is slow, the details carefully observed, conveying quiet reflection rather than urgency.\n(b) Personification: the city 'breathes', 'strips away its performance and becomes, simply, itself'. This gives the city human qualities of interiority, suggesting it has a genuine self that exists independently of the people inhabiting it.\n(c) The author suggests cities have an authentic identity that is concealed during their busy public hours and only revealed in quiet moments — a romantic view of urban consciousness."
+  },
+  {
+    "id": "eng-b-hl-002",
+    "subjectId": "english-b-hl",
+    "topic": "Text Analysis",
+    "paper": 1,
+    "level": "HL",
+    "format": "ShortAnswer",
+    "commandTerm": "examine",
+    "marks": 6,
+    "prompt": "A news editorial begins: \"The data is clear: youth mental health has deteriorated sharply since 2012. Rates of depression, anxiety, and self-harm among teenagers have climbed steadily, and the correlation with the rise of social media platforms is too pronounced to ignore. We cannot continue to allow technology companies to profit from the destruction of a generation's wellbeing without accountability.\"\n\nExamine the author's use of language to persuade readers. Refer to specific textual evidence.",
+    "markScheme": "Award marks for identifying persuasive techniques with textual evidence and analysis of effect:\n• Appeal to authority/evidence: 'The data is clear' — presents an empirical basis before the argument, pre-empting scepticism. Note this is also potentially misleading: the data's clarity is asserted, not demonstrated.\n• Causal language: 'correlation... too pronounced to ignore' — slides from correlation to implied causation, a logical move worth noting\n• Emotive/hyperbolic language: 'destruction of a generation's wellbeing' — heightens emotional stakes, positions the reader to feel urgency\n• Passive voice to assign blame: 'profit from the destruction' — frames tech companies as active agents of harm\n• Inclusive pronoun: 'We cannot continue to allow' — recruits reader into the author's position\n• Escalating sentence structure: moves from factual claim → causal inference → moral imperative\n[Award 1-2 marks for identification, 1-2 for analysis of effect, 1-2 for critical engagement with how techniques might manipulate as well as persuade]"
+  },
+  {
+    "id": "eng-b-hl-003",
+    "subjectId": "english-b-hl",
+    "topic": "Written Production",
+    "paper": 2,
+    "level": "HL",
+    "format": "Essay",
+    "commandTerm": "discuss",
+    "marks": 10,
+    "prompt": "You have been asked to write a speech for a school assembly on the topic: \"Social media connects us — but at what cost?\"\n\nWrite the speech (approximately 400-500 words). Your speech should: present a clear argument, use rhetorical devices appropriate to the spoken format, and acknowledge at least one counterargument.",
+    "markScheme": "Criterion A — Language (5 marks): Accuracy of grammar, vocabulary range, register appropriate to a formal speech.\nCriterion B — Message (3 marks): Clear argument, acknowledgement of counterargument, persuasive structure.\nCriterion C — Format (2 marks): Appropriate speech conventions — direct address ('Good morning...'), rhetorical questions, inclusive language, strong conclusion.\n\nDeduct marks for inappropriate register, unclear argument, or absent counterargument.",
+    "exemplarAnswer": "Good morning, everyone.\n\nImagine this: you're sitting at dinner with your family. Your phone buzzes. You glance at it — just for a second — and suddenly ten minutes have passed. Sound familiar? Social media promised to bring us closer together. And in some ways, it has. I can send a voice message to my grandmother in Lagos in thirty seconds. Students in remote communities can access tutoring, support networks, and communities of people who understand them. These are genuine goods.\n\nBut we should be honest about the cost.\n\nStudies published since 2017 consistently show that heavy social media use is correlated with increased anxiety and depression among teenagers — particularly girls. The platforms are designed by some of the most brilliant engineers alive, using the same psychological mechanisms as slot machines, to maximise the time we spend scrolling. When we feel bad, we scroll more. When we scroll more, we often feel worse. This is not accidental: it is profitable.\n\nSome of you might argue that the problem is not social media but how we use it. Use it responsibly and it enriches your life. I take this point seriously. Not everyone's mental health suffers, and restricting access to teenagers treats us as incapable of agency. I agree.\n\nBut here is what I would ask you to consider: can we speak meaningfully about 'responsible use' of a technology specifically engineered to circumvent our self-control? The responsibility lies not only with us, but with the companies that profit from our compulsive engagement.\n\nSo what do we do? I'm not calling for us to delete everything. I'm calling for us to use these tools with open eyes — to recognise when we're being used by them rather than using them. And I'm calling for the adults in this room, and the policymakers beyond it, to hold technology companies to account for the design choices that are, literally, changing how our brains develop.\n\nConnect, by all means. But do it on your own terms.\n\nThank you."
+  },
+  {
+    "id": "eng-b-hl-004",
+    "subjectId": "english-b-hl",
+    "topic": "Literary Works",
+    "paper": 2,
+    "level": "HL",
+    "format": "Essay",
+    "commandTerm": "examine",
+    "marks": 10,
+    "prompt": "\"In literary works studied at HL, authors use setting to reflect characters' internal states.\" Examine this claim with reference to one literary text you have studied.",
+    "markScheme": "Level 5 (9-10): Sustained, detailed analysis of setting as a reflection of interiority. Uses specific textual evidence (quotations). Demonstrates understanding of literary technique and authorial craft. Makes a clear, arguable claim.\n\nFor full marks, students must: identify a specific work; analyse at least two setting details; explain how they mirror character psychology; demonstrate awareness of how the author constructs this — i.e., intentionality.\n\nExample texts: 1984 (Orwell) — drab, decaying London mirrors Winston's despair; Chronicle of a Death Foretold (García Márquez) — suffocating small town reflects fatalistic inevitability; The Stranger (Camus) — Algerian heat and light associated with Meursault's crisis; Things Fall Apart (Achebe) — landscape of Umuofia reflects Okonkwo's strength and its erosion."
+  },
+  {
+    "id": "eng-b-hl-005",
+    "subjectId": "english-b-hl",
+    "topic": "Listening Comprehension",
+    "paper": 1,
+    "level": "HL",
+    "format": "ShortAnswer",
+    "commandTerm": "identify",
+    "marks": 4,
+    "prompt": "You have listened to a podcast interview with a marine biologist discussing coral reef decline. Answer the following questions based on the audio.\n\n(a) According to the speaker, what is the primary cause of coral bleaching? [1 mark]\n(b) The speaker mentions a 'glimmer of hope'. What does she refer to? [1 mark]\n(c) Identify the register used in the podcast. Justify your answer with reference to one specific feature. [2 marks]",
+    "markScheme": "(Note: this question accompanies an audio stimulus — in exam conditions, answers are based on heard content. The following represents model answers for a standard listening exercise on this topic.)\n(a) Rising ocean temperatures caused by climate change (global warming). [1 mark]\n(b) Any reference to: coral restoration projects / breeding heat-resistant coral varieties / marine protected areas reducing other stressors. [1 mark]\n(c) Register: informal/conversational OR semi-formal. Justification: use of contractions ('it's', 'we're'), first-person ('I think', 'I've seen'), hedging language ('sort of', 'kind of'), or conversational fillers — OR: use of technical terminology ('symbiotic algae', 'bleaching thresholds') balanced with accessible explanations, suggesting semi-formal. [1 mark for register + 1 mark for specific justified feature]"
+  },
+  {
+    "id": "eng-b-hl-006",
+    "subjectId": "english-b-hl",
+    "topic": "Visual Stimulus",
+    "paper": 1,
+    "level": "HL",
+    "format": "ShortAnswer",
+    "commandTerm": "examine",
+    "marks": 6,
+    "prompt": "A photograph shows a young child, approximately 5 years old, sitting alone on a plastic chair in what appears to be an airport waiting area. The child's face is turned away from the camera. Around her, other passengers move briskly, many looking at their phones. The overall colour palette of the image is grey and blue.\n\nExamine how the photographer uses visual elements to convey meaning in this image.",
+    "markScheme": "Award marks for identifying visual elements AND explaining their meaning/effect:\n• Subject positioning and isolation: child alone amid moving crowd — conveys loneliness, vulnerability, invisibility in modern spaces [1-2 marks]\n• Body language: face turned away — ambiguity of emotion (sadness? waiting? introspection?); invites viewer to project emotion [1 mark]\n• Activity contrast: child still while adults move and stare at phones — commentary on adult distraction and digital disconnection [1-2 marks]\n• Colour palette: grey and blue — cold, institutional, impersonal; reinforces theme of emotional coldness despite physical proximity [1 mark]\n• Composition: small child in large space — emphasises smallness and vulnerability [1 mark]\n[Award up to 6 marks for well-developed analysis — require both identification and explanation of effect for full marks per point]"
+  }
+]

@@ -1,0 +1,78 @@
+[
+  {
+    "id": "spa-a-lit-001",
+    "subjectId": "spanish-a-lit",
+    "topic": "Poesía",
+    "paper": 1,
+    "level": "Both",
+    "format": "ShortAnswer",
+    "commandTerm": "examine",
+    "marks": 6,
+    "prompt": "Lee el siguiente fragmento del poema «Romance sonámbulo» de Federico García Lorca (1928) y responde las preguntas.\n\n«Verde que te quiero verde.\nVerde viento. Verdes ramas.\nEl barco sobre la mar\ny el caballo en la montaña.\nCon la sombra en la cintura\nella sueña en su baranda,\nverde carne, pelo verde,\ncon ojos de fría plata.»\n\n(a) Identifica la figura retórica más prominente en los dos primeros versos y explica su efecto. [2 puntos]\n(b) ¿Qué función cumple la repetición del color verde en este fragmento? [2 puntos]\n(c) Analiza el contraste entre los elementos naturales y la figura humana descrita. [2 puntos]",
+    "markScheme": "(a) Anáfora / epífora / repetición: «verde que te quiero verde» — la repetición del color crea una insistencia obsesiva, un encantamiento casi hipnótico. También puede señalarse el polisíndeton en la acumulación de imágenes verdes. [2 puntos]\n(b) El verde actúa como símbolo multidimensional: representa la naturaleza, la vida, pero también lo fantasmal y lo inaccesible en Lorca. La acumulación (viento, ramas, carne, pelo) convierte el color en una obsesión que impregna todo el mundo del poema, sugiriendo el deseo frustrado e inalcanzable. [2 puntos]\n(c) Los elementos naturales (mar, montaña, ramas, viento) evocan movimiento y libertad, mientras que la figura humana queda estática, soñando en su baranda. La contraposición refuerza el tema lorquiano del deseo imposible: la naturaleza fluye, pero el ser humano permanece atrapado. Los «ojos de fría plata» acentúan lo inanimado o fantasmal de la figura. [2 puntos]",
+    "exemplarAnswer": "(a) La figura retórica más prominente es la epanalepsis o repetición de «verde» en el primer verso, que genera un efecto de conjuro o encantamiento: el color se convierte en invocación más que en descripción.\n(b) La insistencia en el verde construye un mundo monocromático y onírico donde el deseo —«que te quiero»— tiñe toda la realidad percibida. Es el color de lo que se anhela pero no se posee.\n(c) El contraste es entre el movimiento natural (el barco sobre el mar, el caballo en la montaña) y la inmovilidad humana (ella sueña, quieta). Lorca opone la fluidez del mundo exterior a la parálisis del deseo interior."
+  },
+  {
+    "id": "spa-a-lit-002",
+    "subjectId": "spanish-a-lit",
+    "topic": "Prosa narrativa",
+    "paper": 2,
+    "level": "Both",
+    "format": "Essay",
+    "commandTerm": "discuss",
+    "marks": 15,
+    "prompt": "«En el realismo mágico de García Márquez, lo sobrenatural nunca se cuestiona — simplemente ocurre.» Analiza esta afirmación con referencia a Cien años de soledad (1967).",
+    "markScheme": "Nivel 5 (13-15): Tesis clara, análisis textual específico, reflexión sobre la técnica narrativa. Considera tanto la afirmación como sus matices.\n\nPuntos de análisis:\n• La voz narrativa adopta el realismo mágico como registro neutro: los muertos hablan, la sangre de José Arcadio recorre el pueblo, los años duran sin reloj — todo se narra con la misma ecuanimidad que los hechos cotidianos.\n• Ejemplo paradigmático: la ascensión de Remedios, la bella — narrada sin asombro, con detalle prosaico (mientras sacudía las sábanas)\n• La amnesia del insomnio y el letrero en los objetos — mezcla de lo mágico y lo funcional\n• El texto invita al lector a adoptar la perspectiva de los habitantes de Macondo, para quienes lo sobrenatural ES lo natural\n• Posible matiz: algunos personajes sí reaccionan con asombro (los forasteros), lo que crea contraste epistemológico"
+  },
+  {
+    "id": "spa-a-lit-003",
+    "subjectId": "spanish-a-lit",
+    "topic": "Comentario textual",
+    "paper": 1,
+    "level": "Both",
+    "format": "Essay",
+    "commandTerm": "examine",
+    "marks": 15,
+    "prompt": "Lee el siguiente fragmento de La casa de los espíritus de Isabel Allende (1982) y realiza un comentario guiado.\n\n«Clara anotaba todo en su cuaderno de anotar la vida. Tenía una letra minúscula y apretada, que parecía destinada a ahorrar papel para toda una eternidad de secretos. Escribía sin puntuación, porque las pausas le parecían innecesarias, como si el pensamiento fuera siempre continuo, sin respiración ni descanso. Esos cuadernos serían después el testimonio de las cosas prodigiosas que habían ocurrido en la familia, y también de las cotidianas, porque Clara sabía que no hay diferencia sustancial entre lo extraordinario y lo común, cuando ambas forman parte de la misma realidad.»\n\n(a) Analiza cómo la descripción de la escritura de Clara refleja su cosmovisión. [5 puntos]\n(b) ¿Qué función narrativa cumplen «los cuadernos» en la novela según este fragmento? [5 puntos]\n(c) Identifica y comenta dos recursos estilísticos empleados por Allende. [5 puntos]",
+    "markScheme": "(a) La letra «minúscula y apretada» y la ausencia de puntuación no son meros detalles físicos — encarnan la forma de percibir el mundo de Clara: un continuo sin jerarquías, donde lo prodigioso y lo cotidiano coexisten sin separación. La escritura como extensión de la conciencia. [hasta 5 puntos según desarrollo y evidencia textual]\n(b) Los cuadernos son el artefacto narrativo que justifica la novela misma: son «testimonio» tanto de «cosas prodigiosas» como de las «cotidianas». Allende los convierte en el archivo de la memoria familiar y colectiva, legitimando la narración y estableciendo la equivalencia entre historia personal e historia colectiva. [hasta 5 puntos]\n(c) Ejemplos de recursos:\n• Paradoja/oxímoron: «letra destinada a ahorrar papel para toda una eternidad» — contraste entre economía del gesto y vastedad del tiempo\n• Metáfora implícita: la escritura sin puntuación como «pensamiento siempre continuo, sin respiración ni descanso» — el pensamiento como corriente vital\n• Antítesis: «extraordinario / común», «prodigiosas / cotidianas» — para demolerla en la conclusión del párrafo [2-3 puntos por recurso bien analizado]",
+    "exemplarAnswer": "(a) La escritura de Clara es expresión directa de su modo de habitar el mundo. La ausencia de puntuación —esas «pausas» que ella rechaza— refleja su rechazo a las distinciones rígidas entre momentos, categorías, realidades. Para Clara no hay cortes: todo fluye. La letra apretada sugiere una conciencia que todo lo registra, que no desecha nada por insignificante.\n\n(b) Los cuadernos tienen la función de memoria y archivo: son la fuente de la que bebe la novela misma. Al mencionarlos, Allende establece el marco metanarrativo de La casa de los espíritus: una historia contada desde documentos familiares, donde lo personal y lo histórico se entretejen.\n\n(c) Primer recurso: antítesis entre «prodigiosas» y «cotidianas», que Allende disuelve al afirmar que «no hay diferencia sustancial» — movimiento retórico que define la poética del realismo mágico. Segundo recurso: hipérbole temporal («para toda una eternidad de secretos») que eleva el acto de escribir a vocación trascendente."
+  },
+  {
+    "id": "spa-a-lit-004",
+    "subjectId": "spanish-a-lit",
+    "topic": "Análisis literario",
+    "paper": 2,
+    "level": "Both",
+    "format": "ShortAnswer",
+    "commandTerm": "explain",
+    "marks": 6,
+    "prompt": "Lee el siguiente fragmento del cuento «El sur» de Jorge Luis Borges (1953) y responde las preguntas.\n\n«Dahlmann pensó que rara vez se estaba tan a gusto como en los trenes. Recordó que esa certidumbre, que quizás era el resultado de una incurable tendencia al olvido, podría llamarse felicidad. Pero en aquel preciso momento el tren se detuvo, y nadie le explicó que había pasado.»\n\n(a) Explica cómo Borges construye la noción de «felicidad» en este fragmento. [3 puntos]\n(b) ¿Qué efecto produce la interrupción repentina del tren en el párrafo? [3 puntos]",
+    "markScheme": "(a) Borges deconstruye la felicidad al identificarla con el «olvido» — una certidumbre que proviene precisamente de no recordar. Esto es irónico y filosóficamente borgeano: la felicidad es posible sólo cuando la conciencia descansa de sí misma. El adverbio «quizás» y la frase subordinada («que quizás era el resultado de») introducen la incertidumbre característica de Borges en el corazón mismo del concepto. [3 puntos por análisis desarrollado]\n(b) La interrupción —«nadie le explicó que había pasado»— rompe la continuidad narrativa con la misma abrupta arbitrariedad que interrumpe la experiencia de Dahlmann. El lector, como el protagonista, queda sin explicación. Esto anticipa la lógica onírica y laberíntica del desenlace del cuento: la realidad en Borges siempre puede suspender sus reglas sin aviso. [3 puntos]",
+    "exemplarAnswer": "(a) Borges define la felicidad de modo paradójico: no como plenitud de conciencia sino como su suspensión. Dahlmann es feliz porque «olvida», porque el movimiento del tren lo desvincula de su historia. La felicidad borgeana es epistemológicamente frágil — depende de no saber.\n(b) La detención inexplicada del tren introduce la inquietud narrativa que caracteriza a Borges: el mundo funciona hasta que, sin causa visible, deja de hacerlo. El silencio —«nadie le explicó»— crea una amenaza implícita y anuncia el territorio del sueño o del destino al que se adentra Dahlmann."
+  },
+  {
+    "id": "spa-a-lit-005",
+    "subjectId": "spanish-a-lit",
+    "topic": "Teatro",
+    "paper": 2,
+    "level": "Both",
+    "format": "Essay",
+    "commandTerm": "discuss",
+    "marks": 15,
+    "prompt": "«En La casa de Bernarda Alba de Federico García Lorca, el espacio cerrado de la casa es un personaje en sí mismo.» Discute esta afirmación con referencia a la obra.",
+    "markScheme": "Nivel 5 (13-15): Análisis sostenido, uso de evidencia específica de la obra, reflexión sobre la técnica dramática de Lorca.\n\nPuntos clave:\n• La casa como espacio de opresión: las paredes blancas, el calor, el encierro — correlato físico del orden patriarcal y del duelo\n• El contraste entre el interior (la casa) y el exterior (el mundo, la libertad, Pepe el Romano) — el exterior existe sólo en los relatos y anhelos de las hijas\n• El espacio habla: los ruidos (los golpes de Bernarda, los gritos de la abuela, el sonido de los caballos) están dramáticamente cargados\n• La blancura obsesiva de las paredes — pureza impostada, represión\n• Adela como única que intenta romper el espacio; su muerte cierra el encierro definitivamente\n• Posibles contraargumentos: ¿es el espacio un personaje o simplemente el escenario del poder de Bernarda?"
+  },
+  {
+    "id": "spa-a-lit-006",
+    "subjectId": "spanish-a-lit",
+    "topic": "Obras prescritas",
+    "paper": 2,
+    "level": "Both",
+    "format": "ShortAnswer",
+    "commandTerm": "compare",
+    "marks": 6,
+    "prompt": "Compara el tratamiento del tema de la memoria en dos obras de la literatura hispánica que hayas estudiado.",
+    "markScheme": "Award marks for: identifying two works with authors [1 mark], identifying at least two points of comparison [2 marks each], and reaching a conclusion [1 mark].\n\nEjemplos de obras:\n• Cien años de soledad (García Márquez) — la memoria colectiva de Macondo, la amnesia del insomnio, el tiempo circular\n• La casa de los espíritus (Allende) — los cuadernos de Clara como memoria material, la memoria femenina frente a la historia oficial\n• Ficciones (Borges) — la memoria perfecta de Funes como pesadilla; el olvido como condición de la humanidad\n• El coronel no tiene quien le escriba (García Márquez) — la espera como memoria cristalizada\n\nPuntos de comparación productivos:\n• Memoria individual vs. colectiva\n• Memoria como resistencia política\n• El olvido como pérdida o como liberación\n• Los soportes materiales de la memoria (cartas, cuadernos, fotografías)",
+    "exemplarAnswer": "En Cien años de soledad, García Márquez presenta la memoria como un proceso colectivo y cíclico: la familia Buendía está condenada a repetir su historia porque no logra aprender de ella, y la amnesia del insomnio externaliza esta incapacidad al privar literalmente a los personajes del recuerdo. La memoria, cuando falla, debe suplirse con artefactos (letreros en los objetos). En Ficciones de Borges, el cuento «Funes el memorioso» invierte el problema: Funes recuerda todo con precisión absoluta y esto lo paraliza. Para Borges, olvidar es la condición del pensamiento y de la identidad. Ambos autores coinciden en que la memoria no es simplemente un depósito pasivo de lo ocurrido, sino una facultad activa y problemática: García Márquez la vincula al destino colectivo; Borges, a los límites de la conciencia individual."
+  }
+]

@@ -1,0 +1,78 @@
+[
+  {
+    "id": "tok-001",
+    "subjectId": "tok",
+    "topic": "Knowledge & the Knower",
+    "paper": 1,
+    "level": "Both",
+    "format": "Essay",
+    "commandTerm": "discuss",
+    "marks": 10,
+    "prompt": "\"The role of the knower is always to question, never to accept.\" Discuss this claim with reference to two areas of knowledge.",
+    "markScheme": "Level 5 (9-10): Focused, well-argued response. Uses two AOKs with developed examples. Considers both the claim and its limits. Shows awareness of perspectives.\n\nPoints supporting the claim:\n• In Natural Sciences, scientific progress depends on questioning existing paradigms (Kuhn — scientific revolutions)\n• In History, historians must question sources, biases, and dominant narratives (Carr — 'What is History?')\n• Intellectual humility and scepticism as epistemic virtues\n\nPoints challenging the claim:\n• Some knowledge must be accepted as foundational — infinite regress problem; we cannot question everything simultaneously\n• In Mathematics, axioms are accepted, not questioned within a formal system\n• Social knowledge depends on shared acceptance of conventions (language, norms)\n• Practical constraints: doctors must accept established medical knowledge to act effectively\n\nGood responses will use specific real-world examples (e.g. Galileo, #MeToo, peer review) and reflect on the role of intellectual communities.",
+    "exemplarAnswer": "The claim captures a genuine epistemic virtue — the capacity for sceptical inquiry has driven scientific progress and exposed historical injustice. Yet taken as an absolute prescription, it generates a paralysing regress: if we question everything, we have no stable platform from which to question. The claim is most illuminating when read as context-specific.\n\nIn Natural Sciences, questioning is the engine of knowledge. Kuhn's account of paradigm shifts shows that revolutionary science requires someone to refuse the accepted theory — Copernicus rejecting geocentrism, Einstein refusing to accept Newtonian mechanics as complete. The peer review process institutionalises questioning: every knowledge claim must survive scrutiny before acceptance. Yet even here, working scientists do not question everything simultaneously. Normal science operates within a paradigm, accepting its framework in order to make progress on specific problems. The productive scientist questions particular claims within an accepted structure.\n\nIn History, the knower's role as questioner is equally important. Historians must question their sources' reliability, their own cultural biases, and the dominant narratives of their time. The rehabilitation of previously silenced perspectives — women's history, post-colonial historiography — came precisely from knowers willing to question the established canon. Yet historians also accept methodological conventions (source evaluation, corroboration) that they cannot continuously re-examine without abandoning historical inquiry altogether.\n\nThe more nuanced claim is: knowers should question proportionally — more scepticism toward new or contested claims, more acceptance of well-established, multiply-verified knowledge. The virtue is not universal questioning but calibrated doubt, adjusted to the strength of evidence and the stakes of error."
+  },
+  {
+    "id": "tok-002",
+    "subjectId": "tok",
+    "topic": "Knowledge & Language",
+    "paper": 1,
+    "level": "Both",
+    "format": "Essay",
+    "commandTerm": "to what extent",
+    "marks": 10,
+    "prompt": "To what extent does language shape our knowledge, rather than simply expressing it?",
+    "markScheme": "Level 5 (9-10): Clear thesis, two well-developed AOKs, genuine engagement with both sides.\n\nLanguage shapes knowledge (strong Whorfian position):\n• Sapir-Whorf hypothesis: linguistic relativity — different languages encode different concepts\n• Example: colour terms differ across languages; Pirahã lacks numbers and certain time concepts\n• Metaphors structure thought (Lakoff & Johnson: 'Argument is War' shapes how we conceptualise disagreement)\n• Technical terminology in Natural Sciences and Ethics creates and constrains possible thought\n\nLanguage merely expresses pre-existing knowledge:\n• Universal concepts (mathematics, music, emotion) exist independently of specific languages\n• Translation between languages is possible, suggesting shared underlying knowledge\n• Non-linguistic knowledge: tacit knowledge, visual art, embodied skill\n\nNuanced position: language shapes the expression and development of knowledge without wholly determining its content.",
+    "exemplarAnswer": "Language occupies a curious dual role: it is both the medium through which we share knowledge and a force that shapes which thoughts are even thinkable. Sapir and Whorf proposed that the structure of one's language constrains one's possible perceptions — a strong version of this thesis has been largely discredited (we can translate between languages; colour perception doesn't fundamentally differ across linguistic groups). But softer versions retain explanatory power. The vocabulary available to us in a given domain shapes how we conceptualise it. The proliferation of technical terms in physics — 'quark', 'superposition', 'entanglement' — does not just label pre-existing concepts: it enables the formation of new ones. Before these words existed, the knowledge they encode was literally unthinkable.\n\nIn Ethics, the introduction of words like 'genocide' (Lemkin, 1944) or 'sexual harassment' (1970s) did not merely label phenomena that had always been recognised — it created the conceptual tools for recognising them as distinct moral categories, making certain forms of knowledge (and legal accountability) possible. Without the word 'genocide', the international community lacked a framework for the specific culpability it carries.\n\nYet non-linguistic knowledge challenges the view that language wholly shapes what we know. A chess grandmaster's intuitive pattern recognition, a musician's embodied knowledge of phrasing, or an infant's pre-linguistic understanding of object permanence — these suggest that knowledge can exist prior to and independent of language. Language may be the primary vehicle for explicit, communicable knowledge, while much tacit knowledge remains irreducibly non-linguistic.\n\nIn conclusion, language profoundly shapes the boundaries of articulable knowledge — especially in domains where technical vocabulary creates new concepts — but does not fully determine the reach of human understanding."
+  },
+  {
+    "id": "tok-003",
+    "subjectId": "tok",
+    "topic": "Knowledge & Technology",
+    "paper": 1,
+    "level": "Both",
+    "format": "ShortAnswer",
+    "commandTerm": "examine",
+    "marks": 6,
+    "prompt": "Examine how technology has changed what counts as reliable knowledge in the Natural Sciences.",
+    "markScheme": "Award 1 mark per developed point up to 6:\n• Instrumentation extends perception beyond human senses — electron microscopes, particle accelerators, telescopes reveal phenomena otherwise unknowable\n• Statistical software enables analysis of massive datasets (Big Data, genome sequencing), generating knowledge previously inaccessible\n• Peer review platforms and pre-print servers accelerate but also complicate knowledge validation\n• AI/machine learning generates correlations that humans struggle to interpret causally — raises question of whether pattern-recognition constitutes explanation\n• Replication crisis partly driven by statistical software enabling p-hacking\n• Simulation models (climate science) produce knowledge claims that cannot be experimentally verified in the traditional sense\n• Technology creates new phenomena to study (nanoparticles, synthetic biology) that would not exist without it",
+    "exemplarAnswer": "Technology has transformed both the content and the validation criteria of scientific knowledge. Instruments like the Large Hadron Collider enable knowledge of entities (the Higgs boson) that are entirely beyond unaugmented human perception — we know such particles not through observation but through statistical inference from detector data. This raises genuine questions about the nature of scientific observation. Similarly, AI-driven pattern recognition in genomics produces knowledge claims (correlations between genetic variants and disease) that resist traditional causal explanation, challenging the view that scientific understanding requires mechanistic accounts.\n\nTechnology also changes knowledge validation. Pre-print servers accelerate publication but bypass peer review, blurring the line between provisional and established knowledge. Statistical software, while enabling large-scale analysis, has contributed to the replication crisis by making it easy to mine data for spurious correlations. The reliability of scientific knowledge is thus simultaneously enhanced and threatened by the technologies that produce it."
+  },
+  {
+    "id": "tok-004",
+    "subjectId": "tok",
+    "topic": "Knowledge & Politics",
+    "paper": 1,
+    "level": "Both",
+    "format": "Essay",
+    "commandTerm": "discuss",
+    "marks": 10,
+    "prompt": "\"Political knowledge is inevitably distorted by power.\" Discuss this claim with reference to two areas of knowledge.",
+    "markScheme": "Level 5 (9-10): Well-argued, uses specific evidence from two AOKs, considers both sides.\n\nSupporting evidence:\n• History: victors write history — colonial historiography, Soviet revision of WWII narrative\n• Natural Sciences: Lysenkoist biology in Soviet Union; suppression of climate science; pharmaceutical industry funding bias\n• Knowledge claims that threaten power structures are marginalised or suppressed\n• Foucault: knowledge and power are inseparable (power/knowledge)\n\nChallenging the claim:\n• Mathematics and formal logic are largely immune to political distortion\n• Institutional independence (peer review, academic freedom) provides partial insulation\n• Whistleblowers, investigative journalism, opposition historians can resist distortion\n• Science has self-correcting mechanisms\n\nGood responses engage with the concept of 'inevitable' — some distortion is possible/frequent without being inevitable or irreversible."
+  },
+  {
+    "id": "tok-005",
+    "subjectId": "tok",
+    "topic": "Core Theme",
+    "paper": 1,
+    "level": "Both",
+    "format": "ShortAnswer",
+    "commandTerm": "explain",
+    "marks": 4,
+    "prompt": "Using one specific real-world example, explain how emotion can both help and hinder the acquisition of knowledge.",
+    "markScheme": "Award 2 marks for how emotion HELPS (with specific example) and 2 marks for how emotion HINDERS:\nHelps:\n• Emotional investment motivates sustained inquiry (Darwin's passion for natural history)\n• Empathy enables understanding of human experience that pure reason cannot access (e.g., trauma research)\n• Intuition (emotionally-driven) can guide productive research directions\nHinders:\n• Confirmation bias: emotionally invested researchers may selectively interpret evidence (e.g., Blondlot's N-rays, 1903)\n• Fear of social rejection can suppress heterodox knowledge claims\n• Strong emotion impairs systematic analysis (grief, rage affect reasoning)\nAccept any well-developed, specific example."
+  },
+  {
+    "id": "tok-006",
+    "subjectId": "tok",
+    "topic": "Knowledge & the Knower",
+    "paper": 1,
+    "level": "Both",
+    "format": "ShortAnswer",
+    "commandTerm": "identify",
+    "marks": 4,
+    "prompt": "Identify and explain two different types of knowledge that a person might possess, illustrating each with a specific example.",
+    "markScheme": "Award 2 marks per type (1 for correct identification with definition, 1 for appropriate example):\n• Propositional/declarative knowledge ('knowing that'): knowledge of facts or truths. Example: knowing that the boiling point of water is 100°C at sea level.\n• Procedural knowledge ('knowing how'): knowing how to perform a skill or action. Example: knowing how to ride a bicycle — cannot be fully expressed in propositions.\n• Acquaintance knowledge ('knowing of/about'): direct familiarity with a person, place, or experience. Example: knowing Paris by having lived there.\n• Tacit knowledge: implicit, embodied knowledge difficult to articulate. Example: a sommelier's ability to identify a wine's region by taste.",
+    "exemplarAnswer": "Two main types: (1) Propositional knowledge ('knowing that') — e.g., knowing that the speed of light is approximately 3 × 10⁸ m/s. This is explicit, can be stated in language, and is subject to truth conditions. (2) Procedural knowledge ('knowing how') — e.g., a surgeon knowing how to perform a cardiac bypass. This is embodied and skill-based; watching a video of the procedure does not confer it. The distinction matters epistemologically because these types have different sources, validation criteria, and limits."
+  }
+]

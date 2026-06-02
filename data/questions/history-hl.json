@@ -1,0 +1,123 @@
+[
+  {
+    "id": "hist-hl-001",
+    "subjectId": "history-hl",
+    "topic": "Rights and Protest",
+    "paper": 1,
+    "level": "HL",
+    "format": "MCQ",
+    "commandTerm": "identify",
+    "marks": 1,
+    "prompt": "Which event on 1 December 1955 marked a pivotal turning point in the Montgomery Bus Boycott?",
+    "options": [
+      { "label": "A", "text": "Martin Luther King Jr. delivered the 'I Have a Dream' speech" },
+      { "label": "B", "text": "Rosa Parks was arrested for refusing to give up her seat on a city bus" },
+      { "label": "C", "text": "The Supreme Court ruled bus segregation unconstitutional" },
+      { "label": "D", "text": "The NAACP filed a class action lawsuit against Montgomery city transport" }
+    ],
+    "correctOption": "B",
+    "markScheme": "B — Rosa Parks was arrested on 1 December 1955, triggering the 381-day Montgomery Bus Boycott organised by the MIA under MLK."
+  },
+  {
+    "id": "hist-hl-002",
+    "subjectId": "history-hl",
+    "topic": "Rights and Protest",
+    "paper": 1,
+    "level": "HL",
+    "format": "MCQ",
+    "commandTerm": "identify",
+    "marks": 1,
+    "prompt": "The Student Nonviolent Coordinating Committee (SNCC) was founded in 1960 primarily as a result of which event?",
+    "options": [
+      { "label": "A", "text": "The Freedom Rides along Southern interstate highways" },
+      { "label": "B", "text": "The Greensboro sit-ins at Woolworth's lunch counter" },
+      { "label": "C", "text": "The March on Washington for Jobs and Freedom" },
+      { "label": "D", "text": "The Birmingham Campaign organised by the SCLC" }
+    ],
+    "correctOption": "B",
+    "markScheme": "B — The Greensboro sit-ins (February 1960) inspired a wave of student activism; SNCC was founded in April 1960 at Shaw University to coordinate student-led nonviolent protest."
+  },
+  {
+    "id": "hist-hl-003",
+    "subjectId": "history-hl",
+    "topic": "Rights and Protest",
+    "paper": 2,
+    "level": "HL",
+    "format": "ShortAnswer",
+    "commandTerm": "explain",
+    "marks": 4,
+    "prompt": "Explain the significance of the Birmingham Campaign (1963) in advancing the Civil Rights Movement.",
+    "markScheme": "Award 1 mark per developed point up to 4:\n• Bull Connor's use of fire hoses and police dogs against peaceful protesters provided powerful televised imagery that shocked national and international opinion\n• President Kennedy publicly committed to civil rights legislation, shifting federal government stance\n• Led directly to Kennedy's June 1963 civil rights address to the nation proposing the Civil Rights Act\n• Campaign demonstrated effectiveness of nonviolent direct action and strategic provocation of authorities\n• Increased national NAACP membership and fundraising, boosting the movement's organisational capacity",
+    "exemplarAnswer": "The Birmingham Campaign of April–May 1963 was a watershed moment for the Civil Rights Movement. Organised by King and the SCLC, it deliberately targeted one of the most segregated cities in the South. When Public Safety Commissioner Bull Connor responded to peaceful marchers — including children — with high-pressure fire hoses and attack dogs, the footage was broadcast nationally and internationally, generating widespread outrage. This public spectacle forced President Kennedy to take a firmer stance: his June 1963 television address called for comprehensive civil rights legislation. Birmingham thus demonstrated that nonviolent confrontation with brutal authority could catalyse federal action, moving the movement's goals from moral appeal to legislative reality."
+  },
+  {
+    "id": "hist-hl-004",
+    "subjectId": "history-hl",
+    "topic": "Rights and Protest",
+    "paper": 2,
+    "level": "HL",
+    "format": "ShortAnswer",
+    "commandTerm": "compare",
+    "marks": 6,
+    "prompt": "Compare the methods used by Martin Luther King Jr. and Stokely Carmichael in pursuing civil rights for African Americans in the 1960s.",
+    "markScheme": "Award marks for balanced comparison identifying similarities AND differences:\nSimilarities:\n• Both sought to end racial discrimination and achieve equality for Black Americans\n• Both operated within a framework of grassroots community organising\n• Both drew on the experience of SNCC in voter registration drives\nDifferences:\n• King advocated nonviolent direct action based on Christian ethics and Gandhian principles; Carmichael promoted Black Power, arguing self-defence was legitimate\n• King sought white liberal allies and federal government cooperation; Carmichael called for Black separatism and autonomous political power\n• King focused on integration and legal equality; Carmichael emphasised Black economic and cultural self-determination\n• King's SCLC worked through established churches; Carmichael's SNCC (post-1966) expelled white members\n• King accepted Nobel Peace Prize 1964, remaining within mainstream international discourse; Carmichael emigrated to Guinea, rejecting American political structures",
+    "exemplarAnswer": "King and Carmichael shared a commitment to African American equality but diverged sharply in ideology and method. King's approach, rooted in Christian nonviolence and Gandhian satyagraha, sought to appeal to the moral conscience of white America and secure federal legislation — a strategy vindicated by the Civil Rights Act (1964) and Voting Rights Act (1965). Carmichael, who coined 'Black Power' in June 1966 during the Meredith March, rejected this integrationist model as inadequate. Where King built coalitions with white liberals, Carmichael argued that Black communities needed independent political and economic power, eventually expelling white SNCC members. The distinction was partly tactical: King believed nonviolence was both morally superior and strategically effective; Carmichael contended that self-defence was a legitimate response to systematic violence. Both, however, were responding to the same structural racism; their difference lay in whether they sought transformation from within the American system or a more fundamental restructuring of its power relations."
+  },
+  {
+    "id": "hist-hl-005",
+    "subjectId": "history-hl",
+    "topic": "Rights and Protest",
+    "paper": 3,
+    "level": "HL",
+    "format": "Essay",
+    "commandTerm": "to what extent",
+    "marks": 15,
+    "prompt": "To what extent was the leadership of Martin Luther King Jr. the most important factor in the success of the US Civil Rights Movement between 1955 and 1968?",
+    "markScheme": "Level 5 (13-15): Sustained, well-substantiated argument. Considers King's contribution AND alternative factors. Uses specific evidence. Reaches a reasoned, nuanced judgement.\n\nFactors to consider FOR King's centrality:\n• Charismatic public oratory — 'I Have a Dream' (August 1963), moral authority\n• Strategic brilliance — chose Birmingham, Selma as sites of confrontation\n• International profile raised by Nobel Peace Prize (1964)\n• Maintained nonviolent discipline under extreme provocation\n\nFactors AGAINST over-emphasising King:\n• NAACP legal strategy: Brown v. Board of Education (1954) preceded his leadership\n• Grassroots organising: SNCC, local church networks, women activists (Fannie Lou Hamer, Diane Nash)\n• Economic and media context: Cold War pressure on US government to demonstrate democracy\n• Federal government agency: Johnson's personal commitment to Civil Rights Act and Voting Rights Act\n• Mass participation: hundreds of thousands of ordinary citizens\n\nBest answers will argue a nuanced position — e.g. King was indispensable but functioned within a broader movement structure.",
+    "exemplarAnswer": "Martin Luther King Jr. occupies an almost mythological place in accounts of the US Civil Rights Movement, and his contributions were genuinely extraordinary. Yet to attribute the movement's success primarily to his individual leadership risks reducing a mass democratic struggle to the biography of one man. A more accurate assessment holds that King was a necessary but insufficient condition for success — his effectiveness depended on, and in turn empowered, a complex ecosystem of organisations, grassroots activists, legal strategists, and favourable structural circumstances.\n\nKing's strengths were real and consequential. His oratory — particularly the 'I Have a Dream' address to 250,000 marchers in Washington in August 1963 — crystallised the movement's moral vision in terms accessible to white moderates and international audiences. His strategic choices were often masterly: the Birmingham Campaign (1963) and Selma voting rights marches (1965) were deliberately staged to provoke segregationist authorities into revealing their brutality on national television. The Birmingham footage moved President Kennedy to propose sweeping civil rights legislation; the Selma violence prompted President Johnson to introduce the Voting Rights Act within days. King's Nobel Peace Prize (1964) gave him international leverage that constrained government repression. And his insistence on Gandhian nonviolence — maintained under extreme provocation including the bombing of his home — denied opponents the pretext of violent response and kept white moderate sympathy broadly intact.\n\nNonetheless, several factors qualify the 'King as primary cause' thesis. Legal foundations for the movement were laid before King's rise: the NAACP's decades-long litigation strategy culminated in Brown v. Board of Education (1954), a Supreme Court ruling that delegitimised the entire legal architecture of segregation. The Montgomery Bus Boycott (1955-56), which launched King to national prominence, was actually organised by the Montgomery Improvement Association on the foundation of the NAACP's existing local network. Rosa Parks herself was a trained civil rights activist, not a spontaneous protester.\n\nSNCC's grassroots voter registration drives in Mississippi and Alabama — often conducted by young organisers like Fannie Lou Hamer and John Lewis in conditions of extreme physical danger — built the political infrastructure without which the Voting Rights Act would have been unenforceable. Women activists were disproportionately effective at community level yet largely invisible in official movement historiography. Economic and Cold War pressures provided structural incentives for federal action independent of King: the US government was acutely embarrassed by footage of racial violence circulated by Soviet propaganda, and Northern migration had given Black voters electoral significance in swing states.\n\nThe question of what 'success' means also complicates the assessment. King himself, in his final years, increasingly focused on poverty and the Vietnam War — areas where his movement achieved far less. The Civil Rights Act (1964) and Voting Rights Act (1965) formally dismantled legal segregation but left structural economic inequality largely untouched, a failure that Carmichael's Black Power critique identified accurately.\n\nIn conclusion, King was irreplaceable in the specific form the movement took: no other figure combined his oratory, strategic intelligence, moral authority, and international profile. But the movement's ultimate legislative success owed equally to NAACP lawyers, SNCC organisers, mass participation, economic pressures, and political calculation by Johnson. King was the indispensable catalyst; the reaction required many other elements."
+  },
+  {
+    "id": "hist-hl-006",
+    "subjectId": "history-hl",
+    "topic": "Move to Global War",
+    "paper": 1,
+    "level": "HL",
+    "format": "MCQ",
+    "commandTerm": "identify",
+    "marks": 1,
+    "prompt": "The Mukden Incident of September 1931 was significant because it provided Japan with the pretext to:",
+    "options": [
+      { "label": "A", "text": "Invade mainland China and capture Beijing" },
+      { "label": "B", "text": "Occupy Manchuria and establish the puppet state of Manchukuo" },
+      { "label": "C", "text": "Withdraw from the League of Nations in protest at international sanctions" },
+      { "label": "D", "text": "Launch a surprise attack on the US Pacific Fleet at Pearl Harbor" }
+    ],
+    "correctOption": "B",
+    "markScheme": "B — Japanese Kwantung Army officers staged the Mukden Incident (blowing up a section of the South Manchuria Railway) as a pretext for seizing Manchuria; Manchukuo was proclaimed in 1932 under the puppet emperor Puyi."
+  },
+  {
+    "id": "hist-hl-007",
+    "subjectId": "history-hl",
+    "topic": "Move to Global War",
+    "paper": 2,
+    "level": "HL",
+    "format": "ShortAnswer",
+    "commandTerm": "examine",
+    "marks": 6,
+    "prompt": "Examine the reasons why the League of Nations failed to stop Japanese aggression in Manchuria (1931-1933).",
+    "markScheme": "Award 1 mark per developed point up to 6:\n• US non-membership removed the most powerful potential enforcer of League decisions\n• Britain and France prioritised their own economic recovery during the Great Depression over distant enforcement\n• Economic sanctions were not applied; trade boycott would have hurt League members' own economies\n• Japan was a permanent member of the League Council, able to delay proceedings\n• Geographical distance from Europe made military intervention impractical\n• Lytton Commission report (October 1932) took 13 months; Japanese forces had already consolidated control\n• Britain privately recognised Japan as a stabilising force against Soviet expansion in Asia\n• League had no standing army; relied entirely on member states' willingness to act\n• Response was limited to condemnation; Japan simply withdrew from the League in March 1933",
+    "exemplarAnswer": "The League's failure over Manchuria exposed the fatal weaknesses at its core. Structurally, the absence of the United States — the world's largest economy and most powerful military — deprived it of its most credible enforcement mechanism. Britain and France, the dominant members, were preoccupied with the Great Depression and unwilling to commit military resources or sacrifice trade with Japan to enforce a ruling over a distant territory with no direct impact on their interests. The Lytton Commission, dispatched to investigate the Mukden Incident, took 13 months to report — by which time Manchukuo was a fait accompli. Even its eventual condemnation was toothless: the League had no army and could not impose economic sanctions without member agreement, which was not forthcoming. Japan's response was simply to resign from the League in March 1933. The episode demonstrated that collective security was only viable when major powers shared both the interest and the capacity to act — conditions that did not exist in 1931."
+  },
+  {
+    "id": "hist-hl-008",
+    "subjectId": "history-hl",
+    "topic": "Authoritarian States",
+    "paper": 3,
+    "level": "HL",
+    "format": "Essay",
+    "commandTerm": "discuss",
+    "marks": 15,
+    "prompt": "Discuss the methods used by Hitler to consolidate power in Germany between January 1933 and August 1934.",
+    "markScheme": "Level 5 (13-15): Analyses multiple methods with specific evidence, considers their relative importance, produces a coherent argument with a clear thesis.\n\nKey methods to discuss:\n• Reichstag Fire (27 February 1933) → Reichstag Fire Decree (28 February) — suspended civil liberties\n• Enabling Act (23 March 1933) — gave Hitler dictatorial legislative power for four years\n• Gleichschaltung (coordination) — brought all institutions under Nazi control\n• Destruction of political opposition: KPD banned, SPD dissolved, other parties 'voluntarily' disbanded\n• Night of the Long Knives (30 June–2 July 1934) — eliminated SA leadership and potential internal rivals\n• Death of Hindenburg (2 August 1934) — Hitler merged chancellorship and presidency, becoming Führer\n• Army oath of personal loyalty to Hitler (2 August 1934)\n\nGood answers will discuss the interaction between legal-constitutional means and extra-legal violence/terror."
+  }
+]
