@@ -1,0 +1,128 @@
+[
+  {
+    "id": "hist-sl-001",
+    "subjectId": "history-sl",
+    "topic": "Rights and Protest",
+    "paper": 1,
+    "level": "SL",
+    "format": "MCQ",
+    "commandTerm": "identify",
+    "marks": 1,
+    "prompt": "The Civil Rights Act of 1964 was significant primarily because it:",
+    "options": [
+      { "label": "A", "text": "Gave African American men the right to vote for the first time" },
+      { "label": "B", "text": "Prohibited discrimination based on race, colour, religion, sex, or national origin" },
+      { "label": "C", "text": "Desegregated the US military by presidential executive order" },
+      { "label": "D", "text": "Established affirmative action programmes in federal employment" }
+    ],
+    "correctOption": "B",
+    "markScheme": "B — The Civil Rights Act (1964) outlawed discrimination in public accommodations and employment on grounds of race, colour, religion, sex, or national origin. Voting rights were addressed separately by the Voting Rights Act (1965)."
+  },
+  {
+    "id": "hist-sl-002",
+    "subjectId": "history-sl",
+    "topic": "Rights and Protest",
+    "paper": 1,
+    "level": "SL",
+    "format": "MCQ",
+    "commandTerm": "identify",
+    "marks": 1,
+    "prompt": "Mahatma Gandhi's campaign of nonviolent resistance in South Africa (1906-1914) developed the concept he called:",
+    "options": [
+      { "label": "A", "text": "Ahimsa" },
+      { "label": "B", "text": "Satyagraha" },
+      { "label": "C", "text": "Hartal" },
+      { "label": "D", "text": "Swaraj" }
+    ],
+    "correctOption": "B",
+    "markScheme": "B — Satyagraha ('truth-force' or 'soul-force') was the philosophy of nonviolent resistance Gandhi developed during his time in South Africa, later applied in India. Ahimsa is the principle of non-injury underlying it."
+  },
+  {
+    "id": "hist-sl-003",
+    "subjectId": "history-sl",
+    "topic": "Rights and Protest",
+    "paper": 2,
+    "level": "SL",
+    "format": "ShortAnswer",
+    "commandTerm": "explain",
+    "marks": 4,
+    "prompt": "Explain two methods used by civil rights activists to challenge segregation in the American South between 1955 and 1963.",
+    "markScheme": "Award 2 marks per method (1 for identifying, 1 for developed explanation):\n• Bus boycotts (e.g. Montgomery 1955-56): African Americans refused to use segregated buses for 381 days, causing significant economic pressure on the city transport system; ended when Supreme Court ruled bus segregation unconstitutional\n• Sit-ins (e.g. Greensboro 1960): Protesters occupied segregated lunch counters, refusing to leave when refused service; spread rapidly across the South; led to desegregation of many establishments\n• Freedom Rides (1961): Interracial groups rode interstate buses to challenge segregated terminal facilities; attacked by mobs in Alabama; forced federal government to enforce desegregation rulings\n• Marches and demonstrations (e.g. Birmingham 1963, Selma 1965): Generated media coverage of police brutality, pressuring federal government to legislate"
+  },
+  {
+    "id": "hist-sl-004",
+    "subjectId": "history-sl",
+    "topic": "Rights and Protest",
+    "paper": 2,
+    "level": "SL",
+    "format": "ShortAnswer",
+    "commandTerm": "examine",
+    "marks": 6,
+    "prompt": "Examine the impact of the Voting Rights Act (1965) on African American political participation.",
+    "markScheme": "Award 1 mark per developed point up to 6:\n• Act prohibited literacy tests and other discriminatory barriers to voter registration\n• Federal registrars sent to counties with history of discrimination, bypassing hostile local officials\n• Black voter registration in Mississippi increased from 6.7% (1964) to 59.8% (1967)\n• Alabama Black registration rose from 19.3% to 51.6% within two years\n• Number of Black elected officials in the South rose from fewer than 100 (1965) to over 1,000 by 1969\n• Limits: Act did not address economic disenfranchisement, gerrymandering, or intimidation\n• Section 5 'preclearance' requirement forced covered states to get federal approval for electoral changes — a powerful enforcement tool gutted by Shelby County v. Holder (2013)",
+    "exemplarAnswer": "The Voting Rights Act of 1965 produced dramatic and measurable changes in Black political participation, particularly in the Deep South where systematic disenfranchisement had been most extreme. By prohibiting literacy tests and dispatching federal registrars to recalcitrant counties, the Act bypassed the hostile local officials who had previously blocked registration. Mississippi's Black registration rate rose from 6.7% in 1964 to nearly 60% by 1967; Alabama's nearly tripled. This translated into electoral representation: the number of Black elected officials in the South grew from under 100 in 1965 to over 1,000 by 1969. However, the Act had limits — it addressed formal barriers to voting but could not easily remedy economic dependency, gerrymandering, or intimidation. Its enforcement provisions, particularly Section 5's preclearance requirement, would prove crucial for decades until their effective gutting by the Supreme Court in 2013."
+  },
+  {
+    "id": "hist-sl-005",
+    "subjectId": "history-sl",
+    "topic": "Move to Global War",
+    "paper": 1,
+    "level": "SL",
+    "format": "MCQ",
+    "commandTerm": "identify",
+    "marks": 1,
+    "prompt": "The policy of appeasement pursued by Britain and France towards Hitler's Germany in the 1930s is best illustrated by which agreement?",
+    "options": [
+      { "label": "A", "text": "The Treaty of Versailles (1919)" },
+      { "label": "B", "text": "The Locarno Pact (1925)" },
+      { "label": "C", "text": "The Munich Agreement (1938)" },
+      { "label": "D", "text": "The Nazi-Soviet Pact (1939)" }
+    ],
+    "correctOption": "C",
+    "markScheme": "C — The Munich Agreement (September 1938), signed by Britain, France, Germany, and Italy, transferred the Sudetenland from Czechoslovakia to Germany without Czech consultation, representing the high point of appeasement policy."
+  },
+  {
+    "id": "hist-sl-006",
+    "subjectId": "history-sl",
+    "topic": "Move to Global War",
+    "paper": 2,
+    "level": "SL",
+    "format": "ShortAnswer",
+    "commandTerm": "explain",
+    "marks": 4,
+    "prompt": "Explain why Britain and France pursued a policy of appeasement towards Germany between 1936 and 1938.",
+    "markScheme": "Award 1 mark per developed point up to 4:\n• Fear of another catastrophic war — memories of World War I casualties made public and politicians deeply averse to military conflict\n• Belief that Hitler's demands were limited and legitimate — revision of Versailles 'diktat' seemed reasonable to some British opinion\n• Military unpreparedness — Britain's rearmament was incomplete; Chiefs of Staff advised against war in 1938\n• Economic weakness — Great Depression had strained government finances; rearmament competed with social spending\n• Anti-communism — some British conservatives preferred Nazi Germany as a buffer against Soviet expansion\n• Chamberlain's personal conviction that personal diplomacy could satisfy Hitler's ambitions",
+    "exemplarAnswer": "Appeasement reflected a combination of sincere belief and strategic calculation. The memory of 1914-18's 700,000 British military dead made any policy risking another major war deeply unpopular; polls showed strong public support for negotiation. Chamberlain and many of his advisers genuinely believed that Hitler's grievances — revision of Versailles, German minorities in neighbouring states — were limited and addressable through diplomacy. Britain's military unpreparedness reinforced the case for buying time: the Chiefs of Staff consistently warned that Britain could not fight Germany, Italy, and Japan simultaneously. Some conservatives also viewed a strengthened Germany as a bulwark against Soviet communism. Appeasement was thus simultaneously a risk-management strategy, a product of war-weariness, and an expression of the belief — catastrophically mistaken, as Munich's aftermath proved — that Hitler was a rational statesman with finite aims."
+  },
+  {
+    "id": "hist-sl-007",
+    "subjectId": "history-sl",
+    "topic": "Causes of World War I",
+    "paper": 1,
+    "level": "SL",
+    "format": "MCQ",
+    "commandTerm": "identify",
+    "marks": 1,
+    "prompt": "The alliance system in Europe prior to 1914 contributed to the outbreak of World War I primarily by:",
+    "options": [
+      { "label": "A", "text": "Preventing any European power from pursuing colonial expansion" },
+      { "label": "B", "text": "Transforming a regional Austro-Serbian dispute into a continental war" },
+      { "label": "C", "text": "Ensuring that all major powers maintained roughly equal military strength" },
+      { "label": "D", "text": "Providing a diplomatic framework for resolving the Moroccan crises" }
+    ],
+    "correctOption": "B",
+    "markScheme": "B — The interlocking alliances (Triple Alliance: Germany, Austria-Hungary, Italy; Triple Entente: France, Russia, Britain) meant that the assassination of Archduke Franz Ferdinand triggered a chain reaction of mobilisations, turning a Balkan crisis into a European war."
+  },
+  {
+    "id": "hist-sl-008",
+    "subjectId": "history-sl",
+    "topic": "Causes of World War I",
+    "paper": 2,
+    "level": "SL",
+    "format": "Essay",
+    "commandTerm": "to what extent",
+    "marks": 15,
+    "prompt": "To what extent was German foreign policy responsible for the outbreak of World War I in 1914?",
+    "markScheme": "Level 5 (13-15): Sustained argument, uses specific evidence, considers multiple factors and their relative weight, reaches a nuanced judgement.\n\nFactors FOR German responsibility:\n• 'Blank cheque' given to Austria-Hungary (5-6 July 1914) encouraged escalation\n• Schlieffen Plan required attacking France through Belgium, widening the war\n• German military leadership pushed for early mobilisation to execute the plan before Russia mobilised fully\n• Weltpolitik and naval building programme had already heightened European tensions\n• German decision-makers arguably preferred war in 1914 before Russian rearmament programme completed (1917)\n\nFactors AGAINST sole German responsibility:\n• Austria-Hungary's determination to punish Serbia and preserve empire\n• Russia's premature general mobilisation (30 July 1914) when partial mobilisation against Austria was possible\n• France's unconditional support for Russia\n• System of alliances created by all major powers\n• Underlying tensions: arms race, imperial rivalries, Balkan instability\n• Fritz Fischer controversy — debate among historians about German 'war guilt'"
+  }
+]

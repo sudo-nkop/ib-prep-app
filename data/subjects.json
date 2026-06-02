@@ -1,0 +1,65 @@
+[
+  {
+    "id": "history-hl",
+    "name": "History HL",
+    "code": "HIST-HL",
+    "group": 3,
+    "level": "HL",
+    "color": "bg-amber-600",
+    "topics": ["Rights and Protest", "Move to Global War", "Authoritarian States", "The Cold War"]
+  },
+  {
+    "id": "history-sl",
+    "name": "History SL",
+    "code": "HIST-SL",
+    "group": 3,
+    "level": "SL",
+    "color": "bg-amber-500",
+    "topics": ["Rights and Protest", "Move to Global War", "Causes of World War I"]
+  },
+  {
+    "id": "maa",
+    "name": "Mathematics: Analysis & Approaches",
+    "code": "MAA",
+    "group": 5,
+    "level": "Both",
+    "color": "bg-blue-600",
+    "topics": ["Functions", "Algebra & Number", "Calculus", "Statistics & Probability", "Geometry & Trigonometry"]
+  },
+  {
+    "id": "physics-sl",
+    "name": "Physics SL",
+    "code": "PHYS-SL",
+    "group": 4,
+    "level": "SL",
+    "color": "bg-purple-600",
+    "topics": ["Mechanics", "Thermal Physics", "Waves", "Electricity & Magnetism", "Circular Motion", "Atomic & Nuclear"]
+  },
+  {
+    "id": "tok",
+    "name": "Theory of Knowledge",
+    "code": "TOK",
+    "group": 0,
+    "level": "Both",
+    "color": "bg-emerald-600",
+    "topics": ["Knowledge & the Knower", "Knowledge & Language", "Knowledge & Technology", "Knowledge & Politics", "Core Theme"]
+  },
+  {
+    "id": "english-b-hl",
+    "name": "English B HL",
+    "code": "ENG-B-HL",
+    "group": 2,
+    "level": "HL",
+    "color": "bg-rose-600",
+    "topics": ["Text Analysis", "Written Production", "Listening Comprehension", "Literary Works", "Visual Stimulus"]
+  },
+  {
+    "id": "spanish-a-lit",
+    "name": "Literatura Española A",
+    "code": "SPA-A-LIT",
+    "group": 1,
+    "level": "Both",
+    "color": "bg-orange-600",
+    "topics": ["Análisis literario", "Prosa narrativa", "Poesía", "Teatro", "Obras prescritas", "Comentario textual"]
+  }
+]
