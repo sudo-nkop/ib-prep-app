@@ -1,0 +1,124 @@
+[
+  {
+    "id": "phys-sl-001",
+    "subjectId": "physics-sl",
+    "topic": "Mechanics",
+    "paper": 1,
+    "level": "SL",
+    "format": "MCQ",
+    "commandTerm": "identify",
+    "marks": 1,
+    "prompt": "A ball is thrown vertically upward with an initial velocity of 20 m/s. Taking g = 10 m/s², what is the maximum height reached by the ball?",
+    "options": [
+      { "label": "A", "text": "10 m" },
+      { "label": "B", "text": "20 m" },
+      { "label": "C", "text": "40 m" },
+      { "label": "D", "text": "2 m" }
+    ],
+    "correctOption": "B",
+    "markScheme": "B — Using v² = u² - 2gs: at maximum height v = 0, so 0 = 400 - 2(10)s → s = 400/20 = 20 m."
+  },
+  {
+    "id": "phys-sl-002",
+    "subjectId": "physics-sl",
+    "topic": "Mechanics",
+    "paper": 1,
+    "level": "SL",
+    "format": "ShortAnswer",
+    "commandTerm": "explain",
+    "marks": 5,
+    "prompt": "A 2 kg block slides along a frictionless horizontal surface at 5 m/s and collides with a stationary 3 kg block. After the collision the blocks stick together (perfectly inelastic collision).\n\n(a) Calculate the velocity of the combined blocks after the collision. [2 marks]\n(b) Calculate the kinetic energy lost in the collision. [3 marks]",
+    "markScheme": "(a) By conservation of momentum: m₁u₁ + m₂u₂ = (m₁ + m₂)v\n2 × 5 + 3 × 0 = (2 + 3)v\n10 = 5v → v = 2 m/s  [2 marks]\n(b) KE before = ½ × 2 × 5² = ½ × 2 × 25 = 25 J\nKE after = ½ × 5 × 2² = ½ × 5 × 4 = 10 J\nKE lost = 25 - 10 = 15 J  [3 marks]",
+    "exemplarAnswer": "(a) v = (2×5)/(2+3) = 2 m/s\n(b) KE_lost = 25 - 10 = 15 J. Energy is converted to heat/sound/deformation."
+  },
+  {
+    "id": "phys-sl-003",
+    "subjectId": "physics-sl",
+    "topic": "Mechanics",
+    "paper": 2,
+    "level": "SL",
+    "format": "ShortAnswer",
+    "commandTerm": "examine",
+    "marks": 4,
+    "prompt": "State Newton's three laws of motion and give one real-world example of each law.",
+    "markScheme": "First Law (1 mark + example): An object remains at rest or in uniform motion unless acted on by a net external force. Example: a book resting on a table stays still until pushed.\nSecond Law (1 mark + example): The net force on an object equals its mass times its acceleration (F = ma). Example: a heavier car requires more force to accelerate at the same rate as a lighter car.\nThird Law (1 mark + example): For every action there is an equal and opposite reaction. Example: a rocket expels gas downward (action) and is propelled upward (reaction).",
+    "exemplarAnswer": "1st Law (Inertia): A stationary object stays at rest until a net force acts — e.g., a hockey puck slides indefinitely on frictionless ice.\n2nd Law: F_net = ma — e.g., doubling the engine force on a car doubles its acceleration.\n3rd Law: Forces come in equal and opposite pairs — e.g., swimming: you push water backward, water pushes you forward."
+  },
+  {
+    "id": "phys-sl-004",
+    "subjectId": "physics-sl",
+    "topic": "Waves",
+    "paper": 1,
+    "level": "SL",
+    "format": "MCQ",
+    "commandTerm": "identify",
+    "marks": 1,
+    "prompt": "Which property of a wave determines its perceived pitch when heard as a sound?",
+    "options": [
+      { "label": "A", "text": "Amplitude" },
+      { "label": "B", "text": "Wavelength" },
+      { "label": "C", "text": "Frequency" },
+      { "label": "D", "text": "Wave speed" }
+    ],
+    "correctOption": "C",
+    "markScheme": "C — Frequency determines pitch. Higher frequency → higher pitch. Amplitude determines loudness. Wavelength and wave speed are related to frequency by v = fλ."
+  },
+  {
+    "id": "phys-sl-005",
+    "subjectId": "physics-sl",
+    "topic": "Waves",
+    "paper": 2,
+    "level": "SL",
+    "format": "ShortAnswer",
+    "commandTerm": "explain",
+    "marks": 4,
+    "prompt": "Explain the difference between constructive and destructive interference of waves. Under what conditions does each occur?",
+    "markScheme": "Constructive interference [2 marks]: occurs when two waves meet in phase (path difference = nλ where n is an integer); the amplitudes add together producing a larger resultant amplitude.\nDestructive interference [2 marks]: occurs when two waves meet exactly out of phase (path difference = (n + ½)λ); the amplitudes cancel (partially or fully), producing a smaller or zero resultant amplitude.",
+    "exemplarAnswer": "Constructive interference: waves arrive in phase (crest meets crest), path difference = nλ; resultant amplitude is the sum of individual amplitudes — e.g., bright fringes in Young's double-slit experiment.\nDestructive interference: waves arrive in antiphase (crest meets trough), path difference = (n+½)λ; resultant amplitude is the difference — e.g., dark fringes in double-slit experiment or noise-cancelling headphones."
+  },
+  {
+    "id": "phys-sl-006",
+    "subjectId": "physics-sl",
+    "topic": "Electricity & Magnetism",
+    "paper": 1,
+    "level": "SL",
+    "format": "MCQ",
+    "commandTerm": "identify",
+    "marks": 1,
+    "prompt": "Three resistors of 6 Ω, 3 Ω, and 2 Ω are connected in parallel. What is the total resistance of the combination?",
+    "options": [
+      { "label": "A", "text": "11 Ω" },
+      { "label": "B", "text": "1 Ω" },
+      { "label": "C", "text": "2 Ω" },
+      { "label": "D", "text": "0.5 Ω" }
+    ],
+    "correctOption": "B",
+    "markScheme": "B — For parallel resistors: 1/R_total = 1/6 + 1/3 + 1/2 = 1/6 + 2/6 + 3/6 = 6/6 = 1. Therefore R_total = 1 Ω."
+  },
+  {
+    "id": "phys-sl-007",
+    "subjectId": "physics-sl",
+    "topic": "Thermal Physics",
+    "paper": 2,
+    "level": "SL",
+    "format": "ShortAnswer",
+    "commandTerm": "explain",
+    "marks": 5,
+    "prompt": "A sealed container holds 0.5 mol of an ideal gas at a temperature of 300 K and a pressure of 1.5 × 10⁵ Pa.\n\n(a) Calculate the volume of the container. (R = 8.31 J mol⁻¹ K⁻¹) [2 marks]\n(b) The temperature is increased to 450 K at constant pressure. Calculate the new volume. [2 marks]\n(c) State one assumption of the ideal gas model. [1 mark]",
+    "markScheme": "(a) pV = nRT → V = nRT/p = (0.5 × 8.31 × 300) / (1.5 × 10⁵) = 1246.5 / 150000 ≈ 8.31 × 10⁻³ m³  [2 marks]\n(b) At constant pressure, V/T = constant: V₂ = V₁ × T₂/T₁ = 8.31 × 10⁻³ × (450/300) = 8.31 × 10⁻³ × 1.5 ≈ 1.25 × 10⁻² m³  [2 marks]\n(c) Any one of: gas molecules have negligible volume compared to the container; no intermolecular forces between molecules; collisions are perfectly elastic; molecules are in random motion.  [1 mark]",
+    "exemplarAnswer": "(a) V = nRT/p = (0.5 × 8.31 × 300) / 1.5×10⁵ ≈ 8.31 × 10⁻³ m³\n(b) V₂ = 8.31×10⁻³ × (450/300) ≈ 1.25 × 10⁻² m³\n(c) Molecules have negligible volume / no intermolecular forces."
+  },
+  {
+    "id": "phys-sl-008",
+    "subjectId": "physics-sl",
+    "topic": "Thermal Physics",
+    "paper": 1,
+    "level": "SL",
+    "format": "ShortAnswer",
+    "commandTerm": "explain",
+    "marks": 4,
+    "prompt": "A 0.5 kg block of copper (specific heat capacity = 385 J kg⁻¹ K⁻¹) is heated from 20°C to 80°C.\n\n(a) Calculate the thermal energy supplied to the copper. [2 marks]\n(b) Explain, in terms of molecular motion, what happens to the copper when thermal energy is supplied. [2 marks]",
+    "markScheme": "(a) Q = mcΔT = 0.5 × 385 × (80 - 20) = 0.5 × 385 × 60 = 11,550 J ≈ 11.6 kJ  [2 marks]\n(b) The thermal energy increases the vibrational kinetic energy of copper atoms in the lattice; atoms vibrate with greater amplitude and frequency, increasing the average kinetic energy (and therefore temperature) of the material.  [2 marks]",
+    "exemplarAnswer": "(a) Q = 0.5 × 385 × 60 = 11,550 J\n(b) Thermal energy increases the vibrational KE of lattice atoms; they oscillate with greater amplitude, raising the material's internal energy and temperature."
+  }
+]

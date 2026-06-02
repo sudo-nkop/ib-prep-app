@@ -1,0 +1,156 @@
+[
+  {
+    "id": "maa-001",
+    "subjectId": "maa",
+    "topic": "Functions",
+    "paper": 1,
+    "level": "Both",
+    "format": "MCQ",
+    "commandTerm": "identify",
+    "marks": 1,
+    "prompt": "The function f(x) = sqrt(x - 3) has domain:",
+    "options": [
+      { "label": "A", "text": "x ∈ ℝ" },
+      { "label": "B", "text": "x ≥ 3" },
+      { "label": "C", "text": "x > 3" },
+      { "label": "D", "text": "x ≥ 0" }
+    ],
+    "correctOption": "B",
+    "markScheme": "B — For sqrt(x - 3) to be defined, we need x - 3 ≥ 0, so x ≥ 3. Domain is [3, ∞)."
+  },
+  {
+    "id": "maa-002",
+    "subjectId": "maa",
+    "topic": "Functions",
+    "paper": 1,
+    "level": "Both",
+    "format": "ShortAnswer",
+    "commandTerm": "identify",
+    "marks": 5,
+    "prompt": "Let f(x) = 2x + 1 and g(x) = x^2 - 3.\n\n(a) Find (f ∘ g)(x). [2 marks]\n(b) Find (g ∘ f)(x). [2 marks]\n(c) State whether f ∘ g = g ∘ f, with justification. [1 mark]",
+    "markScheme": "(a) (f ∘ g)(x) = f(g(x)) = f(x^2 - 3) = 2(x^2 - 3) + 1 = 2x^2 - 6 + 1 = 2x^2 - 5  [2 marks]\n(b) (g ∘ f)(x) = g(f(x)) = g(2x + 1) = (2x + 1)^2 - 3 = 4x^2 + 4x + 1 - 3 = 4x^2 + 4x - 2  [2 marks]\n(c) f ∘ g ≠ g ∘ f since 2x^2 - 5 ≠ 4x^2 + 4x - 2 in general; composition of functions is not commutative.  [1 mark]",
+    "exemplarAnswer": "(a) (f ∘ g)(x) = 2(x^2 - 3) + 1 = 2x^2 - 5\n(b) (g ∘ f)(x) = (2x+1)^2 - 3 = 4x^2 + 4x - 2\n(c) No, f ∘ g ≠ g ∘ f. Substituting x = 1: (f ∘ g)(1) = 2(1) - 5 = -3, while (g ∘ f)(1) = 4 + 4 - 2 = 6."
+  },
+  {
+    "id": "maa-003",
+    "subjectId": "maa",
+    "topic": "Functions",
+    "paper": 1,
+    "level": "Both",
+    "format": "ShortAnswer",
+    "commandTerm": "identify",
+    "marks": 4,
+    "prompt": "Find the inverse function f^{-1}(x) of f(x) = (3x - 2) / (x + 1), where x ≠ -1.\n\nState the domain of f^{-1}(x).",
+    "markScheme": "Let y = (3x - 2)/(x + 1)\nSwap x and y: x = (3y - 2)/(y + 1)\nSolve for y: x(y + 1) = 3y - 2\nxy + x = 3y - 2\nxy - 3y = -2 - x\ny(x - 3) = -x - 2\ny = (-x - 2)/(x - 3) = (x + 2)/(3 - x)  [3 marks]\nSo f^{-1}(x) = (x + 2)/(3 - x)\nDomain: x ∈ ℝ, x ≠ 3 (i.e., the range of f, which excludes 3)  [1 mark]",
+    "exemplarAnswer": "Set y = (3x-2)/(x+1) and interchange x and y:\nx(y+1) = 3y - 2 → xy - 3y = -x - 2 → y(x-3) = -(x+2)\nf^{-1}(x) = (x+2)/(3-x), domain x ≠ 3"
+  },
+  {
+    "id": "maa-004",
+    "subjectId": "maa",
+    "topic": "Calculus",
+    "paper": 1,
+    "level": "Both",
+    "format": "MCQ",
+    "commandTerm": "identify",
+    "marks": 1,
+    "prompt": "Using the chain rule, the derivative of f(x) = sin(3x^2 + 1) is:",
+    "options": [
+      { "label": "A", "text": "cos(3x^2 + 1)" },
+      { "label": "B", "text": "6x · cos(3x^2 + 1)" },
+      { "label": "C", "text": "-6x · cos(3x^2 + 1)" },
+      { "label": "D", "text": "6x · sin(3x^2 + 1)" }
+    ],
+    "correctOption": "B",
+    "markScheme": "B — By the chain rule: f'(x) = cos(3x^2 + 1) · d/dx(3x^2 + 1) = cos(3x^2 + 1) · 6x = 6x cos(3x^2 + 1)."
+  },
+  {
+    "id": "maa-005",
+    "subjectId": "maa",
+    "topic": "Calculus",
+    "paper": 2,
+    "level": "Both",
+    "format": "ShortAnswer",
+    "commandTerm": "identify",
+    "marks": 6,
+    "prompt": "Consider the function f(x) = x^3 - 6x^2 + 9x - 2.\n\n(a) Find f'(x). [2 marks]\n(b) Find the coordinates of the local maximum and local minimum of f(x). [3 marks]\n(c) Find the definite integral ∫₀² f(x) dx. [3 marks]",
+    "markScheme": "(a) f'(x) = 3x^2 - 12x + 9 = 3(x^2 - 4x + 3) = 3(x-1)(x-3)  [2 marks]\n(b) Critical points: x = 1 and x = 3\nf''(x) = 6x - 12\nf''(1) = -6 < 0 → local maximum at (1, f(1)) = (1, 1-6+9-2) = (1, 2)\nf''(3) = 6 > 0 → local minimum at (3, f(3)) = (3, 27-54+27-2) = (3, -2)  [3 marks]\n(c) ∫₀² (x^3 - 6x^2 + 9x - 2) dx = [x^4/4 - 2x^3 + 9x^2/2 - 2x]₀²\n= (16/4 - 16 + 18 - 4) - 0 = 4 - 16 + 18 - 4 = 2  [3 marks]",
+    "exemplarAnswer": "(a) f'(x) = 3x^2 - 12x + 9\n(b) Local max: (1, 2); Local min: (3, -2)\n(c) ∫₀² f(x)dx = [x^4/4 - 2x^3 + 9x^2/2 - 2x]₀² = 4 - 16 + 18 - 4 = 2"
+  },
+  {
+    "id": "maa-006",
+    "subjectId": "maa",
+    "topic": "Algebra & Number",
+    "paper": 1,
+    "level": "Both",
+    "format": "MCQ",
+    "commandTerm": "identify",
+    "marks": 1,
+    "prompt": "The sum of the infinite geometric series 1 + 1/3 + 1/9 + 1/27 + ... is:",
+    "options": [
+      { "label": "A", "text": "3/2" },
+      { "label": "B", "text": "2" },
+      { "label": "C", "text": "4/3" },
+      { "label": "D", "text": "3" }
+    ],
+    "correctOption": "A",
+    "markScheme": "A — This is a geometric series with first term a = 1 and common ratio r = 1/3. Since |r| < 1, S∞ = a/(1-r) = 1/(1 - 1/3) = 1/(2/3) = 3/2."
+  },
+  {
+    "id": "maa-007",
+    "subjectId": "maa",
+    "topic": "Algebra & Number",
+    "paper": 1,
+    "level": "Both",
+    "format": "ShortAnswer",
+    "commandTerm": "identify",
+    "marks": 5,
+    "prompt": "Use the Binomial Theorem to expand (2x - 1)^4, giving each term in simplified form.",
+    "markScheme": "(2x - 1)^4 = Σ C(4,k) (2x)^(4-k) (-1)^k for k = 0 to 4\nk=0: C(4,0)(2x)^4(−1)^0 = 16x^4\nk=1: C(4,1)(2x)^3(−1)^1 = 4 · 8x^3 · (−1) = −32x^3\nk=2: C(4,2)(2x)^2(−1)^2 = 6 · 4x^2 · 1 = 24x^2\nk=3: C(4,3)(2x)^1(−1)^3 = 4 · 2x · (−1) = −8x\nk=4: C(4,4)(2x)^0(−1)^4 = 1\nFull expansion: 16x^4 - 32x^3 + 24x^2 - 8x + 1  [5 marks, 1 per correct term]",
+    "exemplarAnswer": "(2x-1)^4 = 16x^4 - 32x^3 + 24x^2 - 8x + 1"
+  },
+  {
+    "id": "maa-008",
+    "subjectId": "maa",
+    "topic": "Statistics & Probability",
+    "paper": 2,
+    "level": "Both",
+    "format": "ShortAnswer",
+    "commandTerm": "identify",
+    "marks": 6,
+    "prompt": "A random variable X follows a normal distribution with mean μ = 70 and standard deviation σ = 8.\n\n(a) Find P(X > 80). [2 marks]\n(b) Find P(60 < X < 82). [3 marks]\n(c) Given that P(X < k) = 0.25, find the value of k. [2 marks]\n\n(Use the GDC or standard normal tables.)",
+    "markScheme": "(a) P(X > 80) = P(Z > (80-70)/8) = P(Z > 1.25) = 1 - Φ(1.25) ≈ 1 - 0.8944 = 0.1056  [2 marks]\n(b) P(60 < X < 82) = P((60-70)/8 < Z < (82-70)/8) = P(-1.25 < Z < 1.5)\n= Φ(1.5) - Φ(-1.25) = 0.9332 - 0.1056 = 0.8276  [3 marks]\n(c) P(X < k) = 0.25 → (k-70)/8 = -0.6745 (from inverse normal)\nk = 70 - 0.6745 × 8 = 70 - 5.396 ≈ 64.6  [2 marks]",
+    "exemplarAnswer": "(a) P(X > 80) ≈ 0.106 (using GDC: normalcdf(80, 1E99, 70, 8))\n(b) P(60 < X < 82) ≈ 0.828\n(c) k ≈ 64.6 (using invNorm(0.25, 70, 8))"
+  },
+  {
+    "id": "maa-009",
+    "subjectId": "maa",
+    "topic": "Geometry & Trigonometry",
+    "paper": 1,
+    "level": "Both",
+    "format": "MCQ",
+    "commandTerm": "identify",
+    "marks": 1,
+    "prompt": "Which of the following is equivalent to cos(2θ)?",
+    "options": [
+      { "label": "A", "text": "2sin(θ)cos(θ)" },
+      { "label": "B", "text": "cos²(θ) + sin²(θ)" },
+      { "label": "C", "text": "1 - 2sin²(θ)" },
+      { "label": "D", "text": "2cos(θ) - 1" }
+    ],
+    "correctOption": "C",
+    "markScheme": "C — The double angle identity cos(2θ) = cos²(θ) - sin²(θ) = 1 - 2sin²(θ) = 2cos²(θ) - 1. Option A is the identity for sin(2θ). Option B equals 1 (Pythagorean identity). Option D is incorrect."
+  },
+  {
+    "id": "maa-010",
+    "subjectId": "maa",
+    "topic": "Geometry & Trigonometry",
+    "paper": 2,
+    "level": "Both",
+    "format": "ShortAnswer",
+    "commandTerm": "identify",
+    "marks": 6,
+    "prompt": "Two vectors are given: a = (3, -1, 2) and b = (-1, 4, 1).\n\n(a) Calculate |a| and |b|. [2 marks]\n(b) Find a · b (dot product). [2 marks]\n(c) Find the angle θ between vectors a and b, giving your answer in degrees to 1 decimal place. [2 marks]",
+    "markScheme": "(a) |a| = sqrt(3^2 + (-1)^2 + 2^2) = sqrt(9 + 1 + 4) = sqrt(14) ≈ 3.742\n|b| = sqrt((-1)^2 + 4^2 + 1^2) = sqrt(1 + 16 + 1) = sqrt(18) = 3sqrt(2) ≈ 4.243  [2 marks]\n(b) a · b = (3)(-1) + (-1)(4) + (2)(1) = -3 - 4 + 2 = -5  [2 marks]\n(c) cos θ = (a · b) / (|a||b|) = -5 / (sqrt(14) · sqrt(18)) = -5 / sqrt(252) = -5 / (6sqrt(7))\nθ = arccos(-5/sqrt(252)) ≈ arccos(-0.3149) ≈ 108.4°  [2 marks]",
+    "exemplarAnswer": "(a) |a| = √14 ≈ 3.74, |b| = 3√2 ≈ 4.24\n(b) a · b = -5\n(c) θ = arccos(-5/√252) ≈ 108.4°"
+  }
+]
