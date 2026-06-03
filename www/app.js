@@ -254,6 +254,27 @@ function getSubjectById(id) {
 
 function getQuestionsForSubject(subjectId, topicFilter = null) {
   let qs = allQuestions.filter(q => q.subjectId === subjectId);
+
+  // Filter by prescribed works if user has selected specific texts
+  if (PRESCRIBED_TEXTS[subjectId]) {
+    const selectedIds = getSelectedWorks(subjectId);
+    if (selectedIds.length > 0) {
+      const texts = PRESCRIBED_TEXTS[subjectId];
+      const selectedTitles  = selectedIds.map(id => texts.find(t => t.id === id)?.title  || '').filter(Boolean);
+      const selectedAuthors = selectedIds.map(id => texts.find(t => t.id === id)?.author || '').filter(Boolean);
+      // Keep a question if its prompt or markScheme mentions any selected author/title
+      qs = qs.filter(q => {
+        const haystack = ((q.prompt || '') + ' ' + (q.markScheme || '') + ' ' + (q.topic || '')).toLowerCase();
+        return selectedTitles.some(t => haystack.includes(t.toLowerCase()))
+          || selectedAuthors.some(a => haystack.includes(a.split(' ').pop().toLowerCase()));
+      });
+      // Fallback: if filter yields nothing, return all questions (don't leave user stranded)
+      if (qs.length === 0) {
+        qs = allQuestions.filter(q => q.subjectId === subjectId);
+      }
+    }
+  }
+
   if (topicFilter && topicFilter.size > 0) {
     qs = qs.filter(q => topicFilter.has(q.topic));
   }
@@ -350,11 +371,12 @@ function renderHome() {
   const streak = stats.streak || 0;
   document.getElementById('stat-streak').textContent = streak + '🔥';
 
-  // Subject tiles
+  // Subject tiles — only show subjects the user is taking
   const grid = document.getElementById('subjects-grid');
   grid.innerHTML = '';
 
-  for (const subj of SUBJECTS) {
+  const activeSubjects = getActiveSubjects();
+  for (const subj of activeSubjects) {
     const sstats = getSubjectStats(subj.id);
     const tile = buildSubjectTile(subj, sstats);
     grid.appendChild(tile);
@@ -400,24 +422,67 @@ function renderSubjectScreen() {
 
   const sstats = getSubjectStats(subj.id);
 
-  // Header
-  document.getElementById('subject-color-bar').style.background = subj.color;
-  document.getElementById('subject-name-text').textContent       = subj.name;
-  document.getElementById('subject-level-badge').textContent     = subj.level;
-  document.getElementById('sub-stat-total').textContent          = sstats.total;
-  document.getElementById('sub-stat-answered').textContent       = sstats.answered;
-  document.getElementById('sub-stat-accuracy').textContent       = sstats.accuracy + '%';
+  // Sticky top bar
+  document.getElementById('subject-name-text').textContent   = subj.name;
+  document.getElementById('subject-level-badge').textContent = subj.level;
+
+  // Accent line
+  const accentLine = document.getElementById('subject-accent-line');
+  if (accentLine) accentLine.style.background = subj.color;
+
+  // Meta row: "SL/HL · Group N"
+  const metaRow = document.getElementById('subject-meta-row');
+  if (metaRow) {
+    const levelText = subj.level === 'Both' ? 'SL / HL' : subj.level;
+    const groupText = subj.group > 0 ? ` · Group ${subj.group}` : '';
+    metaRow.textContent = levelText + groupText;
+  }
+
+  // Stats
+  document.getElementById('sub-stat-total').textContent    = sstats.total;
+  document.getElementById('sub-stat-answered').textContent = sstats.answered;
+  document.getElementById('sub-stat-accuracy').textContent = sstats.accuracy + '%';
 
   // Mode buttons
   document.querySelectorAll('.mode-btn').forEach(btn => {
     btn.classList.toggle('selected', btn.dataset.mode === subjectState.mode);
   });
 
+  // Prescribed works info (for lit subjects)
+  renderWorksInfo(subj.id);
+
   // Topic chips
   renderTopicChips();
 
   // Update start button label
   updateStartButton();
+}
+
+function renderWorksInfo(subjectId) {
+  // Show selected prescribed works as a subtle strip (or nothing)
+  let strip = document.getElementById('works-strip');
+  const texts = PRESCRIBED_TEXTS[subjectId];
+  if (!texts) {
+    if (strip) strip.remove();
+    return;
+  }
+
+  const selectedIds = getSelectedWorks(subjectId);
+  if (!strip) {
+    strip = document.createElement('div');
+    strip.id = 'works-strip';
+    strip.style.cssText = 'padding:8px 16px;font-size:0.78rem;color:var(--text-muted);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px;flex-wrap:wrap;';
+    // Insert after subject-meta-row
+    const meta = document.getElementById('subject-meta-row');
+    if (meta) meta.insertAdjacentElement('afterend', strip);
+  }
+
+  if (selectedIds.length === 0) {
+    strip.innerHTML = `<span>📚 All works</span><button style="margin-left:auto;font-size:0.75rem;color:var(--primary);background:none;border:none;cursor:pointer;" onclick="openSetup(true)">Edit</button>`;
+  } else {
+    const names = selectedIds.map(id => texts.find(t => t.id === id)?.title || id);
+    strip.innerHTML = `<span>📚 ${escHtml(names.join(' · '))}</span><button style="margin-left:auto;font-size:0.75rem;color:var(--primary);background:none;border:none;cursor:pointer;" onclick="openSetup(true)">Edit</button>`;
+  }
 }
 
 function renderTopicChips() {
@@ -461,13 +526,14 @@ function renderTopicChips() {
 }
 
 function updateStartButton() {
-  const qs = getQuestionsForSubject(subjectState.subjectId, subjectState.selectedTopics);
+  let qs = getQuestionsForSubject(subjectState.subjectId, subjectState.selectedTopics);
   const startBtn = document.getElementById('start-btn');
   let count = qs.length;
 
   // Apply mode-based limits for display
   if (subjectState.mode === 'practice') count = Math.min(count, PRACTICE_LIMIT);
   if (subjectState.mode === 'timed')    count = Math.min(count, TIMED_LIMIT);
+  if (subjectState.mode === 'mastery')  count = Math.min(qs.filter(q => !isMastered(q.id)).length, PRACTICE_LIMIT);
 
   startBtn.textContent = `Start ${count} Question${count !== 1 ? 's' : ''}`;
   startBtn.disabled    = count === 0;
@@ -492,6 +558,9 @@ function startQuiz(subjectId, mode, topicFilter) {
     timerSecs = qs.length * TIMED_SECS_PER_Q;
   } else if (mode === 'practice') {
     qs = qs.slice(0, PRACTICE_LIMIT);
+  } else if (mode === 'mastery') {
+    // Filter to only non-mastered questions, then cap at practice limit
+    qs = qs.filter(q => !isMastered(q.id)).slice(0, PRACTICE_LIMIT);
   }
   // 'endless' = all shuffled questions
 
@@ -523,7 +592,8 @@ function startMixedPractice() {
     return;
   }
 
-  const qs = shuffle(allQuestions).slice(0, 20);
+  const activeIds = new Set(getActiveSubjects().map(s => s.id));
+  const qs = shuffle(allQuestions.filter(q => activeIds.has(q.subjectId))).slice(0, 20);
 
   session = {
     subjectId:     'mixed',
@@ -1222,7 +1292,20 @@ function formatDuration(secs) {
 // ── Event Wiring ─────────────────────────────────────────────
 function wireEvents() {
 
+  // ── Setup wizard ──────────────────────────────────────────
+  document.getElementById('setup-next-btn').addEventListener('click', setupNext);
+  document.getElementById('setup-back-btn').addEventListener('click', setupBack);
+  document.getElementById('settings-next-btn').addEventListener('click', setupNext);
+  document.getElementById('settings-back-btn').addEventListener('click', setupBack);
+  document.getElementById('back-from-settings').addEventListener('click', () => {
+    navigateHome();
+  });
+
   // ── Home ──────────────────────────────────────────────────
+  document.getElementById('btn-settings').addEventListener('click', () => {
+    openSetup(true);
+  });
+
   document.getElementById('btn-practice-all').addEventListener('click', () => {
     startMixedPractice();
   });
@@ -1384,6 +1467,355 @@ function handleKeydown(e) {
   }
 }
 
+// ══════════════════════════════════════════════════════════════
+// PERSONALISATION — Profile, Setup Wizard, Settings
+// ══════════════════════════════════════════════════════════════
+
+// Prescribed works per subject (for Literature / Language B subjects)
+const PRESCRIBED_TEXTS = {
+  'spanish-a-lit': [
+    { id: 'lorca-bernarda',  title: 'La casa de Bernarda Alba',        author: 'Federico García Lorca' },
+    { id: 'lorca-bodas',     title: 'Bodas de sangre',                 author: 'Federico García Lorca' },
+    { id: 'marquez-cronica', title: 'Crónica de una muerte anunciada', author: 'Gabriel García Márquez' },
+    { id: 'marquez-soledad', title: 'Cien años de soledad',            author: 'Gabriel García Márquez' },
+    { id: 'allende-casa',    title: 'La casa de los espíritus',        author: 'Isabel Allende' },
+    { id: 'borges-ficciones',title: 'Ficciones',                       author: 'Jorge Luis Borges' },
+    { id: 'neruda-veinte',   title: 'Veinte poemas de amor',           author: 'Pablo Neruda' },
+  ],
+  'english-b-hl': [
+    { id: '1984',            title: 'Nineteen Eighty-Four',            author: 'George Orwell' },
+    { id: 'kite-runner',     title: 'The Kite Runner',                 author: 'Khaled Hosseini' },
+    { id: 'great-exp',       title: 'Great Expectations',              author: 'Charles Dickens' },
+    { id: 'handmaid',        title: "The Handmaid's Tale",             author: 'Margaret Atwood' },
+    { id: 'things-fall',     title: 'Things Fall Apart',               author: 'Chinua Achebe' },
+  ],
+};
+
+// Subjects where level matters (has both SL and HL variants or questions differ by level)
+const LEVEL_SUBJECTS = ['history-hl', 'history-sl', 'maa', 'physics-sl'];
+
+// ── Profile ──────────────────────────────────────────────────
+// profile shape:
+// {
+//   configured: bool,
+//   subjects: {
+//     [subjectId]: {
+//       active: bool,
+//       level: 'SL' | 'HL' | 'Both',
+//       selectedWorkIds: string[]   // for lit subjects
+//     }
+//   }
+// }
+
+const PROFILE_KEY = 'ib_profile';
+
+function loadProfile() {
+  return loadStore(PROFILE_KEY, null);
+}
+
+function saveProfile(profile) {
+  saveStore(PROFILE_KEY, profile);
+}
+
+function getDefaultProfile() {
+  const subjects = {};
+  for (const s of SUBJECTS) {
+    subjects[s.id] = {
+      active: true,
+      level: s.level,
+      selectedWorkIds: [],
+    };
+  }
+  return { configured: false, subjects };
+}
+
+function getActiveSubjects() {
+  const profile = loadProfile();
+  if (!profile || !profile.configured) return SUBJECTS;
+  return SUBJECTS.filter(s => profile.subjects[s.id]?.active);
+}
+
+function getSubjectLevel(subjectId) {
+  const profile = loadProfile();
+  if (!profile) return SUBJECTS.find(s => s.id === subjectId)?.level || 'Both';
+  return profile.subjects[subjectId]?.level || 'Both';
+}
+
+function getSelectedWorks(subjectId) {
+  const profile = loadProfile();
+  if (!profile) return [];
+  return profile.subjects[subjectId]?.selectedWorkIds || [];
+}
+
+// ── Setup Wizard State ───────────────────────────────────────
+let setupState = {
+  step: 1,          // 1 = subjects, 2 = levels, 3 = works
+  totalSteps: 3,
+  isSettings: false, // true when editing from settings
+  draft: null,       // draft profile being built
+};
+
+function openSetup(isSettings = false) {
+  const existing = loadProfile();
+  setupState.isSettings = isSettings;
+  setupState.draft = existing
+    ? JSON.parse(JSON.stringify(existing))
+    : getDefaultProfile();
+
+  // Determine total steps
+  setupState.totalSteps = computeSetupSteps(setupState.draft);
+  setupState.step = 1;
+
+  if (isSettings) {
+    renderSettingsStep();
+    showScreen('settings');
+  } else {
+    renderSetupStep();
+    showScreen('setup', false);
+  }
+}
+
+function computeSetupSteps(draft) {
+  // Always: subjects (1) + levels (2)
+  // + works step if any lit subject is active
+  const hasLit = SUBJECTS.some(s =>
+    PRESCRIBED_TEXTS[s.id] && draft.subjects[s.id]?.active
+  );
+  return hasLit ? 3 : 2;
+}
+
+// ── Setup Wizard Rendering ───────────────────────────────────
+function setDots(prefix, current, total) {
+  for (let i = 1; i <= 3; i++) {
+    const dot = document.getElementById(`${prefix}-${i}`);
+    if (!dot) continue;
+    dot.classList.toggle('active', i === current);
+    dot.style.display = i <= total ? '' : 'none';
+  }
+}
+
+function renderSetupStep() {
+  const body    = document.getElementById('setup-body');
+  const backBtn = document.getElementById('setup-back-btn');
+  const nextBtn = document.getElementById('setup-next-btn');
+  const { step, totalSteps } = setupState;
+
+  setDots('dot', step, totalSteps);
+
+  backBtn.style.display = step > 1 ? '' : 'none';
+  nextBtn.textContent   = step === totalSteps ? (setupState.isSettings ? 'Save' : 'Start!') : 'Next →';
+
+  if (step === 1) renderSubjectSelectionStep(body);
+  else if (step === 2) renderLevelStep(body);
+  else if (step === 3) renderWorksStep(body);
+}
+
+function renderSettingsStep() {
+  const body    = document.getElementById('settings-body');
+  const backBtn = document.getElementById('settings-back-btn');
+  const nextBtn = document.getElementById('settings-next-btn');
+  const { step, totalSteps } = setupState;
+
+  setDots('settings-dot', step, totalSteps);
+
+  backBtn.style.display = step > 1 ? '' : 'none';
+  nextBtn.textContent   = step === totalSteps ? 'Save' : 'Next →';
+
+  if (step === 1) renderSubjectSelectionStep(body);
+  else if (step === 2) renderLevelStep(body);
+  else if (step === 3) renderWorksStep(body);
+}
+
+function renderSubjectSelectionStep(container) {
+  container.innerHTML = `
+    <div>
+      <div class="setup-title">Your Subjects</div>
+      <div class="setup-subtitle">Select the IB subjects you're studying.</div>
+    </div>
+    <div class="subject-select-grid" id="subject-select-grid"></div>
+  `;
+
+  const grid = container.querySelector('#subject-select-grid');
+  for (const subj of SUBJECTS) {
+    const isActive = setupState.draft.subjects[subj.id]?.active ?? true;
+    const card = document.createElement('button');
+    card.type = 'button';
+    card.className = 'subject-select-card' + (isActive ? ' selected' : '');
+    card.style.setProperty('--subject-color', subj.color);
+    card.innerHTML = `
+      <div class="card-check">${isActive ? '✓' : ''}</div>
+      <div class="card-name">${escHtml(subj.name)}</div>
+      <div class="card-meta">Group ${subj.group} · ${subj.level === 'Both' ? 'SL/HL' : subj.level}</div>
+    `;
+    card.addEventListener('click', () => {
+      const cur = setupState.draft.subjects[subj.id];
+      cur.active = !cur.active;
+      // Recompute total steps in case lit subject was toggled
+      setupState.totalSteps = computeSetupSteps(setupState.draft);
+      renderSubjectSelectionStep(container);
+      // Update dots
+      const isSettings = setupState.isSettings;
+      setDots(isSettings ? 'settings-dot' : 'dot', setupState.step, setupState.totalSteps);
+    });
+    grid.appendChild(card);
+  }
+}
+
+function renderLevelStep(container) {
+  const activeSubjects = SUBJECTS.filter(s => setupState.draft.subjects[s.id]?.active);
+  const levelled = activeSubjects.filter(s => s.level === 'Both' || s.id.startsWith('history'));
+
+  // For history-hl and history-sl they already have fixed levels,
+  // but MAA can be SL or HL
+  const adjustable = activeSubjects.filter(s => s.level === 'Both');
+
+  if (adjustable.length === 0) {
+    // Skip this step automatically
+    container.innerHTML = `
+      <div>
+        <div class="setup-title">Levels</div>
+        <div class="setup-subtitle">Your selected subjects have fixed levels — nothing to configure here.</div>
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = `
+    <div>
+      <div class="setup-title">Your Levels</div>
+      <div class="setup-subtitle">Choose SL or HL for each subject where it applies.</div>
+    </div>
+    <div id="level-sections" class="level-section" style="gap:20px;display:flex;flex-direction:column;"></div>
+  `;
+
+  const wrapper = container.querySelector('#level-sections');
+  for (const subj of adjustable) {
+    const cur = setupState.draft.subjects[subj.id];
+    const currentLevel = cur.level || 'SL';
+
+    const sec = document.createElement('div');
+    sec.className = 'level-section';
+    sec.innerHTML = `
+      <div class="level-subject-name" style="border-left:3px solid ${subj.color};padding-left:8px;">
+        ${escHtml(subj.name)}
+      </div>
+      <div class="level-chips">
+        <button type="button" class="level-chip${currentLevel === 'SL' ? ' selected' : ''}" data-level="SL" data-subject="${subj.id}">SL</button>
+        <button type="button" class="level-chip${currentLevel === 'HL' ? ' selected' : ''}" data-level="HL" data-subject="${subj.id}">HL</button>
+      </div>
+    `;
+    sec.querySelectorAll('.level-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        setupState.draft.subjects[chip.dataset.subject].level = chip.dataset.level;
+        renderLevelStep(container);
+      });
+    });
+    wrapper.appendChild(sec);
+  }
+}
+
+function renderWorksStep(container) {
+  const litSubjects = SUBJECTS.filter(s =>
+    PRESCRIBED_TEXTS[s.id] && setupState.draft.subjects[s.id]?.active
+  );
+
+  if (litSubjects.length === 0) {
+    container.innerHTML = `<div><div class="setup-title">Prescribed Works</div><div class="setup-subtitle">No literature subjects selected.</div></div>`;
+    return;
+  }
+
+  container.innerHTML = `
+    <div>
+      <div class="setup-title">Prescribed Works</div>
+      <div class="setup-subtitle">Select the texts you're studying. Questions will be filtered to your choices.</div>
+    </div>
+    <div id="works-wrapper" style="display:flex;flex-direction:column;gap:24px;"></div>
+  `;
+
+  const wrapper = container.querySelector('#works-wrapper');
+  for (const subj of litSubjects) {
+    const texts = PRESCRIBED_TEXTS[subj.id];
+    const selectedIds = new Set(setupState.draft.subjects[subj.id]?.selectedWorkIds || []);
+
+    const sec = document.createElement('div');
+    sec.innerHTML = `<div class="level-subject-name" style="border-left:3px solid ${subj.color};padding-left:8px;margin-bottom:8px;">${escHtml(subj.name)}</div>`;
+
+    const list = document.createElement('div');
+    list.className = 'work-list';
+
+    for (const text of texts) {
+      const isSelected = selectedIds.has(text.id);
+      const item = document.createElement('button');
+      item.type = 'button';
+      item.className = 'work-item' + (isSelected ? ' selected' : '');
+      item.innerHTML = `
+        <div class="work-check">${isSelected ? '✓' : ''}</div>
+        <div>
+          <div class="work-title">${escHtml(text.title)}</div>
+          <div class="work-author">${escHtml(text.author)}</div>
+        </div>
+      `;
+      item.addEventListener('click', () => {
+        const cur = setupState.draft.subjects[subj.id];
+        const ids = new Set(cur.selectedWorkIds);
+        if (ids.has(text.id)) ids.delete(text.id);
+        else ids.add(text.id);
+        cur.selectedWorkIds = [...ids];
+        renderWorksStep(container);
+      });
+      list.appendChild(item);
+    }
+
+    sec.appendChild(list);
+    wrapper.appendChild(sec);
+  }
+}
+
+// ── Setup Navigation ─────────────────────────────────────────
+function setupNext() {
+  const { step, totalSteps } = setupState;
+
+  // Validate: at least one subject selected
+  if (step === 1) {
+    const anyActive = SUBJECTS.some(s => setupState.draft.subjects[s.id]?.active);
+    if (!anyActive) {
+      showToast('Please select at least one subject.', 'warn');
+      return;
+    }
+  }
+
+  if (step < totalSteps) {
+    setupState.step++;
+    if (setupState.isSettings) renderSettingsStep();
+    else renderSetupStep();
+  } else {
+    // Save and finish
+    setupState.draft.configured = true;
+    saveProfile(setupState.draft);
+    finishSetup();
+  }
+}
+
+function setupBack() {
+  if (setupState.step > 1) {
+    setupState.step--;
+    if (setupState.isSettings) renderSettingsStep();
+    else renderSetupStep();
+  }
+}
+
+function finishSetup() {
+  if (setupState.isSettings) {
+    // Return to home and re-render
+    navigateHome();
+  } else {
+    // First time setup complete — go home
+    screenStack = ['home'];
+    showScreen('home', false);
+    renderHome();
+  }
+}
+
 // ── Service Worker Registration ──────────────────────────────
 function registerServiceWorker() {
   if (!('serviceWorker' in navigator)) return;
@@ -1400,21 +1832,19 @@ function registerServiceWorker() {
 
 // ── App Initialisation ───────────────────────────────────────
 async function init() {
-  // Register service worker
   registerServiceWorker();
-
-  // Show home screen immediately (before data loads)
-  screenStack = ['home'];
-  showScreen('home', false);
-
-  // Wire all UI events first (so buttons work as soon as data arrives)
   wireEvents();
-
-  // Load question data
   await loadQuestions();
 
-  // Render home with real data
-  renderHome();
+  const profile = loadProfile();
+  if (!profile || !profile.configured) {
+    // First launch — run onboarding
+    openSetup(false);
+  } else {
+    screenStack = ['home'];
+    showScreen('home', false);
+    renderHome();
+  }
 }
 
 // Boot
