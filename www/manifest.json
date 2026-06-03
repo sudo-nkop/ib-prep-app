@@ -2,7 +2,7 @@
   "name": "IB Diploma Prep",
   "short_name": "IB Prep",
   "description": "IB Diploma exam preparation app with practice questions across all subjects",
-  "start_url": "/",
+  "start_url": "/ib-prep-app/",
   "display": "standalone",
   "background_color": "#0f172a",
   "theme_color": "#3b82f6",
