@@ -1,1212 +1,1421 @@
-/* ═══════════════════════════════════════════════════════════
-   IB Prep App  —  Vanilla JS PWA
-   ═══════════════════════════════════════════════════════════ */
+/* ============================================================
+   IB Prep App — Full Application Logic
+   Vanilla JS, no build step, offline-capable via service worker
+   Dark theme, localStorage persistence
+   ============================================================ */
 
 'use strict';
 
-// ─── Constants ────────────────────────────────────────────
-const STORAGE_PREFIX = 'ib-app:';
-const SK = {
-  stats:    STORAGE_PREFIX + 'stats',
-  seen:     STORAGE_PREFIX + 'seen',
-  mastered: STORAGE_PREFIX + 'mastered',
-  history:  STORAGE_PREFIX + 'history',
-  settings: STORAGE_PREFIX + 'settings',
-  imported: STORAGE_PREFIX + 'imported',
-};
-
+// ── Subjects ────────────────────────────────────────────────
 const SUBJECTS = [
-  { id: 'history-hl',    name: 'History HL',                        group: 3, level: 'HL',   color: '#b45309', topics: ['Rights and Protest', 'Move to Global War', 'Authoritarian States', 'The Cold War'] },
-  { id: 'history-sl',    name: 'History SL',                        group: 3, level: 'SL',   color: '#d97706', topics: ['Rights and Protest', 'Move to Global War', 'Causes of World War I'] },
-  { id: 'maa',           name: 'Mathematics: Analysis & Approaches', group: 5, level: 'Both', color: '#1d4ed8', topics: ['Functions', 'Algebra & Number', 'Calculus', 'Statistics & Probability', 'Geometry & Trigonometry'] },
-  { id: 'physics-sl',    name: 'Physics SL',                        group: 4, level: 'SL',   color: '#7c3aed', topics: ['Mechanics', 'Thermal Physics', 'Waves', 'Electricity & Magnetism', 'Circular Motion', 'Atomic & Nuclear'] },
-  { id: 'tok',           name: 'Theory of Knowledge',               group: 0, level: 'Both', color: '#059669', topics: ['Knowledge & the Knower', 'Knowledge & Language', 'Knowledge & Technology', 'Knowledge & Politics', 'Core Theme'] },
-  { id: 'english-b-hl', name: 'English B HL',                      group: 2, level: 'HL',   color: '#dc2626', topics: ['Text Analysis', 'Written Production', 'Listening Comprehension', 'Literary Works', 'Visual Stimulus'] },
-  { id: 'spanish-a-lit', name: 'Literatura Española A',             group: 1, level: 'Both', color: '#ea580c', topics: ['Análisis literario', 'Prosa narrativa', 'Poesía', 'Teatro', 'Obras prescritas', 'Comentario textual'] },
+  { id: 'history-hl',    name: 'History HL',            group: 3, level: 'HL',   color: '#b45309' },
+  { id: 'history-sl',    name: 'History SL',            group: 3, level: 'SL',   color: '#d97706' },
+  { id: 'maa',           name: 'Mathematics AA',         group: 5, level: 'Both', color: '#1d4ed8' },
+  { id: 'physics-sl',    name: 'Physics SL',            group: 4, level: 'SL',   color: '#7c3aed' },
+  { id: 'tok',           name: 'Theory of Knowledge',   group: 0, level: 'Both', color: '#059669' },
+  { id: 'english-b-hl', name: 'English B HL',           group: 2, level: 'HL',   color: '#dc2626' },
+  { id: 'spanish-a-lit', name: 'Literatura Española A', group: 1, level: 'Both', color: '#ea580c' },
 ];
 
-const GROUP_NAMES = { 0: 'Core', 1: 'Group 1', 2: 'Group 2', 3: 'Group 3', 4: 'Group 4', 5: 'Group 5' };
-
-const PAPER_TIMES = { 1: 45 * 60, 2: 75 * 60, 3: 90 * 60 }; // seconds
-
-const COMMAND_TERM_INFO = {
-  'identify':      { marks: '1–2',  type: 'low',    tip: 'Name or select a specific feature, fact, or example.' },
-  'state':         { marks: '1',    type: 'low',    tip: 'Give a specific name, value, or other brief answer — no explanation needed.' },
-  'define':        { marks: '1–2',  type: 'low',    tip: 'Give the precise meaning of a term.' },
-  'outline':       { marks: '2–4',  type: 'medium', tip: 'Give a brief account or summary.' },
-  'describe':      { marks: '2–4',  type: 'medium', tip: 'Give a detailed account.' },
-  'explain':       { marks: '4–6',  type: 'medium', tip: 'Give a detailed account with reasons or causes.' },
-  'examine':       { marks: '6',    type: 'medium', tip: 'Consider an argument or concept in a way that uncovers the assumptions and interrelationships.' },
-  'compare':       { marks: '6',    type: 'medium', tip: 'Give an account of the similarities AND differences between two items.' },
-  'analyse':       { marks: '6–9',  type: 'high',   tip: 'Break down to show how/why the components relate to each other and to the whole.' },
-  'evaluate':      { marks: '9–15', type: 'high',   tip: 'Make an appraisal by weighing up strengths and limitations. Reach a reasoned conclusion.' },
-  'discuss':       { marks: '10–15',type: 'high',   tip: 'Offer a considered and balanced review of different perspectives. Reach a conclusion.' },
-  'to what extent':{ marks: '10–15',type: 'high',   tip: 'Consider the merits or otherwise of an argument or concept. Reach a qualified conclusion.' },
+// ── Constants ────────────────────────────────────────────────
+const STORAGE_KEYS = {
+  PROGRESS:       'ib_progress',       // { questionId: { correct: n, attempts: n } }
+  CUSTOM_QS:      'ib_custom_qs',      // array of custom questions added by user
+  STATS:          'ib_stats',          // global stats object
+  FLAGGED:        'ib_flagged',        // set of flagged question ids
+  SESSION_RESULT: 'ib_session_result', // last session result for display
 };
 
-// ─── App State ────────────────────────────────────────────
-let allQuestions = [];
-let screenStack  = [];
+const MASTERY_THRESHOLD = 3;    // correct answers needed to master a question
+const PRACTICE_LIMIT    = 15;   // max questions in practice mode
+const TIMED_LIMIT       = 10;   // max questions in timed mode
+const TIMED_SECS_PER_Q  = 90;   // seconds per question in timed mode
 
-let currentSession = null;
-/* currentSession shape:
+// ── Application State ────────────────────────────────────────
+let allQuestions = [];          // all loaded questions (remote + custom)
+let screenStack  = [];          // navigation stack of screen IDs
+
+// Current quiz session
+let session = null;
+/*
+  session shape:
   {
-    subjectId, subjectName, mode,  // 'practice' | 'paper' | 'endless'
-    paper, level, topics,          // filter params
-    questions: [...],              // ordered array
-    currentIdx: 0,
-    answers: {},                   // {questionId: {choice, correct, selfMark, submitted}}
-    flags: Set,                    // flagged question IDs
-    timerSecs: null,               // null = untimed
-    timerInterval: null,
-    startTime: Date.now(),
+    subjectId: string,
+    mode: 'practice' | 'timed' | 'endless',
+    questions: Question[],
+    currentIdx: number,
+    answers: { [qId]: { chosen: string|null, correct: boolean } },
+    flags: Set<string>,
+    timerSecs: number|null,
+    timerInterval: number|null,
+    startTime: number,
   }
 */
 
-let stats   = loadJSON(SK.stats,    { answered: 0, correct: 0, streak: 0, lastDate: null, bySubject: {} });
-let seenSet = new Set(loadJSON(SK.seen,     []));
-let mastSet = new Set(loadJSON(SK.mastered, []));
+// Subject screen transient state
+let subjectState = {
+  subjectId:      null,
+  mode:           'practice',
+  selectedTopics: new Set(),
+};
 
-// ─── Boot ─────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', async () => {
-  registerSW();
-  applySettings();
-
-  try {
-    const res = await fetch('data/questions.json');
-    const fetched = await res.json();
-    const imported = loadJSON(SK.imported, []);
-    allQuestions = [...fetched, ...imported];
-  } catch (e) {
-    console.error('Failed to load questions:', e);
-    allQuestions = loadJSON(SK.imported, []);
-  }
-
-  buildHomeScreen();
-  showScreen('screen-home', false);
-});
-
-// ─── Service Worker ───────────────────────────────────────
-function registerSW() {
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./sw.js').catch(() => {});
-  }
-}
-
-// ─── Settings ─────────────────────────────────────────────
-function applySettings() {
-  const s = loadJSON(SK.settings, { theme: 'dark' });
-  // currently always dark; placeholder for future theme toggle
-}
-
-// ─── LocalStorage helpers ─────────────────────────────────
-function loadJSON(key, fallback) {
+// ── Storage Helpers ──────────────────────────────────────────
+function loadStore(key, fallback) {
   try {
     const raw = localStorage.getItem(key);
-    return raw ? JSON.parse(raw) : fallback;
-  } catch { return fallback; }
-}
-function saveJSON(key, val) {
-  try { localStorage.setItem(key, JSON.stringify(val)); } catch {}
-}
-function saveSeen()     { saveJSON(SK.seen,     [...seenSet]); }
-function saveMastered() { saveJSON(SK.mastered, [...mastSet]); }
-function saveStats()    { saveJSON(SK.stats,    stats); }
-
-// ─── Screen Navigation ────────────────────────────────────
-function showScreen(id, pushHistory = true, slideIn = true) {
-  const all = document.querySelectorAll('.screen');
-
-  // Animate current screen out if transitioning
-  const current = [...all].find(s => s.classList.contains('active'));
-
-  if (current && current.id !== id && slideIn) {
-    current.classList.remove('active');
-  } else if (current) {
-    current.classList.remove('active');
-  }
-
-  const next = document.getElementById(id);
-  if (!next) return;
-
-  next.classList.add('active');
-  if (slideIn && current && current.id !== id) {
-    next.classList.add('slide-in');
-    next.addEventListener('animationend', () => next.classList.remove('slide-in'), { once: true });
-  }
-
-  if (pushHistory) {
-    screenStack.push(id);
-  }
-
-  // Scroll to top
-  next.scrollTop = 0;
-}
-
-function goBack() {
-  if (screenStack.length <= 1) return;
-
-  // Cleanup quiz state if leaving quiz
-  const current = screenStack[screenStack.length - 1];
-  if (current === 'screen-quiz') {
-    stopTimer();
-  }
-
-  screenStack.pop();
-  const prevId = screenStack[screenStack.length - 1];
-
-  const allScreens = document.querySelectorAll('.screen');
-  allScreens.forEach(s => s.classList.remove('active'));
-
-  const prev = document.getElementById(prevId);
-  if (prev) {
-    prev.classList.add('active');
-    prev.scrollTop = 0;
+    if (raw === null) return fallback;
+    return JSON.parse(raw);
+  } catch (e) {
+    console.warn('loadStore error:', key, e);
+    return fallback;
   }
 }
 
-// ─── Home Screen ──────────────────────────────────────────
-function buildHomeScreen() {
-  renderHomeStats();
-  renderStreak();
-  renderSubjectsGrid();
+function saveStore(key, value) {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch (e) {
+    console.warn('saveStore error (storage full?):', key, e);
+  }
 }
 
-function renderHomeStats() {
-  const pct = stats.answered > 0 ? Math.round((stats.correct / stats.answered) * 100) : 0;
-  setText('home-stat-answered', stats.answered);
-  setText('home-stat-accuracy', stats.answered > 0 ? pct + '%' : '—');
-  setText('home-stat-mastered', mastSet.size);
+// ── Progress (per-question) ──────────────────────────────────
+function getProgress() {
+  return loadStore(STORAGE_KEYS.PROGRESS, {});
 }
 
-function renderStreak() {
-  const banner = document.getElementById('streak-banner');
-  if (!banner) return;
-  if (stats.streak > 0) {
-    banner.classList.remove('hidden');
-    setText('streak-value', stats.streak);
+function saveProgress(prog) {
+  saveStore(STORAGE_KEYS.PROGRESS, prog);
+}
+
+function getQuestionRecord(qId) {
+  const prog = getProgress();
+  return prog[qId] || { correct: 0, attempts: 0 };
+}
+
+function recordQuestionAnswer(qId, wasCorrect) {
+  const prog = getProgress();
+  if (!prog[qId]) prog[qId] = { correct: 0, attempts: 0 };
+  prog[qId].attempts++;
+  if (wasCorrect) prog[qId].correct++;
+  saveProgress(prog);
+}
+
+function isMastered(qId) {
+  const rec = getQuestionRecord(qId);
+  return rec.correct >= MASTERY_THRESHOLD;
+}
+
+function getMasteryLevel(qId) {
+  const rec = getQuestionRecord(qId);
+  return Math.min(rec.correct, MASTERY_THRESHOLD);
+}
+
+// ── Global Stats ─────────────────────────────────────────────
+function getStats() {
+  return loadStore(STORAGE_KEYS.STATS, {
+    totalAnswered: 0,
+    totalCorrect:  0,
+    streak:        0,
+    lastDate:      null,
+    sessionsCompleted: 0,
+  });
+}
+
+function saveStats(s) {
+  saveStore(STORAGE_KEYS.STATS, s);
+}
+
+function recordGlobalAnswer(wasCorrect) {
+  const stats = getStats();
+  stats.totalAnswered = (stats.totalAnswered || 0) + 1;
+  if (wasCorrect) stats.totalCorrect = (stats.totalCorrect || 0) + 1;
+  saveStats(stats);
+}
+
+function recordSessionCompleted() {
+  const stats = getStats();
+  stats.sessionsCompleted = (stats.sessionsCompleted || 0) + 1;
+  saveStats(stats);
+}
+
+// ── Streak Logic ─────────────────────────────────────────────
+function todayISO() {
+  return new Date().toISOString().slice(0, 10);
+}
+
+function yesterdayISO() {
+  const d = new Date();
+  d.setDate(d.getDate() - 1);
+  return d.toISOString().slice(0, 10);
+}
+
+function updateStreak() {
+  const stats = getStats();
+  const today = todayISO();
+  if (stats.lastDate === today) return; // already counted today
+
+  if (stats.lastDate === yesterdayISO()) {
+    stats.streak = (stats.streak || 0) + 1;
   } else {
-    banner.classList.add('hidden');
+    // Streak broken or first day
+    stats.streak = 1;
+  }
+  stats.lastDate = today;
+  saveStats(stats);
+}
+
+function ensureStreakUpdated() {
+  const stats = getStats();
+  if (stats.lastDate !== todayISO()) {
+    updateStreak();
   }
 }
 
-function renderSubjectsGrid() {
+// ── Flagged Questions ────────────────────────────────────────
+function getFlagged() {
+  return new Set(loadStore(STORAGE_KEYS.FLAGGED, []));
+}
+
+function saveFlagged(set) {
+  saveStore(STORAGE_KEYS.FLAGGED, [...set]);
+}
+
+function toggleFlagged(qId) {
+  const flagged = getFlagged();
+  if (flagged.has(qId)) {
+    flagged.delete(qId);
+  } else {
+    flagged.add(qId);
+  }
+  saveFlagged(flagged);
+  return flagged.has(qId);
+}
+
+// ── Custom Questions ─────────────────────────────────────────
+function getCustomQuestions() {
+  return loadStore(STORAGE_KEYS.CUSTOM_QS, []);
+}
+
+function saveCustomQuestions(qs) {
+  saveStore(STORAGE_KEYS.CUSTOM_QS, qs);
+}
+
+function addCustomQuestion(q) {
+  const custom = getCustomQuestions();
+  custom.push(q);
+  saveCustomQuestions(custom);
+  mergeCustomIntoPool();
+}
+
+// ── Data Loading ─────────────────────────────────────────────
+async function loadQuestions() {
+  try {
+    const res = await fetch('data/questions.json');
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    if (!Array.isArray(data)) throw new Error('Invalid format');
+    allQuestions = data;
+    console.log(`Loaded ${allQuestions.length} questions from server`);
+  } catch (e) {
+    console.error('Failed to load questions.json:', e);
+    allQuestions = [];
+    showDataLoadError();
+  }
+  mergeCustomIntoPool();
+}
+
+function mergeCustomIntoPool() {
+  // Remove previously-merged custom questions
+  allQuestions = allQuestions.filter(q => !q._custom);
+  // Add current custom questions
+  const custom = getCustomQuestions();
+  allQuestions = allQuestions.concat(
+    custom.map(q => ({ ...q, _custom: true }))
+  );
+}
+
+function showDataLoadError() {
   const grid = document.getElementById('subjects-grid');
-  if (!grid) return;
-  grid.innerHTML = '';
-
-  SUBJECTS.forEach(sub => {
-    const qs = allQuestions.filter(q => q.subjectId === sub.id);
-    const tile = document.createElement('button');
-    tile.className = 'subject-tile';
-    tile.setAttribute('aria-label', sub.name);
-
-    const levelBadge = sub.level === 'Both'
-      ? '<span class="badge">SL/HL</span>'
-      : `<span class="badge ${sub.level.toLowerCase()}">${sub.level}</span>`;
-
-    tile.innerHTML = `
-      <div class="tile-color-bar" style="background:${sub.color}"></div>
-      <div class="tile-body">
-        <div class="tile-group">${GROUP_NAMES[sub.group] || 'Group ' + sub.group}</div>
-        <div class="tile-name">${esc(sub.name)}</div>
-        <div class="tile-meta">${levelBadge}</div>
-        <div class="tile-qcount">${qs.length} question${qs.length !== 1 ? 's' : ''}</div>
+  if (grid) {
+    grid.innerHTML = `
+      <div class="empty-state" style="grid-column:1/-1;">
+        <span class="empty-state-icon">⚠️</span>
+        <p>Could not load questions.<br>Check your connection and reload.</p>
       </div>
     `;
-    tile.addEventListener('click', () => openSubjectScreen(sub.id));
-    grid.appendChild(tile);
-  });
-}
-
-// ─── Subject Screen ───────────────────────────────────────
-function openSubjectScreen(subjectId) {
-  const sub = SUBJECTS.find(s => s.id === subjectId);
-  if (!sub) return;
-
-  const subQs = allQuestions.filter(q => q.subjectId === subjectId);
-  const subStats = stats.bySubject[subjectId] || { answered: 0, correct: 0 };
-  const mastered = [...mastSet].filter(id => {
-    const q = allQuestions.find(qq => qq.id === id);
-    return q && q.subjectId === subjectId;
-  }).length;
-
-  const screen = document.getElementById('screen-subject');
-
-  // Color bar
-  const colorBar = screen.querySelector('.sub-color-bar');
-  if (colorBar) colorBar.style.background = sub.color;
-
-  // Title & badges
-  screen.querySelector('.sub-title').textContent = sub.name;
-  const badgesEl = screen.querySelector('.sub-badges');
-  badgesEl.innerHTML = `
-    <span class="badge ${sub.level === 'HL' ? 'hl' : sub.level === 'SL' ? 'sl' : ''}">
-      ${sub.level === 'Both' ? 'SL / HL' : sub.level}
-    </span>
-    <span class="badge">${GROUP_NAMES[sub.group]}</span>
-  `;
-
-  // Stats
-  const pct = subStats.answered > 0 ? Math.round((subStats.correct / subStats.answered) * 100) : 0;
-  setText('sub-stat-total',    subQs.length);
-  setText('sub-stat-done',     subStats.answered);
-  setText('sub-stat-mastered', mastered);
-
-  // Topic list
-  const topicList = screen.querySelector('.topic-list');
-  topicList.innerHTML = '';
-  sub.topics.forEach(topic => {
-    const count = subQs.filter(q => q.topic === topic).length;
-    if (count === 0) return;
-    const item = document.createElement('div');
-    item.className = 'topic-item';
-    item.innerHTML = `
-      <span class="topic-name">${esc(topic)}</span>
-      <span class="topic-count">${count} q</span>
-    `;
-    item.addEventListener('click', () => openSetupScreen(subjectId, { topic }));
-    topicList.appendChild(item);
-  });
-  if (topicList.children.length === 0) {
-    topicList.innerHTML = '<p class="text-muted text-sm" style="padding:12px 0">No questions yet for this subject.</p>';
   }
-
-  // Mode buttons
-  screen.querySelector('.btn-practice').onclick  = () => openSetupScreen(subjectId, { mode: 'practice' });
-  screen.querySelector('.btn-exam').onclick      = () => openSetupScreen(subjectId, { mode: 'paper' });
-  screen.querySelector('.btn-endless').onclick   = () => startQuiz({ subjectId, mode: 'endless' });
-  screen.querySelector('.btn-request').onclick   = () => openRequestScreen(subjectId);
-  screen.querySelector('.back-btn').onclick = goBack;
-
-  showScreen('screen-subject');
 }
 
-// ─── Setup Screen ─────────────────────────────────────────
-function openSetupScreen(subjectId, prefill = {}) {
-  const sub = SUBJECTS.find(s => s.id === subjectId);
-  if (!sub) return;
-
-  const screen = document.getElementById('screen-setup');
-  screen.querySelector('.setup-subject-name').textContent = sub.name;
-  screen.querySelector('.back-btn').onclick = goBack;
-
-  // Mode chips
-  const modes = ['practice', 'paper', 'endless'];
-  let selectedMode = prefill.mode || 'practice';
-
-  // Paper chips (1, 2, 3)
-  let selectedPapers = new Set([1, 2, 3]);
-
-  // Level chips
-  let selectedLevel = 'all';
-
-  // Format chips
-  let selectedFormats = new Set(['MCQ', 'ShortAnswer', 'Essay']);
-
-  // Topic chips
-  const allTopics = sub.topics;
-  let selectedTopics = prefill.topic ? new Set([prefill.topic]) : new Set(allTopics);
-
-  function renderChips() {
-    // Mode
-    renderChipGroup('setup-modes', modes, [selectedMode], (val) => {
-      selectedMode = val;
-      renderChips();
-    }, (m) => m.charAt(0).toUpperCase() + m.slice(1));
-
-    // Paper (only show if not endless)
-    const paperSection = document.getElementById('setup-paper-section');
-    if (selectedMode === 'endless') {
-      paperSection.classList.add('hidden');
-    } else {
-      paperSection.classList.remove('hidden');
-      renderChipGroupMulti('setup-papers', [1, 2, 3], selectedPapers, (val) => {
-        if (selectedPapers.has(val)) {
-          if (selectedPapers.size > 1) selectedPapers.delete(val);
-        } else {
-          selectedPapers.add(val);
-        }
-        renderChips();
-      }, (p) => 'Paper ' + p);
-    }
-
-    // Level
-    const levelOpts = sub.level === 'Both' ? ['all', 'SL', 'HL'] : ['all'];
-    renderChipGroup('setup-levels', levelOpts, [selectedLevel], (val) => {
-      selectedLevel = val;
-      renderChips();
-    }, (l) => l === 'all' ? 'All Levels' : l);
-
-    // Format
-    renderChipGroupMulti('setup-formats', ['MCQ', 'ShortAnswer', 'Essay'], selectedFormats, (val) => {
-      if (selectedFormats.has(val)) {
-        if (selectedFormats.size > 1) selectedFormats.delete(val);
-      } else {
-        selectedFormats.add(val);
-      }
-      renderChips();
-    }, (f) => f === 'ShortAnswer' ? 'Short Answer' : f);
-
-    // Topics
-    renderChipGroupMulti('setup-topics', allTopics, selectedTopics, (val) => {
-      if (selectedTopics.has(val)) {
-        if (selectedTopics.size > 1) selectedTopics.delete(val);
-      } else {
-        selectedTopics.add(val);
-      }
-      renderChips();
-    }, (t) => t);
-
-    // Question count
-    const filtered = getFilteredQuestions(subjectId, { selectedMode, selectedPapers, selectedLevel, selectedFormats, selectedTopics });
-    setText('setup-q-count', `${filtered.length} question${filtered.length !== 1 ? 's' : ''} available`);
-    const startBtn = document.getElementById('setup-start-btn');
-    startBtn.disabled = filtered.length === 0;
-  }
-
-  renderChips();
-
-  const startBtn = document.getElementById('setup-start-btn');
-  startBtn.onclick = () => {
-    const filtered = getFilteredQuestions(subjectId, { selectedMode, selectedPapers, selectedLevel, selectedFormats, selectedTopics });
-    if (filtered.length === 0) return;
-    startQuiz({
-      subjectId,
-      mode: selectedMode,
-      paper: selectedMode === 'paper' ? [...selectedPapers].sort()[0] : null,
-      level: selectedLevel === 'all' ? null : selectedLevel,
-      topics: [...selectedTopics],
-      formats: [...selectedFormats],
-      questions: filtered,
-    });
-  };
-
-  showScreen('screen-setup');
+// ── Subject Helpers ──────────────────────────────────────────
+function getSubjectById(id) {
+  return SUBJECTS.find(s => s.id === id) || null;
 }
 
-function renderChipGroup(containerId, options, selected, onSelect, labelFn) {
-  const container = document.getElementById(containerId);
-  if (!container) return;
-  container.innerHTML = '';
-  options.forEach(opt => {
-    const chip = document.createElement('button');
-    chip.className = 'chip' + (selected.includes(opt) ? ' active' : '');
-    chip.textContent = labelFn(opt);
-    chip.onclick = () => onSelect(opt);
-    container.appendChild(chip);
-  });
-}
-
-function renderChipGroupMulti(containerId, options, selectedSet, onToggle, labelFn) {
-  const container = document.getElementById(containerId);
-  if (!container) return;
-  container.innerHTML = '';
-  options.forEach(opt => {
-    const chip = document.createElement('button');
-    chip.className = 'chip' + (selectedSet.has(opt) ? ' active' : '');
-    chip.textContent = labelFn(opt);
-    chip.onclick = () => onToggle(opt);
-    container.appendChild(chip);
-  });
-}
-
-function getFilteredQuestions(subjectId, { selectedMode, selectedPapers, selectedLevel, selectedFormats, selectedTopics }) {
+function getQuestionsForSubject(subjectId, topicFilter = null) {
   let qs = allQuestions.filter(q => q.subjectId === subjectId);
-
-  if (selectedTopics && selectedTopics.size > 0) {
-    qs = qs.filter(q => selectedTopics.has(q.topic));
+  if (topicFilter && topicFilter.size > 0) {
+    qs = qs.filter(q => topicFilter.has(q.topic));
   }
-  if (selectedFormats && selectedFormats.size > 0 && selectedFormats.size < 3) {
-    qs = qs.filter(q => selectedFormats.has(q.format));
-  }
-  if (selectedLevel && selectedLevel !== 'all') {
-    qs = qs.filter(q => q.level === selectedLevel || q.level === 'Both');
-  }
-  if (selectedMode !== 'endless' && selectedPapers && selectedPapers.size > 0 && selectedPapers.size < 3) {
-    qs = qs.filter(q => selectedPapers.has(q.paper));
-  }
-
   return qs;
 }
 
-// ─── Quiz Engine ──────────────────────────────────────────
-function startQuiz(opts) {
-  const sub = SUBJECTS.find(s => s.id === opts.subjectId);
-  if (!sub) return;
+function getTopicsForSubject(subjectId) {
+  const qs = allQuestions.filter(q => q.subjectId === subjectId);
+  return [...new Set(qs.map(q => q.topic))].sort();
+}
 
-  let questions = opts.questions;
-  if (!questions) {
-    questions = allQuestions.filter(q => q.subjectId === opts.subjectId);
+function getSubjectStats(subjectId) {
+  const qs   = allQuestions.filter(q => q.subjectId === subjectId);
+  const prog = getProgress();
+  let answered = 0, correctTotal = 0, mastered = 0;
+
+  for (const q of qs) {
+    const rec = prog[q.id] || { correct: 0, attempts: 0 };
+    if (rec.attempts > 0) {
+      answered++;
+      correctTotal += rec.correct;
+    }
+    if (rec.correct >= MASTERY_THRESHOLD) mastered++;
   }
-  if (questions.length === 0) return;
 
-  // Shuffle for practice/endless
-  if (opts.mode !== 'paper') {
-    questions = shuffle([...questions]);
-  }
+  const accuracy = answered > 0
+    ? Math.round((correctTotal / answered) * 100)
+    : 0;
 
-  const timerSecs = opts.mode === 'paper' && opts.paper
-    ? (PAPER_TIMES[opts.paper] || null)
-    : null;
-
-  currentSession = {
-    subjectId:   opts.subjectId,
-    subjectName: sub.name,
-    mode:        opts.mode,
-    paper:       opts.paper,
-    level:       opts.level,
-    topics:      opts.topics,
-    questions,
-    currentIdx:  0,
-    answers:     {},
-    flags:       new Set(),
-    timerSecs,
-    timerSecsLeft: timerSecs,
-    timerInterval: null,
-    startTime:   Date.now(),
+  return {
+    total:    qs.length,
+    answered,
+    mastered,
+    accuracy,
+    correct:  correctTotal,
   };
+}
 
-  renderQuizQuestion();
-  showScreen('screen-quiz');
+// ── Navigation (Screen Stack) ────────────────────────────────
+function showScreen(id, pushToStack = true) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const target = document.getElementById('screen-' + id);
+  if (!target) {
+    console.error('Screen not found:', id);
+    return;
+  }
+  target.classList.add('active');
 
-  if (timerSecs) {
-    startTimer();
+  if (pushToStack) {
+    // Avoid duplicate top of stack
+    if (screenStack[screenStack.length - 1] !== id) {
+      screenStack.push(id);
+    }
+  }
+
+  // Scroll to top
+  target.scrollTop = 0;
+  window.scrollTo(0, 0);
+}
+
+function goBack() {
+  if (screenStack.length <= 1) {
+    navigateHome();
+    return;
+  }
+  screenStack.pop();
+  const prev = screenStack[screenStack.length - 1];
+  showScreen(prev, false);
+
+  // Re-render destination screen when navigating back
+  if (prev === 'home')    renderHome();
+  if (prev === 'subject') renderSubjectScreen();
+}
+
+function navigateHome() {
+  screenStack = ['home'];
+  showScreen('home', false);
+  renderHome();
+}
+
+// ── HOME SCREEN ──────────────────────────────────────────────
+function renderHome() {
+  const stats = getStats();
+
+  // Stats row
+  document.getElementById('stat-answered').textContent =
+    formatNumber(stats.totalAnswered || 0);
+
+  const acc = (stats.totalAnswered && stats.totalAnswered > 0)
+    ? Math.round((stats.totalCorrect / stats.totalAnswered) * 100)
+    : 0;
+  document.getElementById('stat-accuracy').textContent = acc + '%';
+
+  const streak = stats.streak || 0;
+  document.getElementById('stat-streak').textContent = streak + '🔥';
+
+  // Subject tiles
+  const grid = document.getElementById('subjects-grid');
+  grid.innerHTML = '';
+
+  for (const subj of SUBJECTS) {
+    const sstats = getSubjectStats(subj.id);
+    const tile = buildSubjectTile(subj, sstats);
+    grid.appendChild(tile);
   }
 }
 
-function renderQuizQuestion() {
-  if (!currentSession) return;
+function buildSubjectTile(subj, sstats) {
+  const tile = document.createElement('button');
+  tile.className = 'subject-tile';
+  tile.style.setProperty('--subject-color', subj.color);
+  tile.setAttribute('role', 'listitem');
+  tile.setAttribute('aria-label', subj.name);
 
-  const { questions, currentIdx, answers, flags, subjectName, mode, timerSecsLeft } = currentSession;
-  const q = questions[currentIdx];
-  if (!q) return;
+  const progressPct = sstats.total > 0
+    ? Math.round((sstats.answered / sstats.total) * 100)
+    : 0;
 
-  const screen = document.getElementById('screen-quiz');
+  tile.innerHTML = `
+    <span class="subject-tile-badge">${escHtml(subj.level)}</span>
+    <div class="subject-tile-name">${escHtml(subj.name)}</div>
+    <div class="subject-tile-meta">Group ${subj.group} &middot; ${sstats.total} questions</div>
+    <div class="subject-tile-stats">
+      ${sstats.answered}/${sstats.total} answered &middot; ${sstats.accuracy}% accuracy
+    </div>
+  `;
+
+  tile.addEventListener('click', () => openSubjectScreen(subj.id));
+  return tile;
+}
+
+// ── SUBJECT SCREEN ───────────────────────────────────────────
+function openSubjectScreen(subjectId) {
+  subjectState.subjectId      = subjectId;
+  subjectState.mode           = 'practice';
+  subjectState.selectedTopics = new Set();
+  renderSubjectScreen();
+  showScreen('subject');
+}
+
+function renderSubjectScreen() {
+  const subj = getSubjectById(subjectState.subjectId);
+  if (!subj) return;
+
+  const sstats = getSubjectStats(subj.id);
 
   // Header
-  screen.querySelector('.quiz-subject-name').textContent = subjectName.toUpperCase();
+  document.getElementById('subject-color-bar').style.background = subj.color;
+  document.getElementById('subject-name-text').textContent       = subj.name;
+  document.getElementById('subject-level-badge').textContent     = subj.level;
+  document.getElementById('sub-stat-total').textContent          = sstats.total;
+  document.getElementById('sub-stat-answered').textContent       = sstats.answered;
+  document.getElementById('sub-stat-accuracy').textContent       = sstats.accuracy + '%';
 
-  // Progress
-  const pct = Math.round(((currentIdx + 1) / questions.length) * 100);
-  screen.querySelector('.quiz-progress-fill').style.width = pct + '%';
-  screen.querySelector('.quiz-progress-label').textContent = `${currentIdx + 1} / ${questions.length}`;
+  // Mode buttons
+  document.querySelectorAll('.mode-btn').forEach(btn => {
+    btn.classList.toggle('selected', btn.dataset.mode === subjectState.mode);
+  });
 
-  // Timer (handled separately by startTimer)
-  const timerEl = screen.querySelector('.quiz-timer');
-  if (currentSession.timerSecs) {
-    timerEl.classList.remove('hidden');
-  } else {
-    timerEl.classList.add('hidden');
-  }
+  // Topic chips
+  renderTopicChips();
 
-  // Mark q as seen
-  seenSet.add(q.id);
-  saveSeen();
+  // Update start button label
+  updateStartButton();
+}
 
-  // Question meta chips
-  const metaEl = screen.querySelector('.question-meta');
-  const ctInfo = COMMAND_TERM_INFO[q.commandTerm?.toLowerCase()] || null;
-  metaEl.innerHTML = `
-    ${q.topic ? `<span class="meta-chip">${esc(q.topic)}</span>` : ''}
-    ${q.paper ? `<span class="meta-chip">Paper ${q.paper}</span>` : ''}
-    ${q.marks ? `<span class="meta-chip">[${q.marks} mark${q.marks > 1 ? 's' : ''}]</span>` : ''}
-    ${q.commandTerm ? `<span class="meta-chip command">${esc(q.commandTerm)}</span>` : ''}
-  `;
+function renderTopicChips() {
+  const topics  = getTopicsForSubject(subjectState.subjectId);
+  const chipsEl = document.getElementById('topic-chips');
+  chipsEl.innerHTML = '';
 
-  // Command term context for essay/short answer
-  const essayCtx = screen.querySelector('.essay-context');
-  if ((q.format === 'Essay' || q.format === 'ShortAnswer') && ctInfo) {
-    essayCtx.classList.remove('hidden');
-    essayCtx.innerHTML = `<strong>${esc(q.commandTerm)}:</strong> ${esc(ctInfo.tip)} Typical marks: ${ctInfo.marks}.`;
-  } else {
-    essayCtx.classList.add('hidden');
-  }
+  // "All Topics" chip
+  const allChip = document.createElement('button');
+  allChip.type      = 'button';
+  allChip.className = 'chip' + (subjectState.selectedTopics.size === 0 ? ' selected' : '');
+  allChip.textContent = 'All Topics';
+  allChip.addEventListener('click', () => {
+    subjectState.selectedTopics = new Set();
+    renderTopicChips();
+    updateStartButton();
+  });
+  chipsEl.appendChild(allChip);
 
-  // Prompt
-  const promptEl = screen.querySelector('.question-prompt');
-  promptEl.textContent = q.prompt;
-  renderMath(promptEl);
-
-  // Answer area
-  const choicesEl  = screen.querySelector('.choices-list');
-  const textareaEl = screen.querySelector('.answer-textarea');
-  const feedbackEl = screen.querySelector('.feedback-panel');
-
-  feedbackEl.className = 'feedback-panel hidden';
-  const prev = answers[q.id];
-
-  if (q.format === 'MCQ') {
-    choicesEl.classList.remove('hidden');
-    textareaEl.classList.add('hidden');
-
-    // Build choice buttons
-    choicesEl.innerHTML = '';
-    const choiceKeys = q.choices ? Object.keys(q.choices) : ['A','B','C','D'];
-    choiceKeys.forEach(key => {
-      const text = q.choices ? q.choices[key] : '';
-      const btn = document.createElement('button');
-      btn.className = 'choice-btn';
-      btn.dataset.choice = key;
-
-      btn.innerHTML = `
-        <span class="choice-letter">${key}</span>
-        <span class="choice-text"></span>
-      `;
-      btn.querySelector('.choice-text').textContent = text;
-      renderMath(btn.querySelector('.choice-text'));
-
-      if (prev && prev.submitted) {
-        btn.disabled = true;
-        if (key === q.answer) btn.classList.add('correct');
-        if (key === prev.choice && prev.choice !== q.answer) btn.classList.add('incorrect');
-        if (key === prev.choice) btn.classList.add('selected');
+  for (const topic of topics) {
+    const chip = document.createElement('button');
+    chip.type      = 'button';
+    chip.className = 'chip' + (subjectState.selectedTopics.has(topic) ? ' selected' : '');
+    chip.textContent = topic;
+    chip.addEventListener('click', () => {
+      if (subjectState.selectedTopics.has(topic)) {
+        subjectState.selectedTopics.delete(topic);
       } else {
-        btn.onclick = () => handleMCQChoice(q, key);
+        subjectState.selectedTopics.add(topic);
       }
-      choicesEl.appendChild(btn);
+      // If all topics manually selected, treat as "All"
+      const allTopics = getTopicsForSubject(subjectState.subjectId);
+      if (subjectState.selectedTopics.size === allTopics.length) {
+        subjectState.selectedTopics = new Set();
+      }
+      renderTopicChips();
+      updateStartButton();
     });
-
-    if (prev && prev.submitted) {
-      showMCQFeedback(q, prev.choice);
-    }
-
-  } else {
-    // Short Answer / Essay
-    choicesEl.classList.add('hidden');
-    textareaEl.classList.remove('hidden');
-
-    if (prev && prev.submitted) {
-      textareaEl.value = prev.userAnswer || '';
-      textareaEl.disabled = true;
-      showSelfMarkFeedback(q, prev);
-    } else {
-      textareaEl.value = '';
-      textareaEl.disabled = false;
-    }
-  }
-
-  // Toolbar
-  const flagBtn    = screen.querySelector('.btn-flag');
-  const submitBtn  = screen.querySelector('.btn-submit');
-  const nextBtn    = screen.querySelector('.btn-next');
-  const prevBtnNav = screen.querySelector('.btn-prev');
-
-  // Flag state
-  flagBtn.classList.toggle('flag-active', flags.has(q.id));
-  flagBtn.onclick = () => toggleFlag(q.id);
-
-  // Submit / Next
-  if (prev && prev.submitted) {
-    submitBtn.classList.add('hidden');
-    nextBtn.classList.remove('hidden');
-  } else {
-    submitBtn.classList.remove('hidden');
-    nextBtn.classList.add('hidden');
-    submitBtn.onclick = () => handleSubmit(q);
-  }
-
-  nextBtn.onclick = () => advanceQuestion(1);
-
-  // Prev/Next navigation
-  prevBtnNav.disabled = currentIdx === 0;
-  prevBtnNav.onclick = () => advanceQuestion(-1);
-
-  // Nav overlay button
-  screen.querySelector('.btn-nav-overlay').onclick = openNavOverlay;
-}
-
-function handleMCQChoice(q, choiceKey) {
-  if (!currentSession) return;
-  const prev = currentSession.answers[q.id];
-  if (prev && prev.submitted) return;
-
-  // Deselect all, select clicked
-  document.querySelectorAll('.choice-btn').forEach(b => b.classList.remove('selected'));
-  document.querySelector(`.choice-btn[data-choice="${choiceKey}"]`)?.classList.add('selected');
-
-  currentSession.answers[q.id] = { choice: choiceKey, submitted: false };
-
-  // Enable submit button
-  const submitBtn = document.querySelector('#screen-quiz .btn-submit');
-  if (submitBtn) {
-    submitBtn.disabled = false;
-    submitBtn.onclick = () => handleSubmit(q);
+    chipsEl.appendChild(chip);
   }
 }
 
-function handleSubmit(q) {
-  if (!currentSession) return;
-  const session = currentSession;
+function updateStartButton() {
+  const qs = getQuestionsForSubject(subjectState.subjectId, subjectState.selectedTopics);
+  const startBtn = document.getElementById('start-btn');
+  let count = qs.length;
 
-  if (q.format === 'MCQ') {
-    const answerState = session.answers[q.id];
-    if (!answerState || !answerState.choice) {
-      // Nothing selected yet — flash a hint
-      const choicesEl = document.querySelector('.choices-list');
-      choicesEl.style.opacity = '0.5';
-      setTimeout(() => { choicesEl.style.opacity = '1'; }, 300);
-      return;
-    }
-    const correct = answerState.choice === q.answer;
-    session.answers[q.id] = { ...answerState, submitted: true, correct };
+  // Apply mode-based limits for display
+  if (subjectState.mode === 'practice') count = Math.min(count, PRACTICE_LIMIT);
+  if (subjectState.mode === 'timed')    count = Math.min(count, TIMED_LIMIT);
 
-    // Update stats
-    recordAttempt(q, correct);
-
-    // Disable all choice buttons, mark correct/incorrect
-    document.querySelectorAll('.choice-btn').forEach(btn => {
-      btn.disabled = true;
-      const key = btn.dataset.choice;
-      if (key === q.answer) btn.classList.add('correct');
-      if (key === answerState.choice && !correct) btn.classList.add('incorrect');
-    });
-
-    showMCQFeedback(q, answerState.choice);
-
-  } else {
-    // Short answer / essay
-    const textareaEl = document.querySelector('#screen-quiz .answer-textarea');
-    const userAnswer = textareaEl ? textareaEl.value.trim() : '';
-    session.answers[q.id] = { submitted: true, userAnswer, selfMark: null, correct: null };
-    if (textareaEl) textareaEl.disabled = true;
-    showSelfMarkFeedback(q, session.answers[q.id]);
-  }
-
-  // Toggle submit/next buttons
-  document.querySelector('#screen-quiz .btn-submit').classList.add('hidden');
-  document.querySelector('#screen-quiz .btn-next').classList.remove('hidden');
-  document.querySelector('#screen-quiz .btn-next').onclick = () => advanceQuestion(1);
+  startBtn.textContent = `Start ${count} Question${count !== 1 ? 's' : ''}`;
+  startBtn.disabled    = count === 0;
 }
 
-function showMCQFeedback(q, chosenKey) {
-  const correct = chosenKey === q.answer;
-  const feedbackEl = document.querySelector('#screen-quiz .feedback-panel');
+// ── QUIZ ENGINE ──────────────────────────────────────────────
+function startQuiz(subjectId, mode, topicFilter) {
+  let qs = getQuestionsForSubject(subjectId, topicFilter);
 
-  feedbackEl.className = 'feedback-panel ' + (correct ? 'correct' : 'incorrect');
-  feedbackEl.innerHTML = `
-    <div class="feedback-header ${correct ? 'correct' : 'incorrect'}">
-      <span class="feedback-result-icon">${correct ? '✓' : '✗'}</span>
-      <span class="feedback-result-text ${correct ? 'correct' : 'incorrect'}">${correct ? 'Correct!' : 'Incorrect'}</span>
-    </div>
-    <div class="feedback-body">
-      ${!correct ? `<div class="feedback-section-title">Correct Answer</div>
-        <div class="feedback-text">${esc(q.answer)}${q.choices && q.choices[q.answer] ? ': ' + esc(q.choices[q.answer]) : ''}</div>` : ''}
-      <div class="feedback-section-title">Mark Scheme</div>
-      <div class="feedback-ms-text feedback-text">${esc(q.markScheme || '')}</div>
-      ${q.explanation ? `<div class="feedback-section-title">Explanation</div>
-        <div class="feedback-exp-text feedback-text">${esc(q.explanation)}</div>` : ''}
-    </div>
-  `;
-
-  feedbackEl.classList.remove('hidden');
-  renderMath(feedbackEl);
-}
-
-function showSelfMarkFeedback(q, answerState) {
-  const feedbackEl = document.querySelector('#screen-quiz .feedback-panel');
-
-  const alreadySelfMarked = answerState.selfMark !== null && answerState.selfMark !== undefined;
-
-  feedbackEl.className = 'feedback-panel self-mark';
-  feedbackEl.innerHTML = `
-    <div class="feedback-header self-mark">
-      <span class="feedback-result-icon">📋</span>
-      <span class="feedback-result-text self-mark">Mark Scheme</span>
-    </div>
-    <div class="feedback-body">
-      <div class="feedback-section-title">Mark Scheme</div>
-      <div class="feedback-ms-text feedback-text">${esc(q.markScheme || '')}</div>
-      ${q.explanation ? `<div class="feedback-section-title">Model Notes</div>
-        <div class="feedback-exp-text feedback-text">${esc(q.explanation)}</div>` : ''}
-      ${!alreadySelfMarked ? `
-        <div class="feedback-section-title">Self-Assessment — Mark yourself honestly</div>
-        <div class="self-mark-controls">
-          <button class="self-mark-btn got-it" onclick="submitSelfMark('${q.id}', true)">✓ Got it</button>
-          <button class="self-mark-btn missed" onclick="submitSelfMark('${q.id}', false)">✗ Missed it</button>
-        </div>
-      ` : `
-        <div class="feedback-section-title">Your Self-Assessment</div>
-        <div class="feedback-text" style="color:${answerState.selfMark ? '#4ade80' : '#f87171'}">${answerState.selfMark ? '✓ Marked as correct' : '✗ Marked as incorrect'}</div>
-      `}
-    </div>
-  `;
-
-  feedbackEl.classList.remove('hidden');
-  renderMath(feedbackEl);
-}
-
-function submitSelfMark(questionId, gotIt) {
-  if (!currentSession) return;
-  const q = currentSession.questions.find(q => q.id === questionId);
-  if (!q) return;
-
-  currentSession.answers[questionId].selfMark = gotIt;
-  currentSession.answers[questionId].correct  = gotIt;
-
-  recordAttempt(q, gotIt);
-  showSelfMarkFeedback(q, currentSession.answers[questionId]);
-}
-
-function recordAttempt(q, correct) {
-  stats.answered++;
-  if (correct) {
-    stats.correct++;
-    mastSet.add(q.id);
-    saveMastered();
-  }
-
-  // By-subject tracking
-  if (!stats.bySubject[q.subjectId]) {
-    stats.bySubject[q.subjectId] = { answered: 0, correct: 0 };
-  }
-  stats.bySubject[q.subjectId].answered++;
-  if (correct) stats.bySubject[q.subjectId].correct++;
-
-  // Streak
-  const today = new Date().toDateString();
-  if (stats.lastDate !== today) {
-    const yesterday = new Date(Date.now() - 86400000).toDateString();
-    if (stats.lastDate === yesterday) {
-      stats.streak++;
-    } else if (stats.lastDate !== today) {
-      stats.streak = 1;
-    }
-    stats.lastDate = today;
-  }
-
-  saveStats();
-}
-
-function advanceQuestion(delta) {
-  if (!currentSession) return;
-  const { questions, currentIdx } = currentSession;
-  const next = currentIdx + delta;
-
-  if (next < 0) return;
-
-  if (next >= questions.length) {
-    endQuiz();
+  if (qs.length === 0) {
+    showToast('No questions available for the selected filters.', 'warn');
     return;
   }
 
-  currentSession.currentIdx = next;
+  // Shuffle the pool
+  qs = shuffle(qs);
+
+  // Apply mode limits
+  let timerSecs = null;
+  if (mode === 'timed') {
+    qs        = qs.slice(0, TIMED_LIMIT);
+    timerSecs = qs.length * TIMED_SECS_PER_Q;
+  } else if (mode === 'practice') {
+    qs = qs.slice(0, PRACTICE_LIMIT);
+  }
+  // 'endless' = all shuffled questions
+
+  // Build session object
+  session = {
+    subjectId,
+    mode,
+    questions:    qs,
+    currentIdx:   0,
+    answers:      {},
+    flags:        getFlagged(), // pre-populate from persistent flags
+    timerSecs,
+    timerInterval: null,
+    startTime:    Date.now(),
+  };
+
+  showScreen('quiz');
   renderQuizQuestion();
 
-  // Scroll quiz body to top
-  const body = document.querySelector('.quiz-body');
-  if (body) body.scrollTop = 0;
-}
-
-function toggleFlag(questionId) {
-  if (!currentSession) return;
-  if (currentSession.flags.has(questionId)) {
-    currentSession.flags.delete(questionId);
-  } else {
-    currentSession.flags.add(questionId);
+  if (timerSecs !== null) {
+    startSessionTimer();
   }
-  const flagBtn = document.querySelector('#screen-quiz .btn-flag');
-  if (flagBtn) flagBtn.classList.toggle('flag-active', currentSession.flags.has(questionId));
 }
 
-// ─── Question Navigator Overlay ───────────────────────────
-function openNavOverlay() {
-  if (!currentSession) return;
-  const overlay = document.getElementById('q-nav-overlay');
-  if (!overlay) return;
+function startMixedPractice() {
+  // Pick up to 20 random questions from all subjects
+  if (allQuestions.length === 0) {
+    showToast('Questions are still loading…', 'warn');
+    return;
+  }
 
-  const grid = overlay.querySelector('.q-nav-grid');
-  grid.innerHTML = '';
+  const qs = shuffle(allQuestions).slice(0, 20);
 
-  currentSession.questions.forEach((q, idx) => {
-    const ans = currentSession.answers[q.id];
-    const dot = document.createElement('button');
-    dot.className = 'q-nav-dot';
-    dot.textContent = idx + 1;
+  session = {
+    subjectId:     'mixed',
+    mode:          'practice',
+    questions:     qs,
+    currentIdx:    0,
+    answers:       {},
+    flags:         getFlagged(),
+    timerSecs:     null,
+    timerInterval: null,
+    startTime:     Date.now(),
+  };
 
-    if (idx === currentSession.currentIdx) dot.classList.add('current');
-    if (ans && ans.submitted) {
-      if (ans.correct === true)  dot.classList.add('correct');
-      else if (ans.correct === false) dot.classList.add('incorrect');
-      else dot.classList.add('answered');
+  showScreen('quiz');
+  renderQuizQuestion();
+}
+
+// ── Question Rendering ────────────────────────────────────────
+function renderQuizQuestion() {
+  if (!session) return;
+
+  const q     = session.questions[session.currentIdx];
+  const total = session.questions.length;
+  const idx   = session.currentIdx;
+
+  // ── Header ──
+  const subj = getSubjectById(session.subjectId);
+  document.getElementById('quiz-subject-name').textContent =
+    subj ? subj.name : (session.subjectId === 'mixed' ? 'Mixed Practice' : 'Quiz');
+
+  document.getElementById('quiz-counter').textContent = `${idx + 1} / ${total}`;
+
+  // Timer display
+  const timerEl = document.getElementById('quiz-timer');
+  if (session.timerSecs !== null) {
+    timerEl.style.display = 'block';
+    renderTimerDisplay();
+  } else {
+    timerEl.style.display = 'none';
+  }
+
+  // ── Progress bar ──
+  const pct = total > 1 ? (idx / (total - 1)) * 100 : 0;
+  document.getElementById('quiz-progress').style.width = pct + '%';
+
+  // ── Flag button state ──
+  const qIsFlagged = session.flags.has(q.id);
+  document.getElementById('flag-btn').classList.toggle('flagged', qIsFlagged);
+
+  // ── Question metadata ──
+  renderQuestionMeta(q);
+
+  // ── Question prompt ──
+  const promptEl = document.getElementById('question-prompt');
+  promptEl.textContent = q.prompt;
+  renderMath(promptEl);
+
+  // ── Reset answer UI sections ──
+  const mcqSection  = document.getElementById('mcq-section');
+  const saSection   = document.getElementById('sa-section');
+  const msBox       = document.getElementById('mark-scheme-box');
+  const selfMarkBtns = document.getElementById('self-mark-buttons');
+  const nextRow     = document.getElementById('next-btn-row');
+
+  msBox.classList.remove('visible');
+  selfMarkBtns.classList.remove('visible');
+  nextRow.classList.remove('visible');
+
+  // ── Format-specific UI ──
+  if (q.format === 'MCQ') {
+    mcqSection.style.display = 'flex';
+    saSection.style.display  = 'none';
+    renderMCQOptions(q);
+  } else {
+    mcqSection.style.display = 'none';
+    saSection.style.display  = 'flex';
+    renderShortAnswerSection(q);
+  }
+
+  // If this question was already answered (e.g. browsing back in endless mode),
+  // immediately show the result state
+  if (session.answers[q.id] !== undefined) {
+    restoreAnsweredState(q);
+  }
+}
+
+function renderQuestionMeta(q) {
+  const formatDisplay = {
+    MCQ:         'MCQ',
+    ShortAnswer: 'Short Answer',
+    Essay:       'Essay',
+  };
+  const formatClass = {
+    MCQ:         'format-mcq',
+    ShortAnswer: 'format-short',
+    Essay:       'format-essay',
+  };
+
+  const metaEl = document.getElementById('question-meta');
+  metaEl.innerHTML = `
+    <span class="meta-tag">${escHtml(q.topic)}</span>
+    <span class="meta-tag ${formatClass[q.format] || ''}">${formatDisplay[q.format] || q.format}</span>
+    <span class="meta-tag command">${escHtml(q.commandTerm)}</span>
+    <span class="meta-tag">${q.marks} mark${q.marks !== 1 ? 's' : ''}</span>
+    ${q._custom ? '<span class="local-badge">local</span>' : ''}
+  `;
+}
+
+function renderMCQOptions(q) {
+  const container = document.getElementById('mcq-options');
+  container.innerHTML = '';
+
+  const labels = Object.keys(q.choices || {}).sort();
+  for (const label of labels) {
+    const text = q.choices[label];
+
+    const btn = document.createElement('button');
+    btn.type         = 'button';
+    btn.className    = 'option-btn';
+    btn.dataset.label = label;
+
+    btn.innerHTML = `
+      <span class="option-label">${escHtml(label)}</span>
+      <span class="option-text">${escHtml(text)}</span>
+    `;
+
+    btn.addEventListener('click', () => handleMCQChoice(q, label));
+    container.appendChild(btn);
+  }
+
+  renderMath(container);
+}
+
+function renderShortAnswerSection(q) {
+  const ta = document.getElementById('sa-textarea');
+  ta.value = '';
+  ta.disabled = false;
+
+  if (q.format === 'Essay') {
+    ta.placeholder = 'Write your essay plan or full response here (optional)…';
+    ta.style.minHeight = '160px';
+  } else {
+    ta.placeholder = 'Write your answer here…';
+    ta.style.minHeight = '100px';
+  }
+
+  const showAnsBtn = document.getElementById('show-answer-btn');
+  showAnsBtn.disabled = false;
+  showAnsBtn.textContent = '👁 Show Mark Scheme';
+}
+
+// ── Answer Handling ──────────────────────────────────────────
+function handleMCQChoice(q, chosen) {
+  // Prevent double-answering
+  if (session.answers[q.id] !== undefined) return;
+
+  const correct = (chosen === q.answer);
+  session.answers[q.id] = { chosen, correct };
+
+  // Record to persistent storage
+  recordQuestionAnswer(q.id, correct);
+  recordGlobalAnswer(correct);
+  ensureStreakUpdated();
+
+  // Animate option buttons
+  document.querySelectorAll('.option-btn').forEach(btn => {
+    btn.disabled = true;
+    const lbl = btn.dataset.label;
+    if (lbl === q.answer) {
+      btn.classList.add('correct');
+    } else if (lbl === chosen && !correct) {
+      btn.classList.add('wrong');
     }
-    if (currentSession.flags.has(q.id)) dot.classList.add('flagged');
-
-    dot.onclick = () => {
-      closeNavOverlay();
-      currentSession.currentIdx = idx;
-      renderQuizQuestion();
-      document.querySelector('.quiz-body').scrollTop = 0;
-    };
-    grid.appendChild(dot);
   });
 
-  overlay.classList.add('open');
+  // Reveal mark scheme
+  revealMarkScheme(q);
+
+  // Show next button
+  showNextButton();
 }
 
-function closeNavOverlay() {
-  const overlay = document.getElementById('q-nav-overlay');
-  if (overlay) overlay.classList.remove('open');
+function handleShowAnswer(q) {
+  revealMarkScheme(q);
+  // Show self-mark buttons
+  document.getElementById('self-mark-buttons').classList.add('visible');
+  // Disable show answer button
+  document.getElementById('show-answer-btn').disabled = true;
+  document.getElementById('show-answer-btn').textContent = '✓ Answer revealed';
 }
 
-// ─── Timer ────────────────────────────────────────────────
-function startTimer() {
-  if (!currentSession || !currentSession.timerSecs) return;
-  stopTimer();
+function handleSelfMark(q, correct) {
+  // Prevent double-submission
+  if (session.answers[q.id] !== undefined) return;
 
-  updateTimerDisplay();
+  session.answers[q.id] = { chosen: null, correct };
+  recordQuestionAnswer(q.id, correct);
+  recordGlobalAnswer(correct);
+  ensureStreakUpdated();
 
-  currentSession.timerInterval = setInterval(() => {
-    currentSession.timerSecsLeft--;
-    updateTimerDisplay();
+  // Hide self-mark buttons, show next
+  document.getElementById('self-mark-buttons').classList.remove('visible');
+  showNextButton();
 
-    if (currentSession.timerSecsLeft <= 0) {
-      stopTimer();
-      // Auto-end quiz
-      endQuiz(true);
+  // Disable textarea
+  const ta = document.getElementById('sa-textarea');
+  ta.disabled = true;
+}
+
+function revealMarkScheme(q) {
+  const box = document.getElementById('mark-scheme-box');
+  const textEl = document.getElementById('mark-scheme-text');
+
+  box.classList.add('visible');
+  textEl.textContent = q.markScheme || 'No mark scheme provided.';
+  renderMath(box);
+}
+
+function showNextButton() {
+  const nextRow = document.getElementById('next-btn-row');
+  nextRow.classList.add('visible');
+
+  // Update button label if last question
+  const nextBtn = document.getElementById('next-btn');
+  const isLast = session.currentIdx >= session.questions.length - 1;
+  nextBtn.textContent = isLast ? 'Finish Session →' : 'Next Question →';
+}
+
+// Restore answer state when re-rendering a question that's already been answered
+function restoreAnsweredState(q) {
+  const ans = session.answers[q.id];
+  if (!ans) return;
+
+  revealMarkScheme(q);
+
+  if (q.format === 'MCQ') {
+    document.querySelectorAll('.option-btn').forEach(btn => {
+      btn.disabled = true;
+      const lbl = btn.dataset.label;
+      if (lbl === q.answer) {
+        btn.classList.add('correct');
+      } else if (lbl === ans.chosen && !ans.correct) {
+        btn.classList.add('wrong');
+      }
+    });
+  } else {
+    document.getElementById('show-answer-btn').disabled = true;
+    document.getElementById('show-answer-btn').textContent = '✓ Answer revealed';
+    document.getElementById('sa-textarea').disabled = true;
+  }
+
+  showNextButton();
+}
+
+// ── Quiz Navigation ──────────────────────────────────────────
+function nextQuestion() {
+  if (!session) return;
+
+  if (session.currentIdx < session.questions.length - 1) {
+    session.currentIdx++;
+    renderQuizQuestion();
+  } else {
+    finishSession();
+  }
+}
+
+function finishSession() {
+  // Stop timer if running
+  if (session && session.timerInterval) {
+    clearInterval(session.timerInterval);
+    session.timerInterval = null;
+  }
+
+  ensureStreakUpdated();
+  recordSessionCompleted();
+
+  showScreen('results');
+  renderResultsScreen();
+}
+
+function abortSession() {
+  if (session && session.timerInterval) {
+    clearInterval(session.timerInterval);
+    session.timerInterval = null;
+  }
+  session = null;
+}
+
+// ── Timer ────────────────────────────────────────────────────
+function startSessionTimer() {
+  if (!session || session.timerSecs === null) return;
+
+  renderTimerDisplay();
+
+  session.timerInterval = setInterval(() => {
+    if (!session) return;
+
+    session.timerSecs = Math.max(0, session.timerSecs - 1);
+    renderTimerDisplay();
+
+    if (session.timerSecs <= 0) {
+      clearInterval(session.timerInterval);
+      session.timerInterval = null;
+      // Auto-finish when time is up
+      showToast("Time's up!", 'warn');
+      setTimeout(finishSession, 1200);
     }
   }, 1000);
 }
 
-function stopTimer() {
-  if (currentSession && currentSession.timerInterval) {
-    clearInterval(currentSession.timerInterval);
-    currentSession.timerInterval = null;
+function renderTimerDisplay() {
+  if (!session || session.timerSecs === null) return;
+
+  const el   = document.getElementById('quiz-timer');
+  const secs = Math.max(0, session.timerSecs);
+  const m    = Math.floor(secs / 60);
+  const s    = secs % 60;
+
+  el.textContent = `${m}:${s.toString().padStart(2, '0')}`;
+  el.classList.remove('warning', 'danger');
+  if (secs <= 30) {
+    el.classList.add('danger');
+  } else if (secs <= 60) {
+    el.classList.add('warning');
   }
 }
 
-function updateTimerDisplay() {
-  if (!currentSession) return;
-  const el = document.querySelector('.quiz-timer');
-  if (!el) return;
+// ── RESULTS SCREEN ───────────────────────────────────────────
+function renderResultsScreen() {
+  if (!session) return;
 
-  const secs = currentSession.timerSecsLeft || 0;
-  const m = Math.floor(secs / 60);
-  const s = secs % 60;
-  el.textContent = `⏱ ${m}:${String(s).padStart(2,'0')}`;
+  const answers   = session.answers;
+  const questions = session.questions;
 
-  el.classList.remove('warning', 'critical');
-  if (secs < 60)  el.classList.add('critical');
-  else if (secs < 300) el.classList.add('warning');
-}
-
-// ─── End Quiz / Results ───────────────────────────────────
-function endQuiz(timedOut = false) {
-  stopTimer();
-
-  if (!currentSession) return;
-
-  const { questions, answers, subjectName, mode, timerSecs } = currentSession;
-
-  // Tally
-  let totalMCQ = 0, correctMCQ = 0;
-  let totalSelfMark = 0, selfMarkCorrect = 0;
-
-  const topicMap = {};
-
-  questions.forEach(q => {
-    const a = answers[q.id];
-    const topic = q.topic || 'General';
-    if (!topicMap[topic]) topicMap[topic] = { total: 0, correct: 0 };
-    topicMap[topic].total++;
-
-    if (q.format === 'MCQ') {
-      totalMCQ++;
-      if (a && a.correct === true) {
-        correctMCQ++;
-        topicMap[topic].correct++;
-      }
-    } else {
-      totalSelfMark++;
-      if (a && a.selfMark === true) {
-        selfMarkCorrect++;
-        topicMap[topic].correct++;
-      }
+  // Tally correct / total
+  let correct  = 0;
+  let answered = 0;
+  for (const q of questions) {
+    const ans = answers[q.id];
+    if (ans !== undefined) {
+      answered++;
+      if (ans.correct) correct++;
     }
+  }
+
+  const total = questions.length;
+  const pct   = answered > 0 ? Math.round((correct / answered) * 100) : 0;
+
+  // Score circle: CSS conic-gradient
+  const circle = document.getElementById('score-circle');
+  // Use requestAnimationFrame to allow CSS transition to trigger
+  requestAnimationFrame(() => {
+    circle.style.setProperty('--pct', pct + '%');
   });
 
-  const totalAnswered = totalMCQ + totalSelfMark;
-  const totalCorrect  = correctMCQ + selfMarkCorrect;
-  const pct = totalAnswered > 0 ? Math.round((totalCorrect / totalAnswered) * 100) : 0;
+  document.getElementById('score-pct').textContent      = pct + '%';
+  document.getElementById('score-fraction').textContent  = `${correct} / ${answered}`;
 
-  // Verdict
-  let verdict = pct >= 80 ? '🎉 Excellent!' :
-                pct >= 60 ? '👍 Good effort' :
-                pct >= 40 ? '📚 Keep studying' :
-                            '💪 Review the material';
+  // Verdict text
+  const { verdict, verdictSub } = getVerdict(pct, answered, total);
+  document.getElementById('verdict-text').textContent = verdict;
+  document.getElementById('verdict-sub').textContent  = verdictSub;
 
-  // Save to history
-  const history = loadJSON(SK.history, []);
-  history.unshift({
-    date: new Date().toISOString(),
-    subjectId: currentSession.subjectId,
-    subjectName,
-    mode,
-    total: totalAnswered,
-    correct: totalCorrect,
-    pct,
-    timedOut,
-  });
-  saveJSON(SK.history, history.slice(0, 50));
+  // Subject name
+  const subj = getSubjectById(session.subjectId);
+  const subjName = subj ? subj.name
+    : (session.subjectId === 'mixed' ? 'Mixed Practice' : 'Quiz');
+  document.getElementById('results-subject-name').textContent = subjName;
 
-  // Render results screen
-  const screen = document.getElementById('screen-results');
-  screen.querySelector('.results-subject-name').textContent = subjectName;
-  screen.querySelector('.score-pct').textContent = pct + '%';
-  screen.querySelector('.score-sub').textContent = `${totalCorrect}/${totalAnswered}`;
-  screen.querySelector('.results-verdict').textContent = verdict;
-  screen.querySelector('.results-detail').textContent =
-    `${totalMCQ} MCQ · ${totalSelfMark} written` + (timedOut ? ' · Time expired' : '');
+  // Mode label
+  const modeLabels = { practice: 'Practice', timed: 'Timed Paper', endless: 'Endless' };
+  document.getElementById('results-mode-label').textContent =
+    modeLabels[session.mode] || session.mode;
+
+  // Duration
+  const durationSecs = Math.round((Date.now() - session.startTime) / 1000);
+  document.getElementById('results-duration').textContent = formatDuration(durationSecs);
 
   // Topic breakdown
-  const breakdownEl = screen.querySelector('.results-breakdown');
-  breakdownEl.innerHTML = '<div class="section-header">Topic Breakdown</div>';
-  Object.entries(topicMap).forEach(([topic, { total, correct }]) => {
-    const tp = total > 0 ? Math.round((correct / total) * 100) : 0;
-    const row = document.createElement('div');
-    row.className = 'breakdown-row';
-    row.innerHTML = `
-      <div class="breakdown-topic">${esc(topic)}</div>
-      <div class="breakdown-bar-wrap"><div class="breakdown-bar" style="width:${tp}%"></div></div>
-      <div class="breakdown-pct">${tp}%</div>
-    `;
-    breakdownEl.appendChild(row);
-  });
+  renderTopicBreakdown(questions, answers);
 
-  // Review list
-  const reviewEl = screen.querySelector('.review-list');
-  reviewEl.innerHTML = '<div class="section-header">Review</div>';
-  questions.forEach((q, idx) => {
-    const a = answers[q.id];
-    if (!a || !a.submitted) return;
-    const isCorrect = a.correct === true;
-    const item = document.createElement('div');
-    item.className = `review-item ${isCorrect ? 'correct' : 'incorrect'}`;
-    item.innerHTML = `
-      <div class="review-q">${idx + 1}. ${esc(q.prompt.slice(0, 160))}${q.prompt.length > 160 ? '…' : ''}</div>
-      <div class="review-verdict">
-        <span>${isCorrect ? '✓' : '✗'}</span>
-        <span style="color:${isCorrect ? '#4ade80' : '#f87171'}">${q.format === 'MCQ' ? (isCorrect ? 'Correct' : `Incorrect — answer: ${q.answer}`) : (a.selfMark ? 'Self-marked correct' : 'Self-marked incorrect')}</span>
-      </div>
-      <div class="review-ms">${esc((q.markScheme || '').slice(0, 300))}${(q.markScheme || '').length > 300 ? '…' : ''}</div>
-    `;
-    reviewEl.appendChild(item);
-  });
-
-  // Buttons
-  screen.querySelector('.btn-retry').onclick = () => {
-    startQuiz({
-      subjectId: currentSession.subjectId,
-      mode: currentSession.mode,
-      paper: currentSession.paper,
-      questions: currentSession.questions,
-    });
-  };
-  screen.querySelector('.btn-home').onclick = () => {
-    currentSession = null;
-    buildHomeScreen();
-    screenStack = ['screen-home'];
-    showScreen('screen-home', false, false);
-  };
-  screen.querySelector('.back-btn').onclick = () => {
-    buildHomeScreen();
-    screenStack = ['screen-home'];
-    showScreen('screen-home', false, false);
-    currentSession = null;
-  };
-
-  showScreen('screen-results');
-
-  // Update home stats
-  buildHomeScreen();
+  // Mastered count
+  let newMastered = 0;
+  for (const q of questions) {
+    if (isMastered(q.id)) newMastered++;
+  }
+  document.getElementById('results-mastered').textContent = newMastered;
 }
 
-// ─── Admin Screen ─────────────────────────────────────────
-function openAdminScreen() {
-  const screen = document.getElementById('screen-admin');
-  screen.querySelector('.back-btn').onclick = goBack;
-
-  // Populate subject dropdown
-  const subjectSelect = document.getElementById('admin-subject');
-  subjectSelect.innerHTML = SUBJECTS.map(s =>
-    `<option value="${s.id}">${esc(s.name)}</option>`
-  ).join('');
-
-  // Topic update on subject change
-  function updateTopics() {
-    const subId = subjectSelect.value;
-    const sub = SUBJECTS.find(s => s.id === subId);
-    const topicSelect = document.getElementById('admin-topic');
-    if (sub) {
-      topicSelect.innerHTML = sub.topics.map(t => `<option value="${esc(t)}">${esc(t)}</option>`).join('');
-    }
+function getVerdict(pct, answered, total) {
+  if (answered === 0) {
+    return { verdict: '—', verdictSub: 'No questions answered.' };
   }
-  subjectSelect.onchange = updateTopics;
-  updateTopics();
-
-  // Show/hide MCQ choices based on format
-  const formatSelect = document.getElementById('admin-format');
-  function updateFormatFields() {
-    const fmt = formatSelect.value;
-    const choicesSection = document.getElementById('admin-choices-section');
-    const answerSection  = document.getElementById('admin-answer-section');
-    if (fmt === 'MCQ') {
-      choicesSection.classList.remove('hidden');
-      answerSection.classList.remove('hidden');
-    } else {
-      choicesSection.classList.add('hidden');
-      answerSection.classList.add('hidden');
-    }
-  }
-  formatSelect.onchange = updateFormatFields;
-  updateFormatFields();
-
-  // Submit
-  document.getElementById('admin-save-btn').onclick = saveAdminQuestion;
-
-  showScreen('screen-admin');
+  if (pct >= 90) return { verdict: '🏆 Outstanding!', verdictSub: 'Exceptional performance — you\'re exam-ready.' };
+  if (pct >= 75) return { verdict: '🎯 Excellent work!', verdictSub: 'Strong command of the material.' };
+  if (pct >= 60) return { verdict: '✅ Good progress!', verdictSub: 'Keep reviewing the topics you missed.' };
+  if (pct >= 45) return { verdict: '📚 Needs practice', verdictSub: 'Focus on the weak topics in the breakdown below.' };
+  return { verdict: '💪 Keep going!', verdictSub: 'Review the mark schemes and practice again.' };
 }
 
-function saveAdminQuestion() {
-  const subjectId = document.getElementById('admin-subject').value;
-  const topic     = document.getElementById('admin-topic').value;
-  const paper     = parseInt(document.getElementById('admin-paper').value);
-  const level     = document.getElementById('admin-level').value;
-  const format    = document.getElementById('admin-format').value;
-  const marks     = parseInt(document.getElementById('admin-marks').value) || 1;
-  const commandTerm = document.getElementById('admin-command').value.trim();
-  const prompt    = document.getElementById('admin-prompt').value.trim();
-  const markScheme = document.getElementById('admin-markscheme').value.trim();
-  const explanation = document.getElementById('admin-explanation').value.trim();
+function renderTopicBreakdown(questions, answers) {
+  // Aggregate per-topic stats
+  const topicMap = {};  // topic -> { correct: n, total: n }
+  for (const q of questions) {
+    if (!topicMap[q.topic]) topicMap[q.topic] = { correct: 0, total: 0 };
+    topicMap[q.topic].total++;
+    const ans = answers[q.id];
+    if (ans && ans.correct) topicMap[q.topic].correct++;
+  }
 
-  if (!prompt || !markScheme) {
-    alert('Prompt and mark scheme are required.');
+  const breakdownEl = document.getElementById('topic-breakdown');
+  breakdownEl.innerHTML = '';
+
+  if (Object.keys(topicMap).length === 0) {
+    breakdownEl.innerHTML = '<div class="text-muted" style="font-size:0.85rem;text-align:center;">No topic data.</div>';
     return;
   }
 
-  const sub = SUBJECTS.find(s => s.id === subjectId);
-  const id  = `imported-${Date.now()}`;
+  for (const [topic, data] of Object.entries(topicMap)) {
+    const p = data.total > 0 ? Math.round((data.correct / data.total) * 100) : 0;
+    const barColor = p >= 70 ? 'var(--correct)' : p >= 40 ? 'var(--warn)' : 'var(--wrong)';
 
-  const question = {
-    id, subjectId, subject: sub?.name, topic, paper, level, format, marks, commandTerm, prompt, markScheme, explanation,
-    difficulty: 2,
+    const row = document.createElement('div');
+    row.className = 'topic-row';
+    row.innerHTML = `
+      <div class="topic-row-header">
+        <span class="topic-row-name">${escHtml(topic)}</span>
+        <span class="topic-row-score">${data.correct}/${data.total} (${p}%)</span>
+      </div>
+      <div class="topic-bar-bg">
+        <div class="topic-bar-fill" style="width:0%;background:${barColor}"
+             data-target="${p}"></div>
+      </div>
+    `;
+    breakdownEl.appendChild(row);
+  }
+
+  // Animate bars in
+  requestAnimationFrame(() => {
+    breakdownEl.querySelectorAll('.topic-bar-fill').forEach(fill => {
+      fill.style.width = fill.dataset.target + '%';
+    });
+  });
+}
+
+// ── ADMIN SCREEN ─────────────────────────────────────────────
+function renderAdminScreen() {
+  // Populate subject dropdown
+  const sel = document.getElementById('admin-subject');
+  sel.innerHTML = SUBJECTS.map(s =>
+    `<option value="${escAttr(s.id)}">${escHtml(s.name)}</option>`
+  ).join('');
+
+  // Reset form
+  const form = document.getElementById('admin-form');
+  if (form) form.reset();
+
+  updateAdminMCQVisibility();
+  hideAdminToast();
+}
+
+function updateAdminMCQVisibility() {
+  const format    = document.getElementById('admin-format').value;
+  const mcqSec    = document.getElementById('admin-mcq-section');
+  mcqSec.classList.toggle('visible', format === 'MCQ');
+}
+
+function submitAdminForm() {
+  // Gather values
+  const subjectId   = document.getElementById('admin-subject').value;
+  const topic       = document.getElementById('admin-topic').value.trim();
+  const format      = document.getElementById('admin-format').value;
+  const prompt      = document.getElementById('admin-prompt').value.trim();
+  const markScheme  = document.getElementById('admin-markscheme').value.trim();
+  const commandTerm = document.getElementById('admin-command').value.trim() || 'explain';
+  const marks       = parseInt(document.getElementById('admin-marks').value, 10) || 1;
+
+  // Basic validation
+  if (!topic) {
+    highlightInvalid('admin-topic');
+    return;
+  }
+  if (!prompt) {
+    highlightInvalid('admin-prompt');
+    return;
+  }
+  if (!markScheme) {
+    highlightInvalid('admin-markscheme');
+    return;
+  }
+
+  const subj = getSubjectById(subjectId);
+  const q = {
+    id:          'custom-' + Date.now() + '-' + Math.random().toString(36).slice(2, 7),
+    subjectId,
+    subject:     subj ? subj.name : subjectId,
+    topic,
+    paper:       1,
+    level:       subj ? subj.level : 'Both',
+    format,
+    commandTerm,
+    marks,
+    prompt,
+    markScheme,
+    _custom:     true,
+    createdAt:   new Date().toISOString(),
   };
 
+  // MCQ-specific fields
   if (format === 'MCQ') {
-    const choiceA = document.getElementById('admin-choice-a').value.trim();
-    const choiceB = document.getElementById('admin-choice-b').value.trim();
-    const choiceC = document.getElementById('admin-choice-c').value.trim();
-    const choiceD = document.getElementById('admin-choice-d').value.trim();
-    const answer  = document.getElementById('admin-answer').value;
+    const optA   = document.getElementById('admin-opt-a').value.trim();
+    const optB   = document.getElementById('admin-opt-b').value.trim();
+    const optC   = document.getElementById('admin-opt-c').value.trim();
+    const optD   = document.getElementById('admin-opt-d').value.trim();
+    const answer = document.getElementById('admin-answer').value;
 
-    if (!choiceA || !choiceB) {
-      alert('Please fill in at least choices A and B.');
+    if (!optA || !optB || !optC || !optD) {
+      showToast('Please fill in all four MCQ options.', 'warn');
       return;
     }
 
-    question.choices = {};
-    if (choiceA) question.choices.A = choiceA;
-    if (choiceB) question.choices.B = choiceB;
-    if (choiceC) question.choices.C = choiceC;
-    if (choiceD) question.choices.D = choiceD;
-    question.answer = answer;
+    q.choices = { A: optA, B: optB, C: optC, D: optD };
+    q.answer  = answer;
   }
 
-  // Save to localStorage
-  const imported = loadJSON(SK.imported, []);
-  imported.push(question);
-  saveJSON(SK.imported, imported);
+  // Save
+  addCustomQuestion(q);
 
-  // Add to in-memory list
-  allQuestions.push(question);
-
-  // Reset form
+  // Clear form
   document.getElementById('admin-form').reset();
-  document.getElementById('admin-topic').innerHTML = '';
-  document.getElementById('admin-subject').dispatchEvent(new Event('change'));
-  document.getElementById('admin-format').dispatchEvent(new Event('change'));
+  updateAdminMCQVisibility();
 
+  // Show success toast
+  showAdminToast(`Question saved! "${topic}" added to ${subj ? subj.name : subjectId}.`);
+}
+
+function highlightInvalid(fieldId) {
+  const el = document.getElementById(fieldId);
+  if (!el) return;
+  el.style.borderColor = 'var(--wrong)';
+  el.focus();
+  setTimeout(() => { el.style.borderColor = ''; }, 2000);
+}
+
+function showAdminToast(message) {
   const toast = document.getElementById('admin-toast');
-  toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 3000);
-
-  buildHomeScreen();
+  if (!toast) return;
+  toast.textContent = '✅ ' + message;
+  toast.classList.add('visible');
+  setTimeout(hideAdminToast, 3000);
 }
 
-// ─── Request Screen ───────────────────────────────────────
-function openRequestScreen(subjectId) {
-  const sub = SUBJECTS.find(s => s.id === subjectId);
-  const screen = document.getElementById('screen-request');
-  screen.querySelector('.back-btn').onclick = goBack;
+function hideAdminToast() {
+  const toast = document.getElementById('admin-toast');
+  if (toast) toast.classList.remove('visible');
+}
 
-  const subjectSelect = document.getElementById('req-subject');
-  subjectSelect.innerHTML = SUBJECTS.map(s =>
-    `<option value="${s.id}" ${s.id === subjectId ? 'selected' : ''}>${esc(s.name)}</option>`
+// ── REQUEST SCREEN ───────────────────────────────────────────
+function renderRequestScreen() {
+  const sel = document.getElementById('request-subject');
+  if (!sel) return;
+  sel.innerHTML = SUBJECTS.map(s =>
+    `<option value="${escAttr(s.id)}">${escHtml(s.name)}</option>`
   ).join('');
-
-  document.getElementById('req-submit-btn').onclick = () => {
-    const selSubId  = document.getElementById('req-subject').value;
-    const selSub    = SUBJECTS.find(s => s.id === selSubId);
-    const type      = document.getElementById('req-type').value;
-    const topic     = document.getElementById('req-topic').value.trim();
-    const details   = document.getElementById('req-details').value.trim();
-
-    const title = encodeURIComponent(`[REQUEST] ${selSub?.name || selSubId} — ${type}`);
-    const body  = encodeURIComponent(
-      `**Subject:** ${selSub?.name}\n**Type:** ${type}\n**Topic:** ${topic || 'Not specified'}\n\n**Details:**\n${details || 'No additional details.'}`
-    );
-
-    const url = `https://github.com/sudo-nkop/ib-prep-app/issues/new?title=${title}&body=${body}&labels=content-request`;
-    window.open(url, '_blank');
-  };
-
-  showScreen('screen-request');
 }
 
-// ─── Math Rendering ───────────────────────────────────────
-function renderMath(el) {
-  if (!el || typeof renderMathInElement === 'undefined') return;
+function openGithubIssue() {
+  const subjectId   = document.getElementById('request-subject').value;
+  const reqType     = document.getElementById('request-type').value;
+  const description = document.getElementById('request-description').value.trim();
+  const subj        = getSubjectById(subjectId);
+  const subjName    = subj ? subj.name : subjectId;
+
+  const title = `[Content Request] ${subjName} — ${reqType}`;
+
+  const bodyLines = [
+    `**Subject:** ${subjName}`,
+    `**Request Type:** ${reqType}`,
+    '',
+    '**Description:**',
+    description || '*(No description provided)*',
+    '',
+    '---',
+    '*Submitted via IB Prep App*',
+  ];
+
+  const issueUrl = 'https://github.com/sudo-nkop/ib-prep-app/issues/new'
+    + '?title='  + encodeURIComponent(title)
+    + '&body='   + encodeURIComponent(bodyLines.join('\n'))
+    + '&labels=' + encodeURIComponent('content-request');
+
+  window.open(issueUrl, '_blank', 'noopener,noreferrer');
+}
+
+// ── Math Rendering (KaTeX) ───────────────────────────────────
+function renderMath(element) {
+  if (!window.renderMathInElement) return;
   try {
-    renderMathInElement(el, {
+    renderMathInElement(element, {
       delimiters: [
-        { left: '$$',  right: '$$',  display: true  },
-        { left: '$',   right: '$',   display: false },
+        { left: '$$', right: '$$', display: true  },
+        { left: '$',  right: '$',  display: false },
         { left: '\\[', right: '\\]', display: true  },
         { left: '\\(', right: '\\)', display: false },
       ],
       throwOnError: false,
+      errorColor:   'var(--wrong)',
     });
-  } catch (e) {}
+  } catch (e) {
+    // KaTeX errors are non-fatal
+  }
 }
 
-// ─── Helpers ──────────────────────────────────────────────
-function esc(str) {
-  if (str == null) return '';
+// ── Toast Notifications ──────────────────────────────────────
+let toastTimeout = null;
+
+function showToast(message, type = 'info') {
+  let toast = document.getElementById('app-toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'app-toast';
+    toast.style.cssText = `
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      max-width: 320px;
+      width: calc(100% - 48px);
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-size: 0.875rem;
+      z-index: 9999;
+      text-align: center;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      transition: opacity 0.25s ease;
+    `;
+    document.body.appendChild(toast);
+  }
+
+  if (type === 'warn') {
+    toast.style.borderColor = 'rgba(245,158,11,0.4)';
+    toast.style.color = 'var(--warn)';
+  } else {
+    toast.style.borderColor = 'var(--border)';
+    toast.style.color = 'var(--text)';
+  }
+
+  toast.textContent = message;
+  toast.style.opacity = '1';
+
+  if (toastTimeout) clearTimeout(toastTimeout);
+  toastTimeout = setTimeout(() => {
+    toast.style.opacity = '0';
+  }, 2800);
+}
+
+// ── Utility Functions ────────────────────────────────────────
+function escHtml(str) {
+  if (str === null || str === undefined) return '';
   return String(str)
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 }
 
-function setText(id, val) {
-  const el = document.getElementById(id);
-  if (el) el.textContent = val;
+function escAttr(str) {
+  return escHtml(str);
 }
 
 function shuffle(arr) {
-  for (let i = arr.length - 1; i > 0; i--) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
+    [a[i], a[j]] = [a[j], a[i]];
   }
-  return arr;
+  return a;
 }
 
-// ─── Global event wiring (called from HTML onclick) ───────
-window.submitSelfMark    = submitSelfMark;
-window.closeNavOverlay   = closeNavOverlay;
-window.openAdminScreen   = openAdminScreen;
-window.openRequestScreen = openRequestScreen;
-window.goBack            = goBack;
-window.endQuiz           = endQuiz;
-window.SUBJECTS          = SUBJECTS;
+function formatNumber(n) {
+  if (n >= 1000) return (n / 1000).toFixed(1) + 'k';
+  return String(n);
+}
+
+function formatDuration(secs) {
+  if (secs < 60) return `${secs}s`;
+  const m = Math.floor(secs / 60);
+  const s = secs % 60;
+  return s > 0 ? `${m}m ${s}s` : `${m}m`;
+}
+
+// ── Event Wiring ─────────────────────────────────────────────
+function wireEvents() {
+
+  // ── Home ──────────────────────────────────────────────────
+  document.getElementById('btn-practice-all').addEventListener('click', () => {
+    startMixedPractice();
+  });
+
+  document.getElementById('btn-add-question').addEventListener('click', () => {
+    renderAdminScreen();
+    showScreen('admin');
+  });
+
+  document.getElementById('btn-request').addEventListener('click', () => {
+    renderRequestScreen();
+    showScreen('request');
+  });
+
+  // ── Subject ───────────────────────────────────────────────
+  document.getElementById('back-from-subject').addEventListener('click', goBack);
+
+  document.querySelectorAll('.mode-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      subjectState.mode = btn.dataset.mode;
+      renderSubjectScreen();
+    });
+  });
+
+  document.getElementById('start-btn').addEventListener('click', () => {
+    startQuiz(
+      subjectState.subjectId,
+      subjectState.mode,
+      subjectState.selectedTopics,
+    );
+  });
+
+  // ── Quiz ──────────────────────────────────────────────────
+  document.getElementById('back-from-quiz').addEventListener('click', () => {
+    if (!session) { goBack(); return; }
+
+    const hasAnswers = Object.keys(session.answers).length > 0;
+    if (hasAnswers && session.timerInterval) {
+      if (!confirm('End this timed session? Your progress will be lost.')) return;
+    }
+
+    abortSession();
+    goBack();
+  });
+
+  document.getElementById('flag-btn').addEventListener('click', () => {
+    if (!session) return;
+    const q = session.questions[session.currentIdx];
+    const nowFlagged = toggleFlagged(q.id);
+    // Sync flag into session's local flag set
+    if (nowFlagged) {
+      session.flags.add(q.id);
+    } else {
+      session.flags.delete(q.id);
+    }
+    document.getElementById('flag-btn').classList.toggle('flagged', nowFlagged);
+  });
+
+  document.getElementById('show-answer-btn').addEventListener('click', () => {
+    if (!session) return;
+    const q = session.questions[session.currentIdx];
+    handleShowAnswer(q);
+  });
+
+  document.getElementById('self-mark-got').addEventListener('click', () => {
+    if (!session) return;
+    const q = session.questions[session.currentIdx];
+    handleSelfMark(q, true);
+  });
+
+  document.getElementById('self-mark-missed').addEventListener('click', () => {
+    if (!session) return;
+    const q = session.questions[session.currentIdx];
+    handleSelfMark(q, false);
+  });
+
+  document.getElementById('next-btn').addEventListener('click', nextQuestion);
+
+  // ── Results ───────────────────────────────────────────────
+  document.getElementById('btn-practice-again').addEventListener('click', () => {
+    if (!session) { navigateHome(); return; }
+    const { subjectId, mode } = session;
+    if (subjectId === 'mixed') {
+      startMixedPractice();
+    } else {
+      startQuiz(subjectId, mode, subjectState.selectedTopics);
+    }
+  });
+
+  document.getElementById('btn-back-subjects').addEventListener('click', () => {
+    navigateHome();
+  });
+
+  // ── Admin ─────────────────────────────────────────────────
+  document.getElementById('back-from-admin').addEventListener('click', goBack);
+
+  document.getElementById('admin-format').addEventListener('change', updateAdminMCQVisibility);
+
+  document.getElementById('admin-submit').addEventListener('click', submitAdminForm);
+
+  // ── Request ───────────────────────────────────────────────
+  document.getElementById('back-from-request').addEventListener('click', goBack);
+
+  document.getElementById('btn-open-issue').addEventListener('click', openGithubIssue);
+
+  // ── Keyboard shortcuts ─────────────────────────────────────
+  document.addEventListener('keydown', handleKeydown);
+}
+
+function handleKeydown(e) {
+  // Skip if typing in a form field
+  if (e.target.matches('input, textarea, select')) return;
+
+  // Quiz screen shortcuts
+  const activeScreen = screenStack[screenStack.length - 1];
+  if (activeScreen === 'quiz' && session) {
+    const q = session.questions[session.currentIdx];
+
+    // A/B/C/D = select MCQ option
+    if (q.format === 'MCQ' && session.answers[q.id] === undefined) {
+      const key = e.key.toUpperCase();
+      if (['A','B','C','D'].includes(key)) {
+        const btn = document.querySelector(`.option-btn[data-label="${key}"]`);
+        if (btn && !btn.disabled) btn.click();
+        return;
+      }
+    }
+
+    // Space / Enter = next question (when next is visible)
+    if ((e.key === ' ' || e.key === 'Enter') &&
+        document.getElementById('next-btn-row').classList.contains('visible')) {
+      e.preventDefault();
+      nextQuestion();
+      return;
+    }
+
+    // F = flag
+    if (e.key === 'f' || e.key === 'F') {
+      document.getElementById('flag-btn').click();
+      return;
+    }
+  }
+
+  // Escape = go back
+  if (e.key === 'Escape') {
+    if (activeScreen !== 'home') {
+      // Use the back button logic for quiz to confirm abort
+      const backBtnId = {
+        subject: 'back-from-subject',
+        quiz:    'back-from-quiz',
+        results: null,
+        admin:   'back-from-admin',
+        request: 'back-from-request',
+      }[activeScreen];
+      if (backBtnId) {
+        document.getElementById(backBtnId).click();
+      }
+    }
+  }
+}
+
+// ── Service Worker Registration ──────────────────────────────
+function registerServiceWorker() {
+  if (!('serviceWorker' in navigator)) return;
+
+  navigator.serviceWorker.register('sw.js').then(reg => {
+    console.log('SW registered, scope:', reg.scope);
+    reg.addEventListener('updatefound', () => {
+      console.log('SW update found');
+    });
+  }).catch(err => {
+    console.warn('SW registration failed:', err);
+  });
+}
+
+// ── App Initialisation ───────────────────────────────────────
+async function init() {
+  // Register service worker
+  registerServiceWorker();
+
+  // Show home screen immediately (before data loads)
+  screenStack = ['home'];
+  showScreen('home', false);
+
+  // Wire all UI events first (so buttons work as soon as data arrives)
+  wireEvents();
+
+  // Load question data
+  await loadQuestions();
+
+  // Render home with real data
+  renderHome();
+}
+
+// Boot
+document.addEventListener('DOMContentLoaded', init);
