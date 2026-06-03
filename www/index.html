@@ -31,6 +31,69 @@
 <div id="app">
 
   <!-- ══════════════════════════════════════════════════════
+       SCREEN: SETUP (Onboarding)
+       ══════════════════════════════════════════════════════ -->
+  <div id="screen-setup" class="screen">
+
+    <!-- Progress dots -->
+    <div class="setup-dots">
+      <span class="setup-dot active" id="dot-1"></span>
+      <span class="setup-dot" id="dot-2"></span>
+      <span class="setup-dot" id="dot-3"></span>
+    </div>
+
+    <!-- Step content area -->
+    <div class="setup-body scroll-body" id="setup-body">
+      <!-- Rendered by JS -->
+    </div>
+
+    <!-- Navigation buttons -->
+    <div class="setup-nav">
+      <button id="setup-back-btn" class="btn btn-secondary" style="display:none;">← Back</button>
+      <button id="setup-next-btn" class="btn btn-primary" style="margin-left:auto;">Next →</button>
+    </div>
+
+  </div><!-- /screen-setup -->
+
+
+  <!-- ══════════════════════════════════════════════════════
+       SCREEN: SETTINGS
+       ══════════════════════════════════════════════════════ -->
+  <div id="screen-settings" class="screen">
+
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <button id="back-from-settings" class="back-btn" style="color:white;" aria-label="Go back">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M15 18l-6-6 6-6"/>
+          </svg>
+          Back
+        </button>
+      </div>
+      <div class="top-bar-title">Settings</div>
+      <div class="top-bar-right"></div>
+    </div>
+
+    <!-- Progress dots (same step UI as onboarding) -->
+    <div class="setup-dots">
+      <span class="setup-dot active" id="settings-dot-1"></span>
+      <span class="setup-dot" id="settings-dot-2"></span>
+      <span class="setup-dot" id="settings-dot-3"></span>
+    </div>
+
+    <div class="setup-body scroll-body" id="settings-body">
+      <!-- Rendered by JS -->
+    </div>
+
+    <div class="setup-nav">
+      <button id="settings-back-btn" class="btn btn-secondary" style="display:none;">← Back</button>
+      <button id="settings-next-btn" class="btn btn-primary" style="margin-left:auto;">Next →</button>
+    </div>
+
+  </div><!-- /screen-settings -->
+
+
+  <!-- ══════════════════════════════════════════════════════
        SCREEN: HOME
        ══════════════════════════════════════════════════════ -->
   <div id="screen-home" class="screen">
@@ -39,7 +102,9 @@
     <div class="top-bar">
       <div class="top-bar-left"></div>
       <div class="top-bar-title">IB Diploma Prep</div>
-      <div class="top-bar-right"></div>
+      <div class="top-bar-right">
+        <button id="btn-settings" class="icon-btn" aria-label="Settings" title="Settings">⚙️</button>
+      </div>
     </div>
 
     <!-- Scrollable content -->
@@ -91,45 +156,50 @@
        ══════════════════════════════════════════════════════ -->
   <div id="screen-subject" class="screen">
 
-    <!-- Sticky header -->
-    <div class="subject-header">
-      <div class="subject-header-top">
+    <!-- Sticky blue top bar -->
+    <div class="top-bar" id="subject-top-bar">
+      <div class="top-bar-left">
         <button id="back-from-subject" class="back-btn" aria-label="Go back">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <path d="M15 18l-6-6 6-6"/>
           </svg>
           Back
         </button>
-        <div id="subject-color-bar" class="subject-color-bar"></div>
-        <div>
-          <span id="subject-name-text" class="subject-name"></span>
-          <span id="subject-level-badge" class="level-badge"></span>
-        </div>
       </div>
-
-      <!-- Per-subject stats -->
-      <div class="subject-stats">
-        <div class="subject-stat">
-          <div class="subject-stat-value" id="sub-stat-total">—</div>
-          <div class="subject-stat-label">Questions</div>
-        </div>
-        <div class="subject-stat">
-          <div class="subject-stat-value" id="sub-stat-answered">—</div>
-          <div class="subject-stat-label">Answered</div>
-        </div>
-        <div class="subject-stat">
-          <div class="subject-stat-value" id="sub-stat-accuracy">—</div>
-          <div class="subject-stat-label">Accuracy</div>
-        </div>
+      <div class="top-bar-title" id="subject-name-text"></div>
+      <div class="top-bar-right">
+        <span id="subject-level-badge" class="level-badge"></span>
       </div>
     </div>
 
-    <!-- Body -->
+    <!-- Colored accent line (subject color) -->
+    <div id="subject-accent-line" class="subject-accent-line"></div>
+
+    <!-- SL/HL · Group N metadata row -->
+    <div id="subject-meta-row" class="subject-meta-row"></div>
+
+    <!-- Per-subject stats row (3 bordered columns) -->
+    <div class="subject-stats">
+      <div class="subject-stat">
+        <div class="subject-stat-value" id="sub-stat-total">—</div>
+        <div class="subject-stat-label">Questions</div>
+      </div>
+      <div class="subject-stat">
+        <div class="subject-stat-value" id="sub-stat-answered">—</div>
+        <div class="subject-stat-label">Attempted</div>
+      </div>
+      <div class="subject-stat">
+        <div class="subject-stat-value" id="sub-stat-accuracy">—</div>
+        <div class="subject-stat-label">Accuracy</div>
+      </div>
+    </div>
+
+    <!-- Scrollable body -->
     <div class="subject-body scroll-body">
 
       <!-- Mode selection -->
       <div>
-        <span class="topics-label">Mode</span>
+        <span class="topics-label">Practice Mode</span>
         <div class="mode-buttons">
           <button class="mode-btn selected" data-mode="practice">
             <span class="mode-btn-icon">📝</span>
@@ -146,12 +216,17 @@
             <span class="mode-btn-label">Endless</span>
             <span class="mode-btn-desc">All questions</span>
           </button>
+          <button class="mode-btn" data-mode="mastery">
+            <span class="mode-btn-icon">⭐</span>
+            <span class="mode-btn-label">Mastery</span>
+            <span class="mode-btn-desc">Weak spots only</span>
+          </button>
         </div>
       </div>
 
       <!-- Topic filter -->
       <div>
-        <span class="topics-label">Filter by Topic</span>
+        <span class="topics-label">Topics</span>
         <div id="topic-chips" class="topic-chips">
           <!-- Chips rendered by JS -->
         </div>
