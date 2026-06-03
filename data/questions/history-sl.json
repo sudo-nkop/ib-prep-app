@@ -8,15 +8,15 @@
     "format": "MCQ",
     "commandTerm": "identify",
     "marks": 1,
-    "prompt": "The Civil Rights Act of 1964 was significant primarily because it:",
+    "prompt": "Rosa Parks was arrested in December 1955 for refusing to give up her seat on a bus in which American city?",
     "options": [
-      { "label": "A", "text": "Gave African American men the right to vote for the first time" },
-      { "label": "B", "text": "Prohibited discrimination based on race, colour, religion, sex, or national origin" },
-      { "label": "C", "text": "Desegregated the US military by presidential executive order" },
-      { "label": "D", "text": "Established affirmative action programmes in federal employment" }
+      {"label": "A", "text": "Birmingham, Alabama"},
+      {"label": "B", "text": "Montgomery, Alabama"},
+      {"label": "C", "text": "Atlanta, Georgia"},
+      {"label": "D", "text": "Memphis, Tennessee"}
     ],
     "correctOption": "B",
-    "markScheme": "B — The Civil Rights Act (1964) outlawed discrimination in public accommodations and employment on grounds of race, colour, religion, sex, or national origin. Voting rights were addressed separately by the Voting Rights Act (1965)."
+    "markScheme": "B — Rosa Parks was arrested on 1 December 1955 in Montgomery, Alabama. Her arrest sparked the Montgomery Bus Boycott, which lasted 381 days."
   },
   {
     "id": "hist-sl-002",
@@ -27,43 +27,18 @@
     "format": "MCQ",
     "commandTerm": "identify",
     "marks": 1,
-    "prompt": "Mahatma Gandhi's campaign of nonviolent resistance in South Africa (1906-1914) developed the concept he called:",
+    "prompt": "The 'I Have a Dream' speech was delivered by Martin Luther King Jr at which event in 1963?",
     "options": [
-      { "label": "A", "text": "Ahimsa" },
-      { "label": "B", "text": "Satyagraha" },
-      { "label": "C", "text": "Hartal" },
-      { "label": "D", "text": "Swaraj" }
+      {"label": "A", "text": "The Montgomery Bus Boycott rally"},
+      {"label": "B", "text": "The Selma to Montgomery March"},
+      {"label": "C", "text": "The March on Washington for Jobs and Freedom"},
+      {"label": "D", "text": "The founding of the SCLC in Atlanta"}
     ],
-    "correctOption": "B",
-    "markScheme": "B — Satyagraha ('truth-force' or 'soul-force') was the philosophy of nonviolent resistance Gandhi developed during his time in South Africa, later applied in India. Ahimsa is the principle of non-injury underlying it."
+    "correctOption": "C",
+    "markScheme": "C — King delivered the speech on 28 August 1963 at the Lincoln Memorial, Washington D.C., at the March on Washington for Jobs and Freedom, attended by approximately 250,000 people."
   },
   {
     "id": "hist-sl-003",
-    "subjectId": "history-sl",
-    "topic": "Rights and Protest",
-    "paper": 2,
-    "level": "SL",
-    "format": "ShortAnswer",
-    "commandTerm": "explain",
-    "marks": 4,
-    "prompt": "Explain two methods used by civil rights activists to challenge segregation in the American South between 1955 and 1963.",
-    "markScheme": "Award 2 marks per method (1 for identifying, 1 for developed explanation):\n• Bus boycotts (e.g. Montgomery 1955-56): African Americans refused to use segregated buses for 381 days, causing significant economic pressure on the city transport system; ended when Supreme Court ruled bus segregation unconstitutional\n• Sit-ins (e.g. Greensboro 1960): Protesters occupied segregated lunch counters, refusing to leave when refused service; spread rapidly across the South; led to desegregation of many establishments\n• Freedom Rides (1961): Interracial groups rode interstate buses to challenge segregated terminal facilities; attacked by mobs in Alabama; forced federal government to enforce desegregation rulings\n• Marches and demonstrations (e.g. Birmingham 1963, Selma 1965): Generated media coverage of police brutality, pressuring federal government to legislate"
-  },
-  {
-    "id": "hist-sl-004",
-    "subjectId": "history-sl",
-    "topic": "Rights and Protest",
-    "paper": 2,
-    "level": "SL",
-    "format": "ShortAnswer",
-    "commandTerm": "examine",
-    "marks": 6,
-    "prompt": "Examine the impact of the Voting Rights Act (1965) on African American political participation.",
-    "markScheme": "Award 1 mark per developed point up to 6:\n• Act prohibited literacy tests and other discriminatory barriers to voter registration\n• Federal registrars sent to counties with history of discrimination, bypassing hostile local officials\n• Black voter registration in Mississippi increased from 6.7% (1964) to 59.8% (1967)\n• Alabama Black registration rose from 19.3% to 51.6% within two years\n• Number of Black elected officials in the South rose from fewer than 100 (1965) to over 1,000 by 1969\n• Limits: Act did not address economic disenfranchisement, gerrymandering, or intimidation\n• Section 5 'preclearance' requirement forced covered states to get federal approval for electoral changes — a powerful enforcement tool gutted by Shelby County v. Holder (2013)",
-    "exemplarAnswer": "The Voting Rights Act of 1965 produced dramatic and measurable changes in Black political participation, particularly in the Deep South where systematic disenfranchisement had been most extreme. By prohibiting literacy tests and dispatching federal registrars to recalcitrant counties, the Act bypassed the hostile local officials who had previously blocked registration. Mississippi's Black registration rate rose from 6.7% in 1964 to nearly 60% by 1967; Alabama's nearly tripled. This translated into electoral representation: the number of Black elected officials in the South grew from under 100 in 1965 to over 1,000 by 1969. However, the Act had limits — it addressed formal barriers to voting but could not easily remedy economic dependency, gerrymandering, or intimidation. Its enforcement provisions, particularly Section 5's preclearance requirement, would prove crucial for decades until their effective gutting by the Supreme Court in 2013."
-  },
-  {
-    "id": "hist-sl-005",
     "subjectId": "history-sl",
     "topic": "Move to Global War",
     "paper": 1,
@@ -71,58 +46,179 @@
     "format": "MCQ",
     "commandTerm": "identify",
     "marks": 1,
-    "prompt": "The policy of appeasement pursued by Britain and France towards Hitler's Germany in the 1930s is best illustrated by which agreement?",
+    "prompt": "Japan invaded and occupied Manchuria in 1931 and subsequently set up which puppet state?",
     "options": [
-      { "label": "A", "text": "The Treaty of Versailles (1919)" },
-      { "label": "B", "text": "The Locarno Pact (1925)" },
-      { "label": "C", "text": "The Munich Agreement (1938)" },
-      { "label": "D", "text": "The Nazi-Soviet Pact (1939)" }
+      {"label": "A", "text": "Manchukuo"},
+      {"label": "B", "text": "Kwantung Territory"},
+      {"label": "C", "text": "Greater East Asia"},
+      {"label": "D", "text": "Liaoning Republic"}
     ],
-    "correctOption": "C",
-    "markScheme": "C — The Munich Agreement (September 1938), signed by Britain, France, Germany, and Italy, transferred the Sudetenland from Czechoslovakia to Germany without Czech consultation, representing the high point of appeasement policy."
+    "correctOption": "A",
+    "markScheme": "A — Japan established the puppet state of Manchukuo in 1932, nominally ruled by the last Qing emperor Puyi, but effectively controlled by the Japanese Kwantung Army."
+  },
+  {
+    "id": "hist-sl-004",
+    "subjectId": "history-sl",
+    "topic": "Move to Global War",
+    "paper": 1,
+    "level": "SL",
+    "format": "MCQ",
+    "commandTerm": "identify",
+    "marks": 1,
+    "prompt": "Which event in March 1938 saw Germany absorb Austria into the Third Reich without military resistance?",
+    "options": [
+      {"label": "A", "text": "The Anschluss"},
+      {"label": "B", "text": "The remilitarisation of the Rhineland"},
+      {"label": "C", "text": "The occupation of the Sudetenland"},
+      {"label": "D", "text": "The invasion of Poland"}
+    ],
+    "correctOption": "A",
+    "markScheme": "A — The Anschluss (union) of Germany and Austria took place on 12–13 March 1938 when German troops entered Austria. The union was prohibited under the Treaty of Versailles but Britain and France took no action."
+  },
+  {
+    "id": "hist-sl-005",
+    "subjectId": "history-sl",
+    "topic": "Rights and Protest",
+    "paper": 1,
+    "level": "SL",
+    "format": "MCQ",
+    "commandTerm": "identify",
+    "marks": 1,
+    "prompt": "The Voting Rights Act of 1965 was most directly triggered by violent events at which location?",
+    "options": [
+      {"label": "A", "text": "Birmingham, Alabama — the use of fire hoses against protesters"},
+      {"label": "B", "text": "Selma, Alabama — 'Bloody Sunday' on the Edmund Pettus Bridge"},
+      {"label": "C", "text": "Little Rock, Arkansas — the school desegregation crisis"},
+      {"label": "D", "text": "Greensboro, North Carolina — attacks on sit-in protesters"}
+    ],
+    "correctOption": "B",
+    "markScheme": "B — On 7 March 1965, state troopers attacked peaceful marchers at the Edmund Pettus Bridge in Selma. The televised violence shocked the nation and directly prompted President Johnson to introduce the Voting Rights Act."
   },
   {
     "id": "hist-sl-006",
     "subjectId": "history-sl",
     "topic": "Move to Global War",
-    "paper": 2,
-    "level": "SL",
-    "format": "ShortAnswer",
-    "commandTerm": "explain",
-    "marks": 4,
-    "prompt": "Explain why Britain and France pursued a policy of appeasement towards Germany between 1936 and 1938.",
-    "markScheme": "Award 1 mark per developed point up to 4:\n• Fear of another catastrophic war — memories of World War I casualties made public and politicians deeply averse to military conflict\n• Belief that Hitler's demands were limited and legitimate — revision of Versailles 'diktat' seemed reasonable to some British opinion\n• Military unpreparedness — Britain's rearmament was incomplete; Chiefs of Staff advised against war in 1938\n• Economic weakness — Great Depression had strained government finances; rearmament competed with social spending\n• Anti-communism — some British conservatives preferred Nazi Germany as a buffer against Soviet expansion\n• Chamberlain's personal conviction that personal diplomacy could satisfy Hitler's ambitions",
-    "exemplarAnswer": "Appeasement reflected a combination of sincere belief and strategic calculation. The memory of 1914-18's 700,000 British military dead made any policy risking another major war deeply unpopular; polls showed strong public support for negotiation. Chamberlain and many of his advisers genuinely believed that Hitler's grievances — revision of Versailles, German minorities in neighbouring states — were limited and addressable through diplomacy. Britain's military unpreparedness reinforced the case for buying time: the Chiefs of Staff consistently warned that Britain could not fight Germany, Italy, and Japan simultaneously. Some conservatives also viewed a strengthened Germany as a bulwark against Soviet communism. Appeasement was thus simultaneously a risk-management strategy, a product of war-weariness, and an expression of the belief — catastrophically mistaken, as Munich's aftermath proved — that Hitler was a rational statesman with finite aims."
-  },
-  {
-    "id": "hist-sl-007",
-    "subjectId": "history-sl",
-    "topic": "Causes of World War I",
     "paper": 1,
     "level": "SL",
     "format": "MCQ",
     "commandTerm": "identify",
     "marks": 1,
-    "prompt": "The alliance system in Europe prior to 1914 contributed to the outbreak of World War I primarily by:",
+    "prompt": "Neville Chamberlain's policy of appeasement towards Nazi Germany is BEST described as:",
     "options": [
-      { "label": "A", "text": "Preventing any European power from pursuing colonial expansion" },
-      { "label": "B", "text": "Transforming a regional Austro-Serbian dispute into a continental war" },
-      { "label": "C", "text": "Ensuring that all major powers maintained roughly equal military strength" },
-      { "label": "D", "text": "Providing a diplomatic framework for resolving the Moroccan crises" }
+      {"label": "A", "text": "Seeking to contain German expansion through military alliances"},
+      {"label": "B", "text": "Making concessions to Hitler in the hope of satisfying his ambitions and preserving peace"},
+      {"label": "C", "text": "Imposing economic sanctions to weaken Germany's rearmament programme"},
+      {"label": "D", "text": "Building a military alliance with the Soviet Union to deter German aggression"}
     ],
     "correctOption": "B",
-    "markScheme": "B — The interlocking alliances (Triple Alliance: Germany, Austria-Hungary, Italy; Triple Entente: France, Russia, Britain) meant that the assassination of Archduke Franz Ferdinand triggered a chain reaction of mobilisations, turning a Balkan crisis into a European war."
+    "markScheme": "B — Appeasement involved making concessions to Hitler's demands (e.g. Munich Agreement, 1938) in the belief that satisfying his grievances would prevent another European war. It was widely discredited after Germany occupied all of Czechoslovakia in March 1939."
+  },
+  {
+    "id": "hist-sl-007",
+    "subjectId": "history-sl",
+    "topic": "Rights and Protest",
+    "paper": 2,
+    "level": "SL",
+    "format": "ShortAnswer",
+    "commandTerm": "describe",
+    "marks": 6,
+    "prompt": "Describe two methods used by civil rights activists during the sit-in movement of 1960.",
+    "markScheme": "For each method — 1 mark for identification, 1 mark for development:\n\nMethod 1 — Nonviolent occupation of lunch counters:\n• Activists (often students) would sit at 'whites-only' lunch counters and refuse to leave until served or arrested\n• Even when verbally abused or physically attacked, protesters maintained discipline and nonviolence [2]\n\nMethod 2 — Organised mass participation:\n• Protests spread rapidly from Greensboro (1 February 1960) to dozens of cities across the South\n• SNCC coordinated the movement and trained activists in nonviolent resistance techniques [2]\n\nAdditional credit for: economic boycotts of segregated businesses; media strategy to attract national coverage; legal challenges to arrests\nMax 6 marks"
   },
   {
     "id": "hist-sl-008",
     "subjectId": "history-sl",
-    "topic": "Causes of World War I",
+    "topic": "Move to Global War",
+    "paper": 2,
+    "level": "SL",
+    "format": "ShortAnswer",
+    "commandTerm": "describe",
+    "marks": 6,
+    "prompt": "Describe the main events of Japanese expansion in Asia between 1931 and 1941.",
+    "markScheme": "• Mukden Incident (September 1931): staged explosion used as pretext to occupy Manchuria [1]\n• Creation of Manchukuo puppet state (1932) under Puyi; League of Nations condemned but took no action [1]\n• Japan withdrew from League of Nations (1933) after Lytton Commission report [1]\n• Marco Polo Bridge Incident (July 1937) sparked full-scale Sino-Japanese War [1]\n• Nanjing Massacre (December 1937): Japanese forces killed estimated 100,000–300,000 Chinese civilians [1]\n• Expansion into Southeast Asia (Indochina 1940–41); US oil embargo (1941) prompted attack on Pearl Harbor (December 1941) [1]\nMax 6 marks"
+  },
+  {
+    "id": "hist-sl-009",
+    "subjectId": "history-sl",
+    "topic": "Rights and Protest",
+    "paper": 2,
+    "level": "SL",
+    "format": "ShortAnswer",
+    "commandTerm": "explain",
+    "marks": 6,
+    "prompt": "Explain the importance of the Civil Rights Act of 1964 for African Americans.",
+    "markScheme": "• Outlawed discrimination in public accommodations (restaurants, hotels, theatres) — ended legal basis for Jim Crow [1]\n• Title VII prohibited employment discrimination on grounds of race, colour, religion, sex, or national origin [1]\n• Created Equal Employment Opportunity Commission (EEOC) to investigate complaints [1]\n• Gave federal government power to withhold funding from programmes practising discrimination [1]\n• Validated years of nonviolent protest — movement's goals achieved through legislation [1]\n• However, did not address voting rights (tackled by Voting Rights Act 1965) or housing discrimination [1]\nMax 6 marks"
+  },
+  {
+    "id": "hist-sl-010",
+    "subjectId": "history-sl",
+    "topic": "Move to Global War",
+    "paper": 2,
+    "level": "SL",
+    "format": "ShortAnswer",
+    "commandTerm": "describe",
+    "marks": 6,
+    "prompt": "Describe the key events of German expansion in Europe between 1936 and 1939.",
+    "markScheme": "• Remilitarisation of the Rhineland (March 1936): German troops entered the demilitarised zone; France and Britain did not respond militarily [1]\n• Anschluss with Austria (March 1938): German troops entered Austria; union declared despite prohibition in Treaty of Versailles [1]\n• Munich Agreement (September 1938): Britain, France, Italy and Germany agreed to transfer Sudetenland to Germany; Czechoslovakia not consulted [1]\n• Occupation of remaining Czechoslovakia (March 1939): Germany seized Bohemia-Moravia, making clear expansion was not limited to ethnic Germans [1]\n• German demands on Poland over Danzig and the Polish Corridor (1939); Britain and France gave Poland a guarantee of independence [1]\n• Invasion of Poland (1 September 1939): triggered British and French declarations of war [1]\nMax 6 marks"
+  },
+  {
+    "id": "hist-sl-011",
+    "subjectId": "history-sl",
+    "topic": "Rights and Protest",
+    "paper": 2,
+    "level": "SL",
+    "format": "ShortAnswer",
+    "commandTerm": "explain",
+    "marks": 6,
+    "prompt": "Explain why the Little Rock Crisis of 1957 was important for the Civil Rights Movement in the United States.",
+    "markScheme": "• Governor Orval Faubus used Arkansas National Guard to prevent nine Black students from entering Central High School, defying Brown v Board ruling [1]\n• President Eisenhower sent 101st Airborne Division to enforce desegregation — first use of federal troops in South since Reconstruction [1]\n• Demonstrated federal government could and would enforce Supreme Court rulings against state resistance [1]\n• 'Little Rock Nine' became symbols of courage and the costs of desegregation [1]\n• Crisis broadcast internationally, embarrassing the US during Cold War [1]\n• Showed limits of peaceful compliance — even moderate steps faced violent opposition, radicalising some activists [1]\nMax 6 marks"
+  },
+  {
+    "id": "hist-sl-012",
+    "subjectId": "history-sl",
+    "topic": "Rights and Protest",
     "paper": 2,
     "level": "SL",
     "format": "Essay",
-    "commandTerm": "to what extent",
+    "commandTerm": "explain",
     "marks": 15,
-    "prompt": "To what extent was German foreign policy responsible for the outbreak of World War I in 1914?",
-    "markScheme": "Level 5 (13-15): Sustained argument, uses specific evidence, considers multiple factors and their relative weight, reaches a nuanced judgement.\n\nFactors FOR German responsibility:\n• 'Blank cheque' given to Austria-Hungary (5-6 July 1914) encouraged escalation\n• Schlieffen Plan required attacking France through Belgium, widening the war\n• German military leadership pushed for early mobilisation to execute the plan before Russia mobilised fully\n• Weltpolitik and naval building programme had already heightened European tensions\n• German decision-makers arguably preferred war in 1914 before Russian rearmament programme completed (1917)\n\nFactors AGAINST sole German responsibility:\n• Austria-Hungary's determination to punish Serbia and preserve empire\n• Russia's premature general mobilisation (30 July 1914) when partial mobilisation against Austria was possible\n• France's unconditional support for Russia\n• System of alliances created by all major powers\n• Underlying tensions: arms race, imperial rivalries, Balkan instability\n• Fritz Fischer controversy — debate among historians about German 'war guilt'"
+    "prompt": "Explain the methods used by the Civil Rights Movement between 1955 and 1965 and assess how successful they were.",
+    "markScheme": "Use IB Paper 2 markbands (0–15). SL essays should demonstrate clear knowledge and some analysis.\n\nMethods:\n• Legal challenges: NAACP litigation — Brown v Board (1954), Browder v Gayle (1956)\n• Economic boycotts: Montgomery Bus Boycott — 381 days; economic pressure on city businesses\n• Sit-ins: Greensboro (1960) — spread to over 50 cities; highlighted absurdity of segregation laws\n• Freedom Rides (1961): tested enforcement of desegregation rulings in interstate transport\n• Mass marches: Birmingham (1963), March on Washington (1963), Selma (1965)\n• Appeals to federal government: King's relationship with Kennedy and Johnson\n\nSuccesses:\n• Brown v Board ruled segregation unconstitutional\n• Montgomery Boycott desegregated city buses\n• Civil Rights Act 1964 — ended legal discrimination in public life\n• Voting Rights Act 1965 — enfranchised millions of Black voters\n\nLimitations:\n• De facto segregation in North persisted\n• Economic inequality not addressed\n• Continued violence against Black Americans\n\nLevel 4–5 (11–15): clear argument, specific evidence, some evaluation of success"
+  },
+  {
+    "id": "hist-sl-013",
+    "subjectId": "history-sl",
+    "topic": "Move to Global War",
+    "paper": 2,
+    "level": "SL",
+    "format": "Essay",
+    "commandTerm": "explain",
+    "marks": 15,
+    "prompt": "Explain why Germany was able to expand its territory in Europe between 1936 and 1939 without triggering a major military response from Britain and France.",
+    "markScheme": "Use IB Paper 2 markbands (0–15).\n\nKey factors:\n• Policy of appeasement — belief that satisfying legitimate grievances would prevent war\n• Memory of WWI — public in Britain and France deeply opposed to another major conflict\n• Military unpreparedness — British forces not ready for continental war; RAF still rearming\n• Economic constraints — Depression limited defence spending\n• Mistaken assessment of Hitler — Chamberlain believed he was a rational statesman\n• Belief in legitimacy of some German claims — ethnic Germans in Austria and Sudetenland\n• British Empire — vulnerability of overseas territories reduced appetite for European commitments\n• Munich Agreement (1938) — each concession emboldened Hitler to demand more\n• Failure of collective security — League of Nations ineffective; no working alliance with USSR\n\nConsequences:\n• March 1939 — Hitler occupied all of Czechoslovakia, proving appeasement had failed\n• Britain and France issued guarantee to Poland; declared war September 1939\n\nLevel 4–5 (11–15): clear explanation of multiple factors with specific evidence"
+  },
+  {
+    "id": "hist-sl-014",
+    "subjectId": "history-sl",
+    "topic": "Rights and Protest",
+    "paper": 2,
+    "level": "SL",
+    "format": "Essay",
+    "commandTerm": "describe and explain",
+    "marks": 15,
+    "prompt": "Describe the key events of the US Civil Rights Movement between 1955 and 1965, and explain what they achieved.",
+    "markScheme": "Use IB Paper 2 markbands (0–15). SL: clear narrative and explanation expected.\n\nKey events:\n• Montgomery Bus Boycott 1955–56 — desegregated city buses; elevated King\n• Little Rock Crisis 1957 — federal enforcement of school desegregation\n• Sit-ins 1960 — challenged lunch counter segregation; formed SNCC\n• Freedom Rides 1961 — desegregated interstate travel facilities\n• Birmingham Campaign 1963 — confronted Bull Connor; prompted Civil Rights Act\n• March on Washington 1963 — 250,000 marchers; 'I Have a Dream'\n• Civil Rights Act 1964 — outlawed discrimination in public life and employment\n• Selma Marches 1965 — 'Bloody Sunday'; prompted Voting Rights Act\n• Voting Rights Act 1965 — eliminated barriers to Black political participation\n\nAchievements:\n• Legal dismantling of Jim Crow system\n• Constitutional guarantees enforced\n• Foundation for further progress (housing, affirmative action)\n\nLevel 4–5 (11–15): accurate events with clear explanation of significance and achievement"
+  },
+  {
+    "id": "hist-sl-015",
+    "subjectId": "history-sl",
+    "topic": "Move to Global War",
+    "paper": 2,
+    "level": "SL",
+    "format": "Essay",
+    "commandTerm": "explain",
+    "marks": 15,
+    "prompt": "Explain the causes of Japanese aggression in Asia during the 1930s.",
+    "markScheme": "Use IB Paper 2 markbands (0–15).\n\nEconomic causes:\n• Japan lacked domestic raw materials; needed overseas resources for industrial economy\n• Great Depression devastated exports and created political instability\n\nPolitical/military causes:\n• Ultranationalist ideology — belief in Japan's destiny to lead Asia\n• Militarist factions and Kwantung Army acted independently of civilian government\n• Weak civilian governments unable to control the military; assassinations removed moderates\n\nInternational factors:\n• League of Nations failed to act effectively — no sanctions after Manchuria\n• Western powers distracted by domestic economic crises\n• Success of Manchukuo emboldened further expansion\n\nKey events as evidence:\n• Manchuria (1931), Marco Polo Bridge/China (1937), Pearl Harbor (1941)\n\nLevel 4–5 (11–15): clear explanation of multiple causes with supporting evidence"
   }
 ]

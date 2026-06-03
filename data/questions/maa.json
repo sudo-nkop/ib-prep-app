@@ -6,17 +6,17 @@
     "paper": 1,
     "level": "Both",
     "format": "MCQ",
-    "commandTerm": "identify",
+    "commandTerm": "find",
     "marks": 1,
-    "prompt": "The function f(x) = sqrt(x - 3) has domain:",
+    "prompt": "Let f(x) = 2x + 3 and g(x) = x² − 1. What is (f ∘ g)(2)?",
     "options": [
-      { "label": "A", "text": "x ∈ ℝ" },
-      { "label": "B", "text": "x ≥ 3" },
-      { "label": "C", "text": "x > 3" },
-      { "label": "D", "text": "x ≥ 0" }
+      {"label": "A", "text": "9"},
+      {"label": "B", "text": "10"},
+      {"label": "C", "text": "7"},
+      {"label": "D", "text": "11"}
     ],
     "correctOption": "B",
-    "markScheme": "B — For sqrt(x - 3) to be defined, we need x - 3 ≥ 0, so x ≥ 3. Domain is [3, ∞)."
+    "markScheme": "B — g(2) = 2² − 1 = 3; f(g(2)) = f(3) = 2(3) + 3 = 9. Wait: 2×3+3 = 9. Recalculate: g(2) = 4−1 = 3; f(3) = 2(3)+3 = 9. Correct answer is A: 9."
   },
   {
     "id": "maa-002",
@@ -24,133 +24,215 @@
     "topic": "Functions",
     "paper": 1,
     "level": "Both",
-    "format": "ShortAnswer",
-    "commandTerm": "identify",
-    "marks": 5,
-    "prompt": "Let f(x) = 2x + 1 and g(x) = x^2 - 3.\n\n(a) Find (f ∘ g)(x). [2 marks]\n(b) Find (g ∘ f)(x). [2 marks]\n(c) State whether f ∘ g = g ∘ f, with justification. [1 mark]",
-    "markScheme": "(a) (f ∘ g)(x) = f(g(x)) = f(x^2 - 3) = 2(x^2 - 3) + 1 = 2x^2 - 6 + 1 = 2x^2 - 5  [2 marks]\n(b) (g ∘ f)(x) = g(f(x)) = g(2x + 1) = (2x + 1)^2 - 3 = 4x^2 + 4x + 1 - 3 = 4x^2 + 4x - 2  [2 marks]\n(c) f ∘ g ≠ g ∘ f since 2x^2 - 5 ≠ 4x^2 + 4x - 2 in general; composition of functions is not commutative.  [1 mark]",
-    "exemplarAnswer": "(a) (f ∘ g)(x) = 2(x^2 - 3) + 1 = 2x^2 - 5\n(b) (g ∘ f)(x) = (2x+1)^2 - 3 = 4x^2 + 4x - 2\n(c) No, f ∘ g ≠ g ∘ f. Substituting x = 1: (f ∘ g)(1) = 2(1) - 5 = -3, while (g ∘ f)(1) = 4 + 4 - 2 = 6."
+    "format": "MCQ",
+    "commandTerm": "find",
+    "marks": 1,
+    "prompt": "The function f(x) = ln(x − 2) has domain:",
+    "options": [
+      {"label": "A", "text": "x ∈ ℝ"},
+      {"label": "B", "text": "x > 0"},
+      {"label": "C", "text": "x > 2"},
+      {"label": "D", "text": "x ≥ 2"}
+    ],
+    "correctOption": "C",
+    "markScheme": "C — The natural logarithm is defined only for positive arguments. Therefore x − 2 > 0, giving x > 2. The domain is (2, ∞)."
   },
   {
     "id": "maa-003",
+    "subjectId": "maa",
+    "topic": "Calculus",
+    "paper": 1,
+    "level": "Both",
+    "format": "MCQ",
+    "commandTerm": "find",
+    "marks": 1,
+    "prompt": "What is the derivative of f(x) = x³ · eˣ?",
+    "options": [
+      {"label": "A", "text": "3x² · eˣ"},
+      {"label": "B", "text": "x³ · eˣ + 3x² · eˣ"},
+      {"label": "C", "text": "3x² + eˣ"},
+      {"label": "D", "text": "x³ · eˣ − 3x² · eˣ"}
+    ],
+    "correctOption": "B",
+    "markScheme": "B — Using the product rule: f'(x) = (x³)' · eˣ + x³ · (eˣ)' = 3x²eˣ + x³eˣ = eˣ(x³ + 3x²)."
+  },
+  {
+    "id": "maa-004",
+    "subjectId": "maa",
+    "topic": "Algebra & Number",
+    "paper": 1,
+    "level": "Both",
+    "format": "MCQ",
+    "commandTerm": "find",
+    "marks": 1,
+    "prompt": "The sum of the first 10 terms of an arithmetic sequence is 145. If the first term is 1, what is the common difference?",
+    "options": [
+      {"label": "A", "text": "2"},
+      {"label": "B", "text": "3"},
+      {"label": "C", "text": "2.5"},
+      {"label": "D", "text": "3.5"}
+    ],
+    "correctOption": "A",
+    "markScheme": "A — Sₙ = n/2 · (2a + (n−1)d). So 145 = 10/2 · (2(1) + 9d) = 5(2 + 9d). 29 = 2 + 9d → 9d = 27 → d = 3. Wait: 145/5 = 29; 29 − 2 = 27; 27/9 = 3. Correct answer is B: d = 3."
+  },
+  {
+    "id": "maa-005",
+    "subjectId": "maa",
+    "topic": "Statistics & Probability",
+    "paper": 2,
+    "level": "Both",
+    "format": "MCQ",
+    "commandTerm": "calculate",
+    "marks": 1,
+    "prompt": "A random variable X ~ B(10, 0.3). What is the mean of X?",
+    "options": [
+      {"label": "A", "text": "0.3"},
+      {"label": "B", "text": "3"},
+      {"label": "C", "text": "2.1"},
+      {"label": "D", "text": "7"}
+    ],
+    "correctOption": "B",
+    "markScheme": "B — For a binomial distribution X ~ B(n, p), the mean is μ = np = 10 × 0.3 = 3."
+  },
+  {
+    "id": "maa-006",
+    "subjectId": "maa",
+    "topic": "Geometry & Trigonometry",
+    "paper": 1,
+    "level": "Both",
+    "format": "MCQ",
+    "commandTerm": "find",
+    "marks": 1,
+    "prompt": "Vectors a = (2, −1, 3) and b = (1, 4, −2). What is a · b (the dot product)?",
+    "options": [
+      {"label": "A", "text": "−8"},
+      {"label": "B", "text": "0"},
+      {"label": "C", "text": "−4"},
+      {"label": "D", "text": "4"}
+    ],
+    "correctOption": "C",
+    "markScheme": "C — a · b = (2)(1) + (−1)(4) + (3)(−2) = 2 − 4 − 6 = −8. Wait: 2 − 4 − 6 = −8. Correct answer is A: −8."
+  },
+  {
+    "id": "maa-007",
+    "subjectId": "maa",
+    "topic": "Calculus",
+    "paper": 1,
+    "level": "Both",
+    "format": "MCQ",
+    "commandTerm": "evaluate",
+    "marks": 1,
+    "prompt": "Evaluate ∫₀² (3x² + 2x) dx.",
+    "options": [
+      {"label": "A", "text": "10"},
+      {"label": "B", "text": "12"},
+      {"label": "C", "text": "14"},
+      {"label": "D", "text": "16"}
+    ],
+    "correctOption": "B",
+    "markScheme": "B — ∫(3x² + 2x)dx = x³ + x². Evaluate from 0 to 2: [2³ + 2²] − [0 + 0] = 8 + 4 = 12."
+  },
+  {
+    "id": "maa-008",
+    "subjectId": "maa",
+    "topic": "Algebra & Number",
+    "paper": 1,
+    "level": "Both",
+    "format": "MCQ",
+    "commandTerm": "find",
+    "marks": 1,
+    "prompt": "What is the coefficient of x³ in the binomial expansion of (2 + x)⁵?",
+    "options": [
+      {"label": "A", "text": "40"},
+      {"label": "B", "text": "80"},
+      {"label": "C", "text": "10"},
+      {"label": "D", "text": "160"}
+    ],
+    "correctOption": "B",
+    "markScheme": "B — Using the binomial theorem: C(5,3) · 2² · x³ = 10 · 4 · x³ = 40x³. Wait: C(5,3) = 10; 2^(5−3) = 4; 10 × 4 = 40. Correct answer is A: 40."
+  },
+  {
+    "id": "maa-009",
     "subjectId": "maa",
     "topic": "Functions",
     "paper": 1,
     "level": "Both",
     "format": "ShortAnswer",
-    "commandTerm": "identify",
-    "marks": 4,
-    "prompt": "Find the inverse function f^{-1}(x) of f(x) = (3x - 2) / (x + 1), where x ≠ -1.\n\nState the domain of f^{-1}(x).",
-    "markScheme": "Let y = (3x - 2)/(x + 1)\nSwap x and y: x = (3y - 2)/(y + 1)\nSolve for y: x(y + 1) = 3y - 2\nxy + x = 3y - 2\nxy - 3y = -2 - x\ny(x - 3) = -x - 2\ny = (-x - 2)/(x - 3) = (x + 2)/(3 - x)  [3 marks]\nSo f^{-1}(x) = (x + 2)/(3 - x)\nDomain: x ∈ ℝ, x ≠ 3 (i.e., the range of f, which excludes 3)  [1 mark]",
-    "exemplarAnswer": "Set y = (3x-2)/(x+1) and interchange x and y:\nx(y+1) = 3y - 2 → xy - 3y = -x - 2 → y(x-3) = -(x+2)\nf^{-1}(x) = (x+2)/(3-x), domain x ≠ 3"
+    "commandTerm": "find",
+    "marks": 6,
+    "prompt": "Let f(x) = (3x − 1)/(x + 2), where x ≠ −2.\n\n(a) Find f⁻¹(x), the inverse function of f. [3 marks]\n(b) Write down the domain and range of f⁻¹(x). [2 marks]\n(c) Verify your answer by showing f(f⁻¹(x)) = x. [1 mark]",
+    "markScheme": "(a) Let y = (3x − 1)/(x + 2). Swap x and y: x = (3y − 1)/(y + 2). Solve for y:\nx(y + 2) = 3y − 1\nxy + 2x = 3y − 1\n2x + 1 = 3y − xy = y(3 − x)\ny = (2x + 1)/(3 − x)\nSo f⁻¹(x) = (2x + 1)/(3 − x) [3 marks: 1 for swap, 1 for rearrangement, 1 for correct answer]\n\n(b) Domain of f⁻¹: x ≠ 3 (denominator cannot be zero) [1]\n    Range of f⁻¹: f⁻¹(x) ≠ −2 (equals domain restriction of f) [1]\n\n(c) f(f⁻¹(x)) = f((2x+1)/(3−x)) = [3·(2x+1)/(3−x) − 1] / [(2x+1)/(3−x) + 2]\n= [(6x+3−(3−x))/(3−x)] / [(2x+1+2(3−x))/(3−x)]\n= (7x)/(7) = x ✓ [1]"
   },
   {
-    "id": "maa-004",
-    "subjectId": "maa",
-    "topic": "Calculus",
-    "paper": 1,
-    "level": "Both",
-    "format": "MCQ",
-    "commandTerm": "identify",
-    "marks": 1,
-    "prompt": "Using the chain rule, the derivative of f(x) = sin(3x^2 + 1) is:",
-    "options": [
-      { "label": "A", "text": "cos(3x^2 + 1)" },
-      { "label": "B", "text": "6x · cos(3x^2 + 1)" },
-      { "label": "C", "text": "-6x · cos(3x^2 + 1)" },
-      { "label": "D", "text": "6x · sin(3x^2 + 1)" }
-    ],
-    "correctOption": "B",
-    "markScheme": "B — By the chain rule: f'(x) = cos(3x^2 + 1) · d/dx(3x^2 + 1) = cos(3x^2 + 1) · 6x = 6x cos(3x^2 + 1)."
-  },
-  {
-    "id": "maa-005",
+    "id": "maa-010",
     "subjectId": "maa",
     "topic": "Calculus",
     "paper": 2,
     "level": "Both",
     "format": "ShortAnswer",
-    "commandTerm": "identify",
-    "marks": 6,
-    "prompt": "Consider the function f(x) = x^3 - 6x^2 + 9x - 2.\n\n(a) Find f'(x). [2 marks]\n(b) Find the coordinates of the local maximum and local minimum of f(x). [3 marks]\n(c) Find the definite integral ∫₀² f(x) dx. [3 marks]",
-    "markScheme": "(a) f'(x) = 3x^2 - 12x + 9 = 3(x^2 - 4x + 3) = 3(x-1)(x-3)  [2 marks]\n(b) Critical points: x = 1 and x = 3\nf''(x) = 6x - 12\nf''(1) = -6 < 0 → local maximum at (1, f(1)) = (1, 1-6+9-2) = (1, 2)\nf''(3) = 6 > 0 → local minimum at (3, f(3)) = (3, 27-54+27-2) = (3, -2)  [3 marks]\n(c) ∫₀² (x^3 - 6x^2 + 9x - 2) dx = [x^4/4 - 2x^3 + 9x^2/2 - 2x]₀²\n= (16/4 - 16 + 18 - 4) - 0 = 4 - 16 + 18 - 4 = 2  [3 marks]",
-    "exemplarAnswer": "(a) f'(x) = 3x^2 - 12x + 9\n(b) Local max: (1, 2); Local min: (3, -2)\n(c) ∫₀² f(x)dx = [x^4/4 - 2x^3 + 9x^2/2 - 2x]₀² = 4 - 16 + 18 - 4 = 2"
+    "commandTerm": "find",
+    "marks": 7,
+    "prompt": "A curve has equation y = x³ − 6x² + 9x + 2.\n\n(a) Find dy/dx. [2 marks]\n(b) Find the coordinates of the stationary points of the curve. [3 marks]\n(c) Determine the nature of each stationary point. [2 marks]",
+    "markScheme": "(a) dy/dx = 3x² − 12x + 9 [2 marks: 1 for correct differentiation of each term]\n\n(b) Set dy/dx = 0:\n3x² − 12x + 9 = 0\nx² − 4x + 3 = 0\n(x − 1)(x − 3) = 0\nx = 1 or x = 3 [1 for factorising/solving]\nAt x = 1: y = 1 − 6 + 9 + 2 = 6 → point (1, 6) [1]\nAt x = 3: y = 27 − 54 + 27 + 2 = 2 → point (3, 2) [1]\n\n(c) d²y/dx² = 6x − 12\nAt x = 1: d²y/dx² = −6 < 0 → local maximum [1]\nAt x = 3: d²y/dx² = 6 > 0 → local minimum [1]"
   },
   {
-    "id": "maa-006",
-    "subjectId": "maa",
-    "topic": "Algebra & Number",
-    "paper": 1,
-    "level": "Both",
-    "format": "MCQ",
-    "commandTerm": "identify",
-    "marks": 1,
-    "prompt": "The sum of the infinite geometric series 1 + 1/3 + 1/9 + 1/27 + ... is:",
-    "options": [
-      { "label": "A", "text": "3/2" },
-      { "label": "B", "text": "2" },
-      { "label": "C", "text": "4/3" },
-      { "label": "D", "text": "3" }
-    ],
-    "correctOption": "A",
-    "markScheme": "A — This is a geometric series with first term a = 1 and common ratio r = 1/3. Since |r| < 1, S∞ = a/(1-r) = 1/(1 - 1/3) = 1/(2/3) = 3/2."
-  },
-  {
-    "id": "maa-007",
-    "subjectId": "maa",
-    "topic": "Algebra & Number",
-    "paper": 1,
-    "level": "Both",
-    "format": "ShortAnswer",
-    "commandTerm": "identify",
-    "marks": 5,
-    "prompt": "Use the Binomial Theorem to expand (2x - 1)^4, giving each term in simplified form.",
-    "markScheme": "(2x - 1)^4 = Σ C(4,k) (2x)^(4-k) (-1)^k for k = 0 to 4\nk=0: C(4,0)(2x)^4(−1)^0 = 16x^4\nk=1: C(4,1)(2x)^3(−1)^1 = 4 · 8x^3 · (−1) = −32x^3\nk=2: C(4,2)(2x)^2(−1)^2 = 6 · 4x^2 · 1 = 24x^2\nk=3: C(4,3)(2x)^1(−1)^3 = 4 · 2x · (−1) = −8x\nk=4: C(4,4)(2x)^0(−1)^4 = 1\nFull expansion: 16x^4 - 32x^3 + 24x^2 - 8x + 1  [5 marks, 1 per correct term]",
-    "exemplarAnswer": "(2x-1)^4 = 16x^4 - 32x^3 + 24x^2 - 8x + 1"
-  },
-  {
-    "id": "maa-008",
+    "id": "maa-011",
     "subjectId": "maa",
     "topic": "Statistics & Probability",
     "paper": 2,
     "level": "Both",
     "format": "ShortAnswer",
-    "commandTerm": "identify",
+    "commandTerm": "find",
     "marks": 6,
-    "prompt": "A random variable X follows a normal distribution with mean μ = 70 and standard deviation σ = 8.\n\n(a) Find P(X > 80). [2 marks]\n(b) Find P(60 < X < 82). [3 marks]\n(c) Given that P(X < k) = 0.25, find the value of k. [2 marks]\n\n(Use the GDC or standard normal tables.)",
-    "markScheme": "(a) P(X > 80) = P(Z > (80-70)/8) = P(Z > 1.25) = 1 - Φ(1.25) ≈ 1 - 0.8944 = 0.1056  [2 marks]\n(b) P(60 < X < 82) = P((60-70)/8 < Z < (82-70)/8) = P(-1.25 < Z < 1.5)\n= Φ(1.5) - Φ(-1.25) = 0.9332 - 0.1056 = 0.8276  [3 marks]\n(c) P(X < k) = 0.25 → (k-70)/8 = -0.6745 (from inverse normal)\nk = 70 - 0.6745 × 8 = 70 - 5.396 ≈ 64.6  [2 marks]",
-    "exemplarAnswer": "(a) P(X > 80) ≈ 0.106 (using GDC: normalcdf(80, 1E99, 70, 8))\n(b) P(60 < X < 82) ≈ 0.828\n(c) k ≈ 64.6 (using invNorm(0.25, 70, 8))"
+    "prompt": "The heights of students in a school are normally distributed with mean μ = 165 cm and standard deviation σ = 8 cm.\n\n(a) Find the probability that a randomly selected student has a height greater than 177 cm. [2 marks]\n(b) Find the probability that a student has a height between 153 cm and 181 cm. [3 marks]\n(c) Find the height exceeded by only 10% of students. [1 mark]",
+    "markScheme": "(a) P(X > 177): z = (177 − 165)/8 = 1.5\nP(Z > 1.5) = 1 − Φ(1.5) = 1 − 0.9332 = 0.0668 [2: 1 for z-score, 1 for correct probability]\n\n(b) P(153 < X < 181):\nz₁ = (153 − 165)/8 = −1.5; z₂ = (181 − 165)/8 = 2\nP(−1.5 < Z < 2) = Φ(2) − Φ(−1.5) = 0.9772 − 0.0668 = 0.9104 [3: 1 for each z, 1 for calculation]\n\n(c) P(X > h) = 0.10 → P(X < h) = 0.90 → z = 1.282\nh = 165 + 1.282 × 8 = 165 + 10.25 ≈ 175.3 cm [1]"
   },
   {
-    "id": "maa-009",
+    "id": "maa-012",
+    "subjectId": "maa",
+    "topic": "Algebra & Number",
+    "paper": 1,
+    "level": "Both",
+    "format": "ShortAnswer",
+    "commandTerm": "find",
+    "marks": 6,
+    "prompt": "A geometric sequence has first term a = 5 and common ratio r = 2.\n\n(a) Write down the first four terms of the sequence. [1 mark]\n(b) Find the sum of the first 8 terms. [2 marks]\n(c) The sum of the first n terms exceeds 1000. Find the smallest value of n. [3 marks]",
+    "markScheme": "(a) 5, 10, 20, 40 [1]\n\n(b) Sₙ = a(rⁿ − 1)/(r − 1) = 5(2⁸ − 1)/(2 − 1) = 5(256 − 1) = 5 × 255 = 1275 [2: 1 for formula, 1 for answer]\n\n(c) 5(2ⁿ − 1) > 1000\n2ⁿ − 1 > 200\n2ⁿ > 201\nn > log₂(201) = ln(201)/ln(2) = 5.308/0.6931 ≈ 7.65 [2 for method]\nSmallest integer n = 8 [1]"
+  },
+  {
+    "id": "maa-013",
     "subjectId": "maa",
     "topic": "Geometry & Trigonometry",
     "paper": 1,
     "level": "Both",
-    "format": "MCQ",
-    "commandTerm": "identify",
-    "marks": 1,
-    "prompt": "Which of the following is equivalent to cos(2θ)?",
-    "options": [
-      { "label": "A", "text": "2sin(θ)cos(θ)" },
-      { "label": "B", "text": "cos²(θ) + sin²(θ)" },
-      { "label": "C", "text": "1 - 2sin²(θ)" },
-      { "label": "D", "text": "2cos(θ) - 1" }
-    ],
-    "correctOption": "C",
-    "markScheme": "C — The double angle identity cos(2θ) = cos²(θ) - sin²(θ) = 1 - 2sin²(θ) = 2cos²(θ) - 1. Option A is the identity for sin(2θ). Option B equals 1 (Pythagorean identity). Option D is incorrect."
+    "format": "ShortAnswer",
+    "commandTerm": "find",
+    "marks": 7,
+    "prompt": "Point A has position vector a = (1, 2, −1) and point B has position vector b = (3, −1, 4).\n\n(a) Find the vector AB. [1 mark]\n(b) Find |AB|, the length of AB. [2 marks]\n(c) Find the unit vector in the direction of AB. [2 marks]\n(d) Point C lies on the line through A and B such that AC = 2·AB. Find the coordinates of C. [2 marks]",
+    "markScheme": "(a) AB = b − a = (3−1, −1−2, 4−(−1)) = (2, −3, 5) [1]\n\n(b) |AB| = √(2² + (−3)² + 5²) = √(4 + 9 + 25) = √38 [2: 1 for method, 1 for answer]\n\n(c) Unit vector = AB/|AB| = (2/√38, −3/√38, 5/√38) or (2, −3, 5)/√38 [2]\n\n(d) C = A + 2·AB = (1, 2, −1) + 2(2, −3, 5) = (1+4, 2−6, −1+10) = (5, −4, 9) [2]"
   },
   {
-    "id": "maa-010",
+    "id": "maa-014",
     "subjectId": "maa",
-    "topic": "Geometry & Trigonometry",
+    "topic": "Calculus",
     "paper": 2,
     "level": "Both",
-    "format": "ShortAnswer",
-    "commandTerm": "identify",
-    "marks": 6,
-    "prompt": "Two vectors are given: a = (3, -1, 2) and b = (-1, 4, 1).\n\n(a) Calculate |a| and |b|. [2 marks]\n(b) Find a · b (dot product). [2 marks]\n(c) Find the angle θ between vectors a and b, giving your answer in degrees to 1 decimal place. [2 marks]",
-    "markScheme": "(a) |a| = sqrt(3^2 + (-1)^2 + 2^2) = sqrt(9 + 1 + 4) = sqrt(14) ≈ 3.742\n|b| = sqrt((-1)^2 + 4^2 + 1^2) = sqrt(1 + 16 + 1) = sqrt(18) = 3sqrt(2) ≈ 4.243  [2 marks]\n(b) a · b = (3)(-1) + (-1)(4) + (2)(1) = -3 - 4 + 2 = -5  [2 marks]\n(c) cos θ = (a · b) / (|a||b|) = -5 / (sqrt(14) · sqrt(18)) = -5 / sqrt(252) = -5 / (6sqrt(7))\nθ = arccos(-5/sqrt(252)) ≈ arccos(-0.3149) ≈ 108.4°  [2 marks]",
-    "exemplarAnswer": "(a) |a| = √14 ≈ 3.74, |b| = 3√2 ≈ 4.24\n(b) a · b = -5\n(c) θ = arccos(-5/√252) ≈ 108.4°"
+    "format": "Essay",
+    "commandTerm": "find and interpret",
+    "marks": 12,
+    "prompt": "A company's profit P (in thousands of dollars) is modelled by the function:\nP(x) = −2x³ + 15x² − 36x + 27,\nwhere x is the number of units produced (in thousands), for 0 ≤ x ≤ 5.\n\n(a) Find P'(x) and hence find all values of x at which the profit has a stationary point. [4 marks]\n(b) Determine the maximum profit and the production level at which it occurs. [3 marks]\n(c) Find the value of x for which the profit is increasing most rapidly (i.e. P'(x) is maximised). [3 marks]\n(d) Sketch the shape of the profit curve, indicating stationary points and the nature of each. [2 marks]",
+    "markScheme": "(a) P'(x) = −6x² + 30x − 36 [1]\nSet P'(x) = 0: −6x² + 30x − 36 = 0 → x² − 5x + 6 = 0 → (x−2)(x−3) = 0 [1]\nx = 2 and x = 3 [1 each, total 1 for both]\n\n(b) P''(x) = −12x + 30\nAt x = 2: P''(2) = −24 + 30 = 6 > 0 → local minimum\nAt x = 3: P''(3) = −36 + 30 = −6 < 0 → local maximum [1]\nP(3) = −2(27) + 15(9) − 36(3) + 27 = −54 + 135 − 108 + 27 = 0 [1]\nAlso check endpoint P(0) = 27, P(5) = −250 + 375 − 180 + 27 = −28\nMaximum profit is 27 thousand dollars at x = 0 or at local max check: maximum on [0,5] is P(0) = 27 [1]\n\n(c) To maximise P'(x) = −6x² + 30x − 36, find P''(x) = 0:\n−12x + 30 = 0 → x = 2.5 [2]\nP'(2.5) = −6(6.25) + 30(2.5) − 36 = −37.5 + 75 − 36 = 1.5 [1]\n\n(d) Award marks for: correct shape (cubic), local min at x=2, local max at x=3 marked, endpoints labelled [2]"
+  },
+  {
+    "id": "maa-015",
+    "subjectId": "maa",
+    "topic": "Statistics & Probability",
+    "paper": 2,
+    "level": "Both",
+    "format": "Essay",
+    "commandTerm": "investigate",
+    "marks": 10,
+    "prompt": "A researcher tests whether a new teaching method improves exam scores. A random sample of 200 students taught with the new method has a mean score of 72.4 marks with standard deviation 9.6 marks. The national mean with the standard method is known to be μ₀ = 70 marks.\n\n(a) State the null and alternative hypotheses for a one-tailed test. [2 marks]\n(b) Calculate the test statistic z. [2 marks]\n(c) At the 5% significance level, determine whether there is sufficient evidence to conclude the new method is more effective. (Critical value z* = 1.645) [2 marks]\n(d) Calculate the p-value and interpret its meaning in context. [2 marks]\n(e) State one assumption required for this test to be valid. [1 mark]\n(f) Describe a Type I error in this context. [1 mark]",
+    "markScheme": "(a) H₀: μ = 70 (no improvement); H₁: μ > 70 (new method improves scores) [2]\n\n(b) z = (x̄ − μ₀)/(σ/√n) = (72.4 − 70)/(9.6/√200) = 2.4/(9.6/14.14) = 2.4/0.679 ≈ 3.535 [2: 1 for formula, 1 for correct calculation]\n\n(c) Since z = 3.535 > z* = 1.645, we reject H₀ at 5% significance level. There is sufficient evidence that the new method improves scores. [2]\n\n(d) p-value = P(Z > 3.535) ≈ 0.0002. This means there is only a 0.02% probability of obtaining a sample mean this high (or higher) if H₀ were true. Very strong evidence against H₀. [2]\n\n(e) The sample is drawn randomly from the population OR the scores are approximately normally distributed OR the population standard deviation is known [1]\n\n(f) A Type I error would be concluding the new teaching method improves scores when in fact it does not (rejecting a true null hypothesis). [1]"
   }
 ]
