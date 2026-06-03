@@ -2,15 +2,15 @@
   {
     "id": "tok-001",
     "subjectId": "tok",
-    "topic": "Knowledge & the Knower",
+    "topic": "Core Theme",
     "paper": 1,
     "level": "Both",
     "format": "Essay",
     "commandTerm": "discuss",
     "marks": 10,
-    "prompt": "\"The role of the knower is always to question, never to accept.\" Discuss this claim with reference to two areas of knowledge.",
-    "markScheme": "Level 5 (9-10): Focused, well-argued response. Uses two AOKs with developed examples. Considers both the claim and its limits. Shows awareness of perspectives.\n\nPoints supporting the claim:\n• In Natural Sciences, scientific progress depends on questioning existing paradigms (Kuhn — scientific revolutions)\n• In History, historians must question sources, biases, and dominant narratives (Carr — 'What is History?')\n• Intellectual humility and scepticism as epistemic virtues\n\nPoints challenging the claim:\n• Some knowledge must be accepted as foundational — infinite regress problem; we cannot question everything simultaneously\n• In Mathematics, axioms are accepted, not questioned within a formal system\n• Social knowledge depends on shared acceptance of conventions (language, norms)\n• Practical constraints: doctors must accept established medical knowledge to act effectively\n\nGood responses will use specific real-world examples (e.g. Galileo, #MeToo, peer review) and reflect on the role of intellectual communities.",
-    "exemplarAnswer": "The claim captures a genuine epistemic virtue — the capacity for sceptical inquiry has driven scientific progress and exposed historical injustice. Yet taken as an absolute prescription, it generates a paralysing regress: if we question everything, we have no stable platform from which to question. The claim is most illuminating when read as context-specific.\n\nIn Natural Sciences, questioning is the engine of knowledge. Kuhn's account of paradigm shifts shows that revolutionary science requires someone to refuse the accepted theory — Copernicus rejecting geocentrism, Einstein refusing to accept Newtonian mechanics as complete. The peer review process institutionalises questioning: every knowledge claim must survive scrutiny before acceptance. Yet even here, working scientists do not question everything simultaneously. Normal science operates within a paradigm, accepting its framework in order to make progress on specific problems. The productive scientist questions particular claims within an accepted structure.\n\nIn History, the knower's role as questioner is equally important. Historians must question their sources' reliability, their own cultural biases, and the dominant narratives of their time. The rehabilitation of previously silenced perspectives — women's history, post-colonial historiography — came precisely from knowers willing to question the established canon. Yet historians also accept methodological conventions (source evaluation, corroboration) that they cannot continuously re-examine without abandoning historical inquiry altogether.\n\nThe more nuanced claim is: knowers should question proportionally — more scepticism toward new or contested claims, more acceptance of well-established, multiply-verified knowledge. The virtue is not universal questioning but calibrated doubt, adjusted to the strength of evidence and the stakes of error."
+    "prompt": "\"The quality of knowledge is best measured by how many people believe it.\" Discuss this claim with reference to two areas of knowledge.",
+    "markScheme": "Strong responses will:\n• Define 'quality of knowledge' — truth, reliability, certainty, usefulness? [1]\n• Challenge the premise: popular belief does not determine truth (e.g. historical scientific consensus — heliocentrism, germ theory rejected before accepted) [1]\n• AOK 1 — Natural Sciences: scientific knowledge is not determined by popular vote; peer review, reproducibility, predictive power are better measures [1–2]\n• AOK 2 — Human Sciences or History: majority consensus in social science or historical interpretation can shift; does popularity improve or reflect quality? [1–2]\n• Knowledge claim: Some knowledge genuinely depends on social agreement (e.g. ethics, laws, currencies) — here 'many people believing' may partly constitute the knowledge [1]\n• Counterclaim: Flat Earth belief held by millions — clearly does not improve quality; quality must be independent of popularity [1]\n• Real-life situation: e.g. climate science — 97% scientific consensus vs. popular scepticism; shows that expert consensus differs from popular belief [1]\n• Nuanced conclusion [1]",
+    "exemplarAnswer": "The claim conflates the sociology of knowledge with its epistemology — the number of believers tells us something about social acceptance but little about truth or reliability. In the Natural Sciences, the quality of knowledge is evaluated through predictive accuracy, experimental reproducibility, and explanatory power. The heliocentric model of the solar system was held by a tiny minority before Copernicus and Galileo; its quality did not improve when millions eventually accepted it. The knowledge was 'better' because it made more accurate predictions — not because it gained adherents.\n\nHowever, the claim has more purchase in areas where social agreement partially constitutes the knowledge. In Ethics, the wrongness of slavery was contested for centuries and widely disbelieved; today near-universal condemnation does reflect a form of moral progress. Here, the breadth of agreement is not irrelevant — though it is still not sufficient. Moral knowledge requires reasons, not just numbers.\n\nA critical real-life situation is vaccine safety: scientific knowledge about vaccine efficacy is high-quality regardless of popular mistrust. During COVID-19, widespread hesitancy did not diminish the quality of epidemiological evidence — though it affected its social uptake. This shows a disconnect between 'many people believing' and the independent quality of the knowledge claim.\n\nIn conclusion, the claim is largely false: quality is better measured by coherence, empirical support, and explanatory depth. It has limited validity in ethical or political domains where shared belief partly constitutes norms, but even there, it must be hedged by the requirement for reasons."
   },
   {
     "id": "tok-002",
@@ -21,9 +21,8 @@
     "format": "Essay",
     "commandTerm": "to what extent",
     "marks": 10,
-    "prompt": "To what extent does language shape our knowledge, rather than simply expressing it?",
-    "markScheme": "Level 5 (9-10): Clear thesis, two well-developed AOKs, genuine engagement with both sides.\n\nLanguage shapes knowledge (strong Whorfian position):\n• Sapir-Whorf hypothesis: linguistic relativity — different languages encode different concepts\n• Example: colour terms differ across languages; Pirahã lacks numbers and certain time concepts\n• Metaphors structure thought (Lakoff & Johnson: 'Argument is War' shapes how we conceptualise disagreement)\n• Technical terminology in Natural Sciences and Ethics creates and constrains possible thought\n\nLanguage merely expresses pre-existing knowledge:\n• Universal concepts (mathematics, music, emotion) exist independently of specific languages\n• Translation between languages is possible, suggesting shared underlying knowledge\n• Non-linguistic knowledge: tacit knowledge, visual art, embodied skill\n\nNuanced position: language shapes the expression and development of knowledge without wholly determining its content.",
-    "exemplarAnswer": "Language occupies a curious dual role: it is both the medium through which we share knowledge and a force that shapes which thoughts are even thinkable. Sapir and Whorf proposed that the structure of one's language constrains one's possible perceptions — a strong version of this thesis has been largely discredited (we can translate between languages; colour perception doesn't fundamentally differ across linguistic groups). But softer versions retain explanatory power. The vocabulary available to us in a given domain shapes how we conceptualise it. The proliferation of technical terms in physics — 'quark', 'superposition', 'entanglement' — does not just label pre-existing concepts: it enables the formation of new ones. Before these words existed, the knowledge they encode was literally unthinkable.\n\nIn Ethics, the introduction of words like 'genocide' (Lemkin, 1944) or 'sexual harassment' (1970s) did not merely label phenomena that had always been recognised — it created the conceptual tools for recognising them as distinct moral categories, making certain forms of knowledge (and legal accountability) possible. Without the word 'genocide', the international community lacked a framework for the specific culpability it carries.\n\nYet non-linguistic knowledge challenges the view that language wholly shapes what we know. A chess grandmaster's intuitive pattern recognition, a musician's embodied knowledge of phrasing, or an infant's pre-linguistic understanding of object permanence — these suggest that knowledge can exist prior to and independent of language. Language may be the primary vehicle for explicit, communicable knowledge, while much tacit knowledge remains irreducibly non-linguistic.\n\nIn conclusion, language profoundly shapes the boundaries of articulable knowledge — especially in domains where technical vocabulary creates new concepts — but does not fully determine the reach of human understanding."
+    "prompt": "\"Language itself shapes what we can know.\" To what extent do you agree with this statement?",
+    "markScheme": "Strong responses will:\n• Define terms: 'language' (natural language, scientific notation, artistic forms); 'shapes what we can know' (determines vs. influences) [1]\n• Knowledge claim: Sapir-Whorf hypothesis — strong version: language determines thought; weak version: language influences perception [1]\n• Example: Colour perception — speakers of languages with more colour terms perceive distinctions more readily (e.g. Russian speakers and blue-green distinction) [1]\n• AOK — Natural Sciences: scientific language (mathematical notation) enables knowledge that would be impossible in ordinary language; physics of quantum mechanics expressible only in mathematics [1]\n• AOK — Mathematics: mathematical language creates its own knowledge domain — concepts like infinity, imaginary numbers [1]\n• Counterclaim: Translation between languages preserves meaning; people can think thoughts for which they lack words (pre-linguistic thought); animals with no language have spatial knowledge [1]\n• Real-life situation: deaf communities and sign language — knowledge is constructed and communicated differently but not necessarily limited [1]\n• Nuanced conclusion: language shapes but does not wholly determine knowledge [1]"
   },
   {
     "id": "tok-003",
@@ -31,12 +30,11 @@
     "topic": "Knowledge & Technology",
     "paper": 1,
     "level": "Both",
-    "format": "ShortAnswer",
-    "commandTerm": "examine",
-    "marks": 6,
-    "prompt": "Examine how technology has changed what counts as reliable knowledge in the Natural Sciences.",
-    "markScheme": "Award 1 mark per developed point up to 6:\n• Instrumentation extends perception beyond human senses — electron microscopes, particle accelerators, telescopes reveal phenomena otherwise unknowable\n• Statistical software enables analysis of massive datasets (Big Data, genome sequencing), generating knowledge previously inaccessible\n• Peer review platforms and pre-print servers accelerate but also complicate knowledge validation\n• AI/machine learning generates correlations that humans struggle to interpret causally — raises question of whether pattern-recognition constitutes explanation\n• Replication crisis partly driven by statistical software enabling p-hacking\n• Simulation models (climate science) produce knowledge claims that cannot be experimentally verified in the traditional sense\n• Technology creates new phenomena to study (nanoparticles, synthetic biology) that would not exist without it",
-    "exemplarAnswer": "Technology has transformed both the content and the validation criteria of scientific knowledge. Instruments like the Large Hadron Collider enable knowledge of entities (the Higgs boson) that are entirely beyond unaugmented human perception — we know such particles not through observation but through statistical inference from detector data. This raises genuine questions about the nature of scientific observation. Similarly, AI-driven pattern recognition in genomics produces knowledge claims (correlations between genetic variants and disease) that resist traditional causal explanation, challenging the view that scientific understanding requires mechanistic accounts.\n\nTechnology also changes knowledge validation. Pre-print servers accelerate publication but bypass peer review, blurring the line between provisional and established knowledge. Statistical software, while enabling large-scale analysis, has contributed to the replication crisis by making it easy to mine data for spurious correlations. The reliability of scientific knowledge is thus simultaneously enhanced and threatened by the technologies that produce it."
+    "format": "Essay",
+    "commandTerm": "discuss",
+    "marks": 10,
+    "prompt": "\"Artificial intelligence can produce knowledge, but it cannot understand it.\" Discuss this claim with reference to at least two ways of knowing.",
+    "markScheme": "Strong responses will:\n• Define 'knowledge' and 'understanding' — what distinguishes them? [1]\n• Knowledge claim: AI systems (e.g. large language models) produce outputs indistinguishable from human knowledge claims, solve mathematical problems, generate scientific hypotheses [1]\n• Way of Knowing 1 — Reason: AI appears to reason logically, but critics argue it performs pattern matching without intentionality (Searle's Chinese Room) [1–2]\n• Way of Knowing 2 — Intuition/Emotion: AI lacks genuine experience, emotional investment, or intuitive leaps rooted in embodied existence [1]\n• AOK — Natural Sciences: AI has discovered novel scientific results (AlphaFold, protein structure); does discovery imply understanding? [1]\n• AOK — Arts: AI generates creative works but arguably without genuine aesthetic experience or intention [1]\n• Counterclaim: 'Understanding' is philosophically contested — functionalists argue if the outputs are correct, the distinction doesn't matter [1]\n• Real-life situation: AI medical diagnosis — can identify cancer in scans better than human radiologists; does this constitute 'knowing'? [1]\n• Conclusion: AI produces knowledge claims but lacks phenomenal understanding; the distinction matters epistemologically even if not practically [1]"
   },
   {
     "id": "tok-004",
@@ -45,10 +43,10 @@
     "paper": 1,
     "level": "Both",
     "format": "Essay",
-    "commandTerm": "discuss",
+    "commandTerm": "evaluate",
     "marks": 10,
-    "prompt": "\"Political knowledge is inevitably distorted by power.\" Discuss this claim with reference to two areas of knowledge.",
-    "markScheme": "Level 5 (9-10): Well-argued, uses specific evidence from two AOKs, considers both sides.\n\nSupporting evidence:\n• History: victors write history — colonial historiography, Soviet revision of WWII narrative\n• Natural Sciences: Lysenkoist biology in Soviet Union; suppression of climate science; pharmaceutical industry funding bias\n• Knowledge claims that threaten power structures are marginalised or suppressed\n• Foucault: knowledge and power are inseparable (power/knowledge)\n\nChallenging the claim:\n• Mathematics and formal logic are largely immune to political distortion\n• Institutional independence (peer review, academic freedom) provides partial insulation\n• Whistleblowers, investigative journalism, opposition historians can resist distortion\n• Science has self-correcting mechanisms\n\nGood responses engage with the concept of 'inevitable' — some distortion is possible/frequent without being inevitable or irreversible."
+    "prompt": "\"Those in positions of power have the greatest influence over what counts as knowledge.\" Evaluate this claim.",
+    "markScheme": "Strong responses will:\n• Define 'power' and 'what counts as knowledge' — gatekeeping, agenda-setting, legitimisation [1]\n• Knowledge claim: Foucault's power/knowledge — knowledge is not neutral; powerful institutions (governments, universities, media) define legitimate knowledge [1]\n• Real-life situation 1: Colonial epistemologies — indigenous knowledge systems marginalised and dismissed as superstition by colonial powers [1]\n• Real-life situation 2: Soviet Lysenkoist biology — politically mandated pseudoscience; geneticists persecuted; shows power can enforce false knowledge claims [1]\n• AOK — History: who writes the historical record? Victors shape what is 'known' about the past [1]\n• AOK — Natural Sciences: peer-review and academic funding controlled by institutions; 'paradigm shifts' (Kuhn) resist established power [1]\n• Counterclaim: Scientific method provides some independence from power; reproducibility and falsifiability as checks; whistleblowers, independent media [1]\n• Nuanced conclusion: power shapes what is socially legitimised as knowledge, but cannot indefinitely suppress true claims — reality constrains power's reach [1]"
   },
   {
     "id": "tok-005",
@@ -56,11 +54,11 @@
     "topic": "Core Theme",
     "paper": 1,
     "level": "Both",
-    "format": "ShortAnswer",
-    "commandTerm": "explain",
-    "marks": 4,
-    "prompt": "Using one specific real-world example, explain how emotion can both help and hinder the acquisition of knowledge.",
-    "markScheme": "Award 2 marks for how emotion HELPS (with specific example) and 2 marks for how emotion HINDERS:\nHelps:\n• Emotional investment motivates sustained inquiry (Darwin's passion for natural history)\n• Empathy enables understanding of human experience that pure reason cannot access (e.g., trauma research)\n• Intuition (emotionally-driven) can guide productive research directions\nHinders:\n• Confirmation bias: emotionally invested researchers may selectively interpret evidence (e.g., Blondlot's N-rays, 1903)\n• Fear of social rejection can suppress heterodox knowledge claims\n• Strong emotion impairs systematic analysis (grief, rage affect reasoning)\nAccept any well-developed, specific example."
+    "format": "Essay",
+    "commandTerm": "to what extent",
+    "marks": 10,
+    "prompt": "\"Does it matter if our knowledge is true?\" Discuss with reference to two areas of knowledge.",
+    "markScheme": "Strong responses will:\n• Interrogate what 'matters' means — practically, morally, epistemologically [1]\n• Knowledge claim: truth matters because false beliefs lead to bad decisions — medical, scientific, ethical examples [1]\n• AOK 1 — Natural Sciences: truth matters enormously — engineering bridges or designing vaccines on false knowledge leads to material harm [1–2]\n• AOK 2 — Ethics: if moral beliefs are false (e.g. belief that a group is inferior justifies discrimination), the consequences are catastrophic [1–2]\n• Counterclaim: pragmatism — William James: true is what works; some beliefs are useful even if not strictly 'true' (placebo effect; religious belief supporting wellbeing) [1]\n• AOK — Arts: fictional narratives contain no factual truths but generate profound understanding of human experience [1]\n• Real-life situation: climate denial — the social and political cost of not accepting the truth about climate change is existential [1]\n• Nuanced conclusion: truth matters profoundly in domains where beliefs guide action; pragmatic value of 'useful fictions' has limits [1]"
   },
   {
     "id": "tok-006",
@@ -68,11 +66,118 @@
     "topic": "Knowledge & the Knower",
     "paper": 1,
     "level": "Both",
+    "format": "Essay",
+    "commandTerm": "discuss",
+    "marks": 10,
+    "prompt": "\"Our personal experiences shape what we know, but they can also distort it.\" Discuss this claim with reference to memory and sense perception as ways of knowing.",
+    "markScheme": "Strong responses will:\n• Acknowledge productive tension: experience is necessary for knowledge yet introduces subjectivity [1]\n• WOK 1 — Memory: episodic memory is the basis of historical personal knowledge; research (Loftus) shows memory is reconstructive, not reproductive; false memory syndrome [1–2]\n• WOK 2 — Sense Perception: our senses provide primary data about the world; but optical illusions, selective attention, confirmation bias show perception is theory-laden [1–2]\n• AOK — History: individual testimony (eyewitness accounts) both essential and unreliable [1]\n• AOK — Human Sciences: observer effect; researcher's personal experience shapes qualitative research findings [1]\n• Knowledge claim: without personal experience, knowledge would be purely abstract and lack grounding [1]\n• Real-life situation: trauma and memory — PTSD shows how extreme experience can both intensify and distort recall of events [1]\n• Conclusion: personal experience is epistemically necessary but must be checked by other sources; intersubjective verification matters [1]"
+  },
+  {
+    "id": "tok-007",
+    "subjectId": "tok",
+    "topic": "Knowledge & Technology",
+    "paper": 1,
+    "level": "Both",
     "format": "ShortAnswer",
-    "commandTerm": "identify",
-    "marks": 4,
-    "prompt": "Identify and explain two different types of knowledge that a person might possess, illustrating each with a specific example.",
-    "markScheme": "Award 2 marks per type (1 for correct identification with definition, 1 for appropriate example):\n• Propositional/declarative knowledge ('knowing that'): knowledge of facts or truths. Example: knowing that the boiling point of water is 100°C at sea level.\n• Procedural knowledge ('knowing how'): knowing how to perform a skill or action. Example: knowing how to ride a bicycle — cannot be fully expressed in propositions.\n• Acquaintance knowledge ('knowing of/about'): direct familiarity with a person, place, or experience. Example: knowing Paris by having lived there.\n• Tacit knowledge: implicit, embodied knowledge difficult to articulate. Example: a sommelier's ability to identify a wine's region by taste.",
-    "exemplarAnswer": "Two main types: (1) Propositional knowledge ('knowing that') — e.g., knowing that the speed of light is approximately 3 × 10⁸ m/s. This is explicit, can be stated in language, and is subject to truth conditions. (2) Procedural knowledge ('knowing how') — e.g., a surgeon knowing how to perform a cardiac bypass. This is embodied and skill-based; watching a video of the procedure does not confer it. The distinction matters epistemologically because these types have different sources, validation criteria, and limits."
+    "commandTerm": "explain",
+    "marks": 6,
+    "prompt": "Explain, with one real-life example, how technology can both expand and restrict access to knowledge.",
+    "markScheme": "Expand access:\n• Internet/Wikipedia makes vast amounts of information freely available globally [1]\n• Open-access publishing removes paywalls; scientific knowledge democratised [1]\n• Real-life example: e.g. MIT OpenCourseWare allows free access to university education worldwide [1]\n\nRestrict access:\n• Algorithmic filter bubbles restrict what users see, creating knowledge silos [1]\n• Internet censorship (e.g. China's Great Firewall) restricts what knowledge is accessible [1]\n• Digital divide — technology access requires wealth; global inequality limits who benefits [1]\nMax 6 marks (3 for expansion, 3 for restriction, with at least one real-life example)"
+  },
+  {
+    "id": "tok-008",
+    "subjectId": "tok",
+    "topic": "Knowledge & Language",
+    "paper": 1,
+    "level": "Both",
+    "format": "ShortAnswer",
+    "commandTerm": "explain",
+    "marks": 6,
+    "prompt": "Explain how the use of metaphor in language can both illuminate and mislead in the construction of knowledge. Use one example from science or politics.",
+    "markScheme": "Illuminate:\n• Metaphor makes abstract concepts accessible — 'electric current' uses water flow metaphor to explain electricity [1]\n• Enables new connections between domains — 'natural selection' metaphor from artificial breeding illuminated evolutionary theory [1]\n\nMislead:\n• Metaphors import unexamined assumptions — calling the brain a 'computer' implies aspects of mind that may not apply [1]\n• Political metaphors: 'war on drugs' implies military solutions to a public health problem; shapes policy thinking harmfully [1]\n\nExample development (science or politics):\n• Scientific: 'selfish gene' (Dawkins) — illuminates evolutionary logic but misleads by implying intentionality in DNA [1]\n• Political: 'immigrants as flood/wave' — normalises dehumanising framing [1]\nMax 6 marks"
+  },
+  {
+    "id": "tok-009",
+    "subjectId": "tok",
+    "topic": "Knowledge & Politics",
+    "paper": 1,
+    "level": "Both",
+    "format": "ShortAnswer",
+    "commandTerm": "describe",
+    "marks": 6,
+    "prompt": "TOK Exhibition prompt: 'What is the relationship between knowledge and politics?' Using one object or real-world example, describe how political context shapes the production or reception of knowledge.",
+    "markScheme": "Object/example identification — must be specific and concrete [1]\nExamples accepted:\n• A scientific report commissioned by a government [1] — shaped by funding priorities or suppressed if inconvenient [1]\n• A history textbook — national curriculum shapes which historical narratives are taught as 'knowledge' [1]\n• A propaganda poster — illustrates how political power produces competing knowledge claims [1]\n• Social media content moderation policies — political context determines what 'misinformation' means [1]\n\nConnection to TOK concepts:\n• Must discuss how political context does not just surround knowledge but actively shapes what is produced, accepted, or dismissed [1]\nMax 6 marks"
+  },
+  {
+    "id": "tok-010",
+    "subjectId": "tok",
+    "topic": "Core Theme",
+    "paper": 1,
+    "level": "Both",
+    "format": "ShortAnswer",
+    "commandTerm": "identify and explain",
+    "marks": 6,
+    "prompt": "Identify two ways of knowing and explain how each contributes differently to knowledge in the natural sciences.",
+    "markScheme": "For each WOK: [1] identify, [1] explain contribution to Natural Sciences, [1] example\n\nReason:\n• Deductive and inductive reasoning enables scientists to form hypotheses and draw general conclusions from specific observations [1]\n• E.g. Kepler used mathematical reasoning to derive laws of planetary motion [1]\n\nSense Perception:\n• Empirical observation provides primary data — the foundation of experimental science [1]\n• E.g. Galileo's telescopic observations challenged geocentric model [1]\n\nOther accepted WOKs (imagination, intuition, emotion) with relevant scientific examples\nMax 6 marks"
+  },
+  {
+    "id": "tok-011",
+    "subjectId": "tok",
+    "topic": "Knowledge & the Knower",
+    "paper": 1,
+    "level": "Both",
+    "format": "ShortAnswer",
+    "commandTerm": "explain",
+    "marks": 6,
+    "prompt": "Explain how bias — whether conscious or unconscious — can affect the production of knowledge in the human sciences.",
+    "markScheme": "Definition of bias in this context:\n• A systematic tendency to favour certain conclusions, often without awareness [1]\n\nConscious bias:\n• Researcher selects data that confirms pre-existing theory; cherry-picking results; publication bias (only positive results published) [1]\n\nUnconscious bias:\n• Observer effect: researcher's presence changes participants' behaviour; demand characteristics in experiments [1]\n• Implicit bias: e.g. gender bias in psychology studies that used only male subjects and generalised results to all humans [1]\n\nReal-life example:\n• Replication crisis in psychology (Bem's ESP study; Stapel fraud) demonstrates how motivated reasoning corrupts knowledge [1]\n• Tuskegee Syphilis Study — researchers' racial bias affected ethical and epistemic decisions [1]\nMax 6 marks"
+  },
+  {
+    "id": "tok-012",
+    "subjectId": "tok",
+    "topic": "Knowledge & Technology",
+    "paper": 1,
+    "level": "Both",
+    "format": "ShortAnswer",
+    "commandTerm": "evaluate",
+    "marks": 8,
+    "prompt": "TOK Exhibition IA Prompt: 'Is there knowledge that should never be sought?' Evaluate this prompt using one concrete object or real-world situation.",
+    "markScheme": "Object must be concrete and linked to a genuine knowledge question [1]\n\nKnowledge claim — some knowledge should not be sought:\n• Research into engineering more lethal pathogens (gain-of-function research) — knowing how to make a deadlier virus may create existential risk [1]\n• Psychological torture research — Milgram obedience experiments raised ethical concerns even if knowledge gained was valuable [1]\n\nCounterclaim — restricting knowledge is dangerous:\n• Censorship of research has historically been used to suppress inconvenient truths (e.g. tobacco industry suppressing cancer links) [1]\n• Scientific progress often requires exploring ethically uncomfortable questions [1]\n\nTOK concepts applied:\n• Knowledge and its consequences; responsibility of the knower; distinction between seeking and applying knowledge [1]\n• Who decides what should not be sought, and how? Power and politics [1]\n\nConclusion: nuanced evaluation of whether limits on knowledge-seeking are ever justified [1]\nMax 8 marks"
+  },
+  {
+    "id": "tok-013",
+    "subjectId": "tok",
+    "topic": "Core Theme",
+    "paper": 1,
+    "level": "Both",
+    "format": "Essay",
+    "commandTerm": "discuss",
+    "marks": 10,
+    "prompt": "\"History is written by the victors.\" Discuss this claim with reference to history as an area of knowledge and at least one other area of knowledge.",
+    "markScheme": "Strong responses will:\n• Unpack the claim: powerful nations/groups shape historical narratives; marginalised voices are excluded [1]\n• AOK — History: colonial histories written from European perspective; indigenous accounts suppressed (e.g. North American history, African colonial history) [1–2]\n• WOK — Language: the language of historical record (who writes, in what language) shapes what is preserved [1]\n• AOK 2 — Human Sciences: sociology of knowledge — Foucault's archive — what gets documented and why [1]\n• Knowledge claim: primary sources, archaeology, oral traditions provide partial counter-narratives [1]\n• Real-life situation: reinterpretation of WWII in Japan vs. China/Korea — same events, radically different national histories [1]\n• Counterclaim: modern historiography increasingly gives voice to marginalised groups; subaltern studies; digital preservation [1]\n• Conclusion: there is truth in the claim, but it is not absolute — scholarship and activism can recover suppressed knowledge [1]"
+  },
+  {
+    "id": "tok-014",
+    "subjectId": "tok",
+    "topic": "Knowledge & the Knower",
+    "paper": 1,
+    "level": "Both",
+    "format": "Essay",
+    "commandTerm": "to what extent",
+    "marks": 10,
+    "prompt": "\"Intuition is a more reliable source of knowledge in the arts than in the natural sciences.\" To what extent do you agree?",
+    "markScheme": "Strong responses will:\n• Define intuition — immediate understanding without conscious reasoning; expert intuition vs. gut feeling [1]\n• AOK — Arts: artists rely on intuitive decisions about form, composition, emotional impact; aesthetic judgement is often immediate [1]\n• Role of intuition in artistic creation vs. reception — both involve non-deliberate knowledge [1]\n• AOK — Natural Sciences: scientists describe 'Eureka' moments; expert intuition guides hypothesis formation (Kary Mullis, PCR) [1]\n• Counterclaim in Arts: intuition in arts must be cultivated through practice; not naive gut feeling — trained intuition [1]\n• Counterclaim in Sciences: scientific method exists precisely because intuition is unreliable — cognitive biases, counterintuitive results (quantum mechanics) [1]\n• Real-life comparison: mathematical intuition — mathematicians use intuition to select proof strategies, yet proof must be rigorous [1]\n• Conclusion: intuition is important in both AOKs but is more socially accepted in Arts; in Sciences it must be verified; 'reliability' is domain-dependent [1]"
+  },
+  {
+    "id": "tok-015",
+    "subjectId": "tok",
+    "topic": "Knowledge & Politics",
+    "paper": 1,
+    "level": "Both",
+    "format": "Essay",
+    "commandTerm": "discuss",
+    "marks": 10,
+    "prompt": "\"The obligation to share knowledge can conflict with the right to privacy.\" Discuss this claim with reference to two areas of knowledge.",
+    "markScheme": "Strong responses will:\n• Define both obligations: duty to share (scientific progress, public health) vs. right to privacy (personal, proprietary) [1]\n• AOK 1 — Natural Sciences/Medicine: tension between open-data science and patient confidentiality; COVID-19 genome sharing vs. individual privacy [1–2]\n• AOK 2 — Human Sciences: social science research using personal data (Facebook emotional contagion study) — did public benefit justify covert data use? [1–2]\n• WOK — Emotion: strong emotional attachment to privacy; equally strong communal need for knowledge (contact tracing, disease surveillance) [1]\n• Real-life situation: whistleblowers (Snowden, Deep Throat) — chose to share knowledge despite legal and personal risk; public interest vs. institutional secrecy [1]\n• AOK — Ethics: consequentialist argument for sharing (maximise public benefit) vs. deontological argument for privacy (persons as ends, not means) [1]\n• Conclusion: tension is genuine and context-dependent; no universal resolution — governance frameworks attempt to balance both [1]"
   }
 ]

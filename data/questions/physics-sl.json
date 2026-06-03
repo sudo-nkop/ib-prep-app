@@ -6,78 +6,20 @@
     "paper": 1,
     "level": "SL",
     "format": "MCQ",
-    "commandTerm": "identify",
+    "commandTerm": "calculate",
     "marks": 1,
-    "prompt": "A ball is thrown vertically upward with an initial velocity of 20 m/s. Taking g = 10 m/s², what is the maximum height reached by the ball?",
+    "prompt": "A ball is thrown vertically upward with an initial velocity of 20 m s⁻¹. Using g = 10 m s⁻², what is the maximum height reached?",
     "options": [
-      { "label": "A", "text": "10 m" },
-      { "label": "B", "text": "20 m" },
-      { "label": "C", "text": "40 m" },
-      { "label": "D", "text": "2 m" }
+      {"label": "A", "text": "10 m"},
+      {"label": "B", "text": "20 m"},
+      {"label": "C", "text": "40 m"},
+      {"label": "D", "text": "200 m"}
     ],
     "correctOption": "B",
-    "markScheme": "B — Using v² = u² - 2gs: at maximum height v = 0, so 0 = 400 - 2(10)s → s = 400/20 = 20 m."
+    "markScheme": "B — Using v² = u² + 2as with v = 0, u = 20, a = −10: 0 = 400 − 20s → s = 400/20 = 20 m."
   },
   {
     "id": "phys-sl-002",
-    "subjectId": "physics-sl",
-    "topic": "Mechanics",
-    "paper": 1,
-    "level": "SL",
-    "format": "ShortAnswer",
-    "commandTerm": "explain",
-    "marks": 5,
-    "prompt": "A 2 kg block slides along a frictionless horizontal surface at 5 m/s and collides with a stationary 3 kg block. After the collision the blocks stick together (perfectly inelastic collision).\n\n(a) Calculate the velocity of the combined blocks after the collision. [2 marks]\n(b) Calculate the kinetic energy lost in the collision. [3 marks]",
-    "markScheme": "(a) By conservation of momentum: m₁u₁ + m₂u₂ = (m₁ + m₂)v\n2 × 5 + 3 × 0 = (2 + 3)v\n10 = 5v → v = 2 m/s  [2 marks]\n(b) KE before = ½ × 2 × 5² = ½ × 2 × 25 = 25 J\nKE after = ½ × 5 × 2² = ½ × 5 × 4 = 10 J\nKE lost = 25 - 10 = 15 J  [3 marks]",
-    "exemplarAnswer": "(a) v = (2×5)/(2+3) = 2 m/s\n(b) KE_lost = 25 - 10 = 15 J. Energy is converted to heat/sound/deformation."
-  },
-  {
-    "id": "phys-sl-003",
-    "subjectId": "physics-sl",
-    "topic": "Mechanics",
-    "paper": 2,
-    "level": "SL",
-    "format": "ShortAnswer",
-    "commandTerm": "examine",
-    "marks": 4,
-    "prompt": "State Newton's three laws of motion and give one real-world example of each law.",
-    "markScheme": "First Law (1 mark + example): An object remains at rest or in uniform motion unless acted on by a net external force. Example: a book resting on a table stays still until pushed.\nSecond Law (1 mark + example): The net force on an object equals its mass times its acceleration (F = ma). Example: a heavier car requires more force to accelerate at the same rate as a lighter car.\nThird Law (1 mark + example): For every action there is an equal and opposite reaction. Example: a rocket expels gas downward (action) and is propelled upward (reaction).",
-    "exemplarAnswer": "1st Law (Inertia): A stationary object stays at rest until a net force acts — e.g., a hockey puck slides indefinitely on frictionless ice.\n2nd Law: F_net = ma — e.g., doubling the engine force on a car doubles its acceleration.\n3rd Law: Forces come in equal and opposite pairs — e.g., swimming: you push water backward, water pushes you forward."
-  },
-  {
-    "id": "phys-sl-004",
-    "subjectId": "physics-sl",
-    "topic": "Waves",
-    "paper": 1,
-    "level": "SL",
-    "format": "MCQ",
-    "commandTerm": "identify",
-    "marks": 1,
-    "prompt": "Which property of a wave determines its perceived pitch when heard as a sound?",
-    "options": [
-      { "label": "A", "text": "Amplitude" },
-      { "label": "B", "text": "Wavelength" },
-      { "label": "C", "text": "Frequency" },
-      { "label": "D", "text": "Wave speed" }
-    ],
-    "correctOption": "C",
-    "markScheme": "C — Frequency determines pitch. Higher frequency → higher pitch. Amplitude determines loudness. Wavelength and wave speed are related to frequency by v = fλ."
-  },
-  {
-    "id": "phys-sl-005",
-    "subjectId": "physics-sl",
-    "topic": "Waves",
-    "paper": 2,
-    "level": "SL",
-    "format": "ShortAnswer",
-    "commandTerm": "explain",
-    "marks": 4,
-    "prompt": "Explain the difference between constructive and destructive interference of waves. Under what conditions does each occur?",
-    "markScheme": "Constructive interference [2 marks]: occurs when two waves meet in phase (path difference = nλ where n is an integer); the amplitudes add together producing a larger resultant amplitude.\nDestructive interference [2 marks]: occurs when two waves meet exactly out of phase (path difference = (n + ½)λ); the amplitudes cancel (partially or fully), producing a smaller or zero resultant amplitude.",
-    "exemplarAnswer": "Constructive interference: waves arrive in phase (crest meets crest), path difference = nλ; resultant amplitude is the sum of individual amplitudes — e.g., bright fringes in Young's double-slit experiment.\nDestructive interference: waves arrive in antiphase (crest meets trough), path difference = (n+½)λ; resultant amplitude is the difference — e.g., dark fringes in double-slit experiment or noise-cancelling headphones."
-  },
-  {
-    "id": "phys-sl-006",
     "subjectId": "physics-sl",
     "topic": "Electricity & Magnetism",
     "paper": 1,
@@ -85,40 +27,212 @@
     "format": "MCQ",
     "commandTerm": "identify",
     "marks": 1,
-    "prompt": "Three resistors of 6 Ω, 3 Ω, and 2 Ω are connected in parallel. What is the total resistance of the combination?",
+    "prompt": "Two resistors of 6 Ω and 3 Ω are connected in parallel. What is the combined resistance?",
     "options": [
-      { "label": "A", "text": "11 Ω" },
-      { "label": "B", "text": "1 Ω" },
-      { "label": "C", "text": "2 Ω" },
-      { "label": "D", "text": "0.5 Ω" }
+      {"label": "A", "text": "9 Ω"},
+      {"label": "B", "text": "4.5 Ω"},
+      {"label": "C", "text": "2 Ω"},
+      {"label": "D", "text": "18 Ω"}
     ],
-    "correctOption": "B",
-    "markScheme": "B — For parallel resistors: 1/R_total = 1/6 + 1/3 + 1/2 = 1/6 + 2/6 + 3/6 = 6/6 = 1. Therefore R_total = 1 Ω."
+    "correctOption": "C",
+    "markScheme": "C — For parallel resistors: 1/R = 1/6 + 1/3 = 1/6 + 2/6 = 3/6 = 1/2. Therefore R = 2 Ω."
+  },
+  {
+    "id": "phys-sl-003",
+    "subjectId": "physics-sl",
+    "topic": "Waves",
+    "paper": 1,
+    "level": "SL",
+    "format": "MCQ",
+    "commandTerm": "identify",
+    "marks": 1,
+    "prompt": "A wave has a frequency of 500 Hz and travels at 340 m s⁻¹. What is its wavelength?",
+    "options": [
+      {"label": "A", "text": "0.68 m"},
+      {"label": "B", "text": "1.47 m"},
+      {"label": "C", "text": "0.34 m"},
+      {"label": "D", "text": "680 m"}
+    ],
+    "correctOption": "A",
+    "markScheme": "A — λ = v/f = 340/500 = 0.68 m."
+  },
+  {
+    "id": "phys-sl-004",
+    "subjectId": "physics-sl",
+    "topic": "Thermal Physics",
+    "paper": 1,
+    "level": "SL",
+    "format": "MCQ",
+    "commandTerm": "calculate",
+    "marks": 1,
+    "prompt": "An ideal gas occupies 2.0 m³ at a pressure of 1.0 × 10⁵ Pa and temperature 300 K. The gas is compressed to 1.0 m³ at the same temperature. What is the new pressure?",
+    "options": [
+      {"label": "A", "text": "0.5 × 10⁵ Pa"},
+      {"label": "B", "text": "1.0 × 10⁵ Pa"},
+      {"label": "C", "text": "2.0 × 10⁵ Pa"},
+      {"label": "D", "text": "4.0 × 10⁵ Pa"}
+    ],
+    "correctOption": "C",
+    "markScheme": "C — Isothermal process: P₁V₁ = P₂V₂. (1.0 × 10⁵)(2.0) = P₂(1.0) → P₂ = 2.0 × 10⁵ Pa."
+  },
+  {
+    "id": "phys-sl-005",
+    "subjectId": "physics-sl",
+    "topic": "Atomic & Nuclear",
+    "paper": 1,
+    "level": "SL",
+    "format": "MCQ",
+    "commandTerm": "identify",
+    "marks": 1,
+    "prompt": "In the photoelectric effect, increasing the intensity of light (at constant frequency above the threshold) will:",
+    "options": [
+      {"label": "A", "text": "Increase the maximum kinetic energy of emitted electrons"},
+      {"label": "B", "text": "Increase the frequency of the emitted electrons"},
+      {"label": "C", "text": "Increase the number of electrons emitted per second"},
+      {"label": "D", "text": "Decrease the work function of the metal"}
+    ],
+    "correctOption": "C",
+    "markScheme": "C — Intensity is proportional to the number of photons per second. Each photon can eject one electron (if it has enough energy), so more photons → more electrons emitted per second. The maximum kinetic energy depends only on frequency, not intensity."
+  },
+  {
+    "id": "phys-sl-006",
+    "subjectId": "physics-sl",
+    "topic": "Mechanics",
+    "paper": 1,
+    "level": "SL",
+    "format": "MCQ",
+    "commandTerm": "identify",
+    "marks": 1,
+    "prompt": "A 2 kg object moving at 6 m s⁻¹ collides with and sticks to a stationary 4 kg object. What is the velocity of the combined mass after the collision?",
+    "options": [
+      {"label": "A", "text": "6 m s⁻¹"},
+      {"label": "B", "text": "3 m s⁻¹"},
+      {"label": "C", "text": "2 m s⁻¹"},
+      {"label": "D", "text": "4 m s⁻¹"}
+    ],
+    "correctOption": "C",
+    "markScheme": "C — Conservation of momentum: p_before = (2)(6) = 12 kg m s⁻¹. p_after = (2+4)v = 6v. So v = 12/6 = 2 m s⁻¹."
   },
   {
     "id": "phys-sl-007",
+    "subjectId": "physics-sl",
+    "topic": "Waves",
+    "paper": 1,
+    "level": "SL",
+    "format": "MCQ",
+    "commandTerm": "identify",
+    "marks": 1,
+    "prompt": "The Doppler effect causes a fire engine siren to appear to have a higher pitch as it approaches an observer. This is because:",
+    "options": [
+      {"label": "A", "text": "The speed of sound increases as the source moves toward the observer"},
+      {"label": "B", "text": "The amplitude of the sound waves increases"},
+      {"label": "C", "text": "The wavelength of sound received by the observer is compressed, increasing the observed frequency"},
+      {"label": "D", "text": "The fire engine produces more sound energy when moving toward the observer"}
+    ],
+    "correctOption": "C",
+    "markScheme": "C — As the source moves toward the observer, successive wavefronts are emitted closer together (compressed wavelength). Since v = fλ and wave speed is constant in the medium, a shorter wavelength means higher observed frequency."
+  },
+  {
+    "id": "phys-sl-008",
+    "subjectId": "physics-sl",
+    "topic": "Atomic & Nuclear",
+    "paper": 1,
+    "level": "SL",
+    "format": "MCQ",
+    "commandTerm": "calculate",
+    "marks": 1,
+    "prompt": "A radioactive isotope has a half-life of 6 hours. What fraction of the original sample remains after 24 hours?",
+    "options": [
+      {"label": "A", "text": "1/2"},
+      {"label": "B", "text": "1/8"},
+      {"label": "C", "text": "1/16"},
+      {"label": "D", "text": "1/4"}
+    ],
+    "correctOption": "C",
+    "markScheme": "C — Number of half-lives in 24 hours = 24/6 = 4. Fraction remaining = (1/2)⁴ = 1/16."
+  },
+  {
+    "id": "phys-sl-009",
+    "subjectId": "physics-sl",
+    "topic": "Mechanics",
+    "paper": 2,
+    "level": "SL",
+    "format": "ShortAnswer",
+    "commandTerm": "calculate",
+    "marks": 7,
+    "prompt": "A projectile is launched from the ground at an angle of 30° above the horizontal with an initial speed of 40 m s⁻¹. Take g = 10 m s⁻² and ignore air resistance.\n\n(a) Calculate the horizontal and vertical components of the initial velocity. [2 marks]\n(b) Calculate the time of flight (total time in the air). [2 marks]\n(c) Calculate the horizontal range of the projectile. [2 marks]\n(d) Calculate the maximum height reached. [1 mark]",
+    "markScheme": "(a) uₓ = u cos30° = 40 × (√3/2) = 40 × 0.866 = 34.6 m s⁻¹ [1]\n    uᵧ = u sin30° = 40 × 0.5 = 20 m s⁻¹ [1]\n\n(b) Time to maximum height: uᵧ = gt_max → t_max = 20/10 = 2 s [1]\n    Total time of flight = 2 × t_max = 4 s [1]\n\n(c) Range = uₓ × t_total = 34.6 × 4 = 138.4 m ≈ 138 m [2]\n    (Accept use of Range = u²sin(2θ)/g = 1600×sin60°/10 = 160×0.866 = 138.6 m)\n\n(d) h_max = uᵧ²/(2g) = 400/20 = 20 m [1]"
+  },
+  {
+    "id": "phys-sl-010",
+    "subjectId": "physics-sl",
+    "topic": "Electricity & Magnetism",
+    "paper": 2,
+    "level": "SL",
+    "format": "ShortAnswer",
+    "commandTerm": "calculate",
+    "marks": 8,
+    "prompt": "A circuit consists of a 12 V battery (internal resistance 0.5 Ω) connected to an external circuit. The external circuit has two resistors: R₁ = 3 Ω connected in series with a parallel combination of R₂ = 4 Ω and R₃ = 12 Ω.\n\n(a) Calculate the combined resistance of R₂ and R₃ in parallel. [2 marks]\n(b) Calculate the total resistance of the circuit including internal resistance. [2 marks]\n(c) Calculate the current through the battery. [1 mark]\n(d) Calculate the terminal voltage of the battery. [1 mark]\n(e) Calculate the power dissipated in R₁. [2 marks]",
+    "markScheme": "(a) 1/R₂₃ = 1/4 + 1/12 = 3/12 + 1/12 = 4/12 → R₂₃ = 3 Ω [2]\n\n(b) R_external = R₁ + R₂₃ = 3 + 3 = 6 Ω\n    R_total = R_external + r = 6 + 0.5 = 6.5 Ω [2]\n\n(c) I = EMF/R_total = 12/6.5 ≈ 1.85 A [1]\n\n(d) V_terminal = EMF − Ir = 12 − 1.85 × 0.5 = 12 − 0.92 ≈ 11.1 V [1]\n\n(e) P_R₁ = I²R₁ = (1.85)² × 3 ≈ 3.42 × 3 ≈ 10.3 W [2: 1 for formula, 1 for answer]"
+  },
+  {
+    "id": "phys-sl-011",
     "subjectId": "physics-sl",
     "topic": "Thermal Physics",
     "paper": 2,
     "level": "SL",
     "format": "ShortAnswer",
-    "commandTerm": "explain",
-    "marks": 5,
-    "prompt": "A sealed container holds 0.5 mol of an ideal gas at a temperature of 300 K and a pressure of 1.5 × 10⁵ Pa.\n\n(a) Calculate the volume of the container. (R = 8.31 J mol⁻¹ K⁻¹) [2 marks]\n(b) The temperature is increased to 450 K at constant pressure. Calculate the new volume. [2 marks]\n(c) State one assumption of the ideal gas model. [1 mark]",
-    "markScheme": "(a) pV = nRT → V = nRT/p = (0.5 × 8.31 × 300) / (1.5 × 10⁵) = 1246.5 / 150000 ≈ 8.31 × 10⁻³ m³  [2 marks]\n(b) At constant pressure, V/T = constant: V₂ = V₁ × T₂/T₁ = 8.31 × 10⁻³ × (450/300) = 8.31 × 10⁻³ × 1.5 ≈ 1.25 × 10⁻² m³  [2 marks]\n(c) Any one of: gas molecules have negligible volume compared to the container; no intermolecular forces between molecules; collisions are perfectly elastic; molecules are in random motion.  [1 mark]",
-    "exemplarAnswer": "(a) V = nRT/p = (0.5 × 8.31 × 300) / 1.5×10⁵ ≈ 8.31 × 10⁻³ m³\n(b) V₂ = 8.31×10⁻³ × (450/300) ≈ 1.25 × 10⁻² m³\n(c) Molecules have negligible volume / no intermolecular forces."
+    "commandTerm": "calculate and explain",
+    "marks": 7,
+    "prompt": "A sample of 0.50 mol of an ideal gas is held in a container at a temperature of 27°C and a pressure of 1.0 × 10⁵ Pa. The universal gas constant R = 8.31 J mol⁻¹ K⁻¹.\n\n(a) Calculate the volume of the gas. [2 marks]\n(b) The gas is heated at constant pressure until its temperature doubles. Calculate the new volume. [2 marks]\n(c) Calculate the work done by the gas during this expansion. [2 marks]\n(d) State the first law of thermodynamics and explain what it means for this process. [1 mark]",
+    "markScheme": "(a) PV = nRT; V = nRT/P = (0.50)(8.31)(300) / (1.0 × 10⁵)\n    V = 1246.5 / 100000 = 0.01247 m³ ≈ 1.25 × 10⁻² m³ [2]\n\n(b) At constant pressure (isobaric): V₁/T₁ = V₂/T₂\n    New T = 600 K; V₂ = V₁ × (T₂/T₁) = 1.25 × 10⁻² × (600/300) = 2.50 × 10⁻² m³ [2]\n\n(c) W = PΔV = P(V₂ − V₁) = (1.0 × 10⁵)(2.50 × 10⁻² − 1.25 × 10⁻²)\n    W = (1.0 × 10⁵)(1.25 × 10⁻²) = 1250 J ≈ 1.25 × 10³ J [2]\n\n(d) First law: ΔU = Q − W. The internal energy of the gas increases because the temperature increases. Heat is supplied (Q > 0) and some is used to do work (W > 0). [1]"
   },
   {
-    "id": "phys-sl-008",
+    "id": "phys-sl-012",
     "subjectId": "physics-sl",
-    "topic": "Thermal Physics",
-    "paper": 1,
+    "topic": "Atomic & Nuclear",
+    "paper": 2,
     "level": "SL",
     "format": "ShortAnswer",
+    "commandTerm": "calculate and explain",
+    "marks": 7,
+    "prompt": "The photoelectric effect is investigated using a metal with a work function φ = 3.2 × 10⁻¹⁹ J. Light of frequency 8.0 × 10¹⁴ Hz is incident on the metal surface. (Planck's constant h = 6.63 × 10⁻³⁴ J s)\n\n(a) Calculate the energy of a single photon of this light. [2 marks]\n(b) Calculate the maximum kinetic energy of an emitted electron. [2 marks]\n(c) Explain why electrons are not emitted if the frequency of light is below the threshold frequency. [2 marks]\n(d) Calculate the threshold frequency for this metal. [1 mark]",
+    "markScheme": "(a) E = hf = (6.63 × 10⁻³⁴)(8.0 × 10¹⁴) = 5.304 × 10⁻¹⁹ J ≈ 5.30 × 10⁻¹⁹ J [2]\n\n(b) KE_max = E − φ = 5.30 × 10⁻¹⁹ − 3.2 × 10⁻¹⁹ = 2.10 × 10⁻¹⁹ J [2]\n\n(c) Each photon transfers a fixed amount of energy E = hf. If this energy is less than the work function φ (minimum energy needed to remove an electron from the metal surface), no electron can be emitted regardless of intensity. Increasing intensity only increases number of photons, not individual photon energy. [2]\n\n(d) At threshold: hf₀ = φ → f₀ = φ/h = (3.2 × 10⁻¹⁹)/(6.63 × 10⁻³⁴) ≈ 4.83 × 10¹⁴ Hz [1]"
+  },
+  {
+    "id": "phys-sl-013",
+    "subjectId": "physics-sl",
+    "topic": "Mechanics",
+    "paper": 2,
+    "level": "SL",
+    "format": "ShortAnswer",
+    "commandTerm": "calculate",
+    "marks": 6,
+    "prompt": "A car of mass 1200 kg is moving at 25 m s⁻¹ when the driver applies the brakes. The car decelerates uniformly and comes to rest after travelling 62.5 m.\n\n(a) Calculate the deceleration of the car. [2 marks]\n(b) Calculate the braking force applied to the car. [2 marks]\n(c) Calculate the kinetic energy lost during braking, and state where this energy goes. [2 marks]",
+    "markScheme": "(a) v² = u² + 2as: 0 = (25)² + 2a(62.5)\n    2a(62.5) = −625 → a = −5 m s⁻² (deceleration = 5 m s⁻²) [2]\n\n(b) F = ma = 1200 × 5 = 6000 N [2]\n\n(c) ΔKE = ½mv² − ½mu² = 0 − ½(1200)(25²) = −375,000 J = −375 kJ [1]\n    Energy is converted primarily into thermal energy (heat) in the brake pads and discs, and some into sound. [1]"
+  },
+  {
+    "id": "phys-sl-014",
+    "subjectId": "physics-sl",
+    "topic": "Waves",
+    "paper": 2,
+    "level": "SL",
+    "format": "Essay",
+    "commandTerm": "describe and explain",
+    "marks": 10,
+    "prompt": "A student sets up a Young's double-slit experiment using a monochromatic light source with wavelength 600 nm. The slit separation is 0.2 mm and the screen is placed 1.5 m from the slits.\n\n(a) Calculate the fringe spacing (distance between adjacent bright fringes) on the screen. [3 marks]\n(b) Describe what would be observed on the screen and explain the physical reason for the pattern. [3 marks]\n(c) The student replaces the monochromatic source with white light. Describe and explain the differences in the observed pattern. [2 marks]\n(d) The slit separation is then doubled. Describe the effect on the fringe spacing and explain why. [2 marks]",
+    "markScheme": "(a) Fringe spacing: y = λD/d = (600 × 10⁻⁹ × 1.5) / (0.2 × 10⁻³)\n    y = (9 × 10⁻⁷) / (2 × 10⁻⁴) = 4.5 × 10⁻³ m = 4.5 mm [3: 1 for formula, 1 for substitution, 1 for answer]\n\n(b) A series of alternating bright and dark fringes (interference pattern) equally spaced across the screen [1]. Bright fringes occur where path difference = nλ (constructive interference — waves arrive in phase) [1]. Dark fringes occur where path difference = (n + ½)λ (destructive interference — waves arrive out of phase and cancel) [1].\n\n(c) Each wavelength in white light produces its own fringe pattern with different spacing [1]. The central fringe is white, but fringes either side appear as spectra (violet closest to centre, red furthest out), since fringe spacing ∝ wavelength. Fringes rapidly overlap and appear as a smeared white pattern away from centre [1].\n\n(d) Fringe spacing halves [1]. Since y = λD/d, doubling d halves y. The fringes become more closely spaced because the angular separation between paths from the two slits to any point is greater [1]."
+  },
+  {
+    "id": "phys-sl-015",
+    "subjectId": "physics-sl",
+    "topic": "Thermal Physics",
+    "paper": 2,
+    "level": "SL",
+    "format": "Essay",
     "commandTerm": "explain",
-    "marks": 4,
-    "prompt": "A 0.5 kg block of copper (specific heat capacity = 385 J kg⁻¹ K⁻¹) is heated from 20°C to 80°C.\n\n(a) Calculate the thermal energy supplied to the copper. [2 marks]\n(b) Explain, in terms of molecular motion, what happens to the copper when thermal energy is supplied. [2 marks]",
-    "markScheme": "(a) Q = mcΔT = 0.5 × 385 × (80 - 20) = 0.5 × 385 × 60 = 11,550 J ≈ 11.6 kJ  [2 marks]\n(b) The thermal energy increases the vibrational kinetic energy of copper atoms in the lattice; atoms vibrate with greater amplitude and frequency, increasing the average kinetic energy (and therefore temperature) of the material.  [2 marks]",
-    "exemplarAnswer": "(a) Q = 0.5 × 385 × 60 = 11,550 J\n(b) Thermal energy increases the vibrational KE of lattice atoms; they oscillate with greater amplitude, raising the material's internal energy and temperature."
+    "marks": 10,
+    "prompt": "A block of ice at 0°C is heated until all the ice has melted and the water has reached 80°C. The mass of the ice is 0.50 kg. Specific heat capacity of water: c = 4200 J kg⁻¹ K⁻¹; Specific latent heat of fusion of ice: L = 3.34 × 10⁵ J kg⁻¹.\n\n(a) Calculate the energy required to melt all the ice at 0°C. [2 marks]\n(b) Calculate the additional energy required to heat the water from 0°C to 80°C. [2 marks]\n(c) Calculate the total energy supplied. [1 mark]\n(d) Explain, at the molecular level, why energy must be supplied to melt ice even though the temperature does not change during melting. [3 marks]\n(e) Sketch a temperature-time graph for this entire heating process, labelling all important features. [2 marks]",
+    "markScheme": "(a) Q₁ = mL = 0.50 × 3.34 × 10⁵ = 1.67 × 10⁵ J = 167,000 J [2]\n\n(b) Q₂ = mcΔT = 0.50 × 4200 × 80 = 168,000 J [2]\n\n(c) Q_total = Q₁ + Q₂ = 167,000 + 168,000 = 335,000 J = 3.35 × 10⁵ J [1]\n\n(d) In ice, water molecules are held in a regular crystal lattice by hydrogen bonds [1]. Energy is needed to break these intermolecular bonds (potential energy increases) rather than to increase the kinetic energy of the molecules [1]. Since temperature is related to average kinetic energy of molecules, and kinetic energy is not increasing during melting, the temperature remains constant at 0°C despite energy being continuously supplied [1].\n\n(e) Graph should show: rising line (if ice heated from below 0°C — accept if started at 0°C); horizontal plateau at 0°C during melting [1]; rising line from 0°C to 80°C after melting complete; labelled axes (temperature/°C on y-axis, time on x-axis) [1]."
   }
 ]
