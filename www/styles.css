@@ -59,8 +59,8 @@ body {
 
 /* ── App Shell ──────────────────────────────────────────── */
 #app {
-  max-width: 640px;
-  margin: 0 auto;
+  max-width: none;
+  width: 100%;
   min-height: 100dvh;
   position: relative;
 }
@@ -82,9 +82,76 @@ body {
   to   { opacity: 1; transform: translateY(0); }
 }
 
+/* ── Top Bar (sticky blue header) ───────────────────────── */
+.top-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #1a3a6e;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  height: 56px;
+  border-bottom: 1px solid #2d5090;
+  flex-shrink: 0;
+}
+
+.top-bar-title {
+  flex: 1;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 700;
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.top-bar-left {
+  width: 64px;
+  display: flex;
+  align-items: center;
+}
+
+.top-bar-right {
+  width: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.top-bar .back-btn {
+  color: white;
+}
+
+/* Subject accent line below top bar */
+.subject-accent-line {
+  height: 3px;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+/* Subject meta row */
+.subject-meta-row {
+  padding: 8px var(--gap);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
 /* ── Screen: Home ────────────────────────────────────────── */
 #screen-home {
+  padding: 0;
+  gap: 0;
+}
+
+.home-content {
   padding: var(--gap);
+  display: flex;
+  flex-direction: column;
   gap: var(--gap);
 }
 
@@ -140,7 +207,7 @@ body {
 .stat-value {
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--primary);
+  color: var(--warn);
   line-height: 1;
   display: block;
 }
@@ -303,28 +370,6 @@ body {
   padding: 0;
 }
 
-.subject-header {
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
-  padding: var(--gap);
-  display: flex;
-  flex-direction: column;
-  gap: var(--gap-sm);
-}
-
-.subject-header-top {
-  display: flex;
-  align-items: center;
-  gap: var(--gap-sm);
-}
-
-.subject-color-bar {
-  width: 4px;
-  height: 48px;
-  border-radius: 4px;
-  flex-shrink: 0;
-}
-
 .subject-name {
   font-size: 1.2rem;
   font-weight: 700;
@@ -344,20 +389,29 @@ body {
   vertical-align: middle;
 }
 
+/* Stats row on subject page — bordered columns */
 .subject-stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--gap-sm);
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
 }
 
 .subject-stat {
   text-align: center;
+  padding: 12px var(--gap-sm);
+  border-right: 1px solid var(--border);
+}
+
+.subject-stat:last-child {
+  border-right: none;
 }
 
 .subject-stat-value {
   font-size: 1.2rem;
   font-weight: 700;
-  color: var(--primary);
+  color: var(--warn);
 }
 
 .subject-stat-label {
@@ -374,10 +428,10 @@ body {
   gap: var(--gap);
 }
 
-/* Mode buttons */
+/* Mode buttons — 2×2 grid */
 .mode-buttons {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--gap-sm);
 }
 
@@ -1057,7 +1111,7 @@ body {
 /* ── Responsive ──────────────────────────────────────────── */
 @media (max-width: 360px) {
   .mode-buttons {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
   }
   .subjects-grid {
     grid-template-columns: 1fr;
