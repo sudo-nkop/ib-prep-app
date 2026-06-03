@@ -1,1 +1,37 @@
-bmFtZTogRGVwbG95IE5leHQuanMgc2l0ZSB0byBQYWdlcwoKb246CiAgcHVzaDoKICAgIGJyYW5jaGVzOiBbbWFpbl0KICB3b3JrZmxvd19kaXNwYXRjaDoKCnBlcm1pc3Npb25zOgogIGNvbnRlbnRzOiByZWFkCiAgcGFnZXM6IHdyaXRlCiAgaWQtdG9rZW46IHdyaXRlCgpjb25jdXJyZW5jeToKICBncm91cDogcGFnZXMKICBjYW5jZWwtaW4tcHJvZ3Jlc3M6IGZhbHNlCgpqb2JzOgogIGJ1aWxkOgogICAgcnVucy1vbjogdWJ1bnR1LWxhdGVzdAogICAgc3RlcHM6CiAgICAgIC0gbmFtZTogQ2hlY2tvdXQKICAgICAgICB1c2VzOiBhY3Rpb25zL2NoZWNrb3V0QHY0CgogICAgICAtIG5hbWU6IFNldHVwIE5vZGUKICAgICAgICB1c2VzOiBhY3Rpb25zL3NldHVwLW5vZGVAdjQKICAgICAgICB3aXRoOgogICAgICAgICAgbm9kZS12ZXJzaW9uOiAyMAogICAgICAgICAgY2FjaGU6IG5wbQoKICAgICAgLSBuYW1lOiBTZXR1cCBQYWdlcwogICAgICAgIHVzZXM6IGFjdGlvbnMvY29uZmlndXJlLXBhZ2VzQHY1CiAgICAgICAgd2l0aDoKICAgICAgICAgIHN0YXRpY19zaXRlX2dlbmVyYXRvcjogbmV4dAoKICAgICAgLSBuYW1lOiBSZXN0b3JlIGNhY2hlCiAgICAgICAgdXNlczogYWN0aW9ucy9jYWNoZUB2NAogICAgICAgIHdpdGg6CiAgICAgICAgICBwYXRoOiB8CiAgICAgICAgICAgIC5uZXh0L2NhY2hlCiAgICAgICAgICBrZXk6ICR7eyBydW5uZXIub3MgfX0tbmV4dGpzLSR7eyBoYXNoRmlsZXMoJyoqL3BhY2thZ2UtbG9jay5qc29uJykgfX0tJHt7IGhhc2hGaWxlcygnKiouW2p0XXMnLCAnKiouW2p0XXN4JykgfX0KICAgICAgICAgIHJlc3RvcmUta2V5czogfAogICAgICAgICAgICAke3sgcnVubmVyLm9zIH19LW5leHRqcy0ke3sgaGFzaEZpbGVzKCcqKi9wYWNrYWdlLWxvY2suanNvbicpIH19LQoKICAgICAgLSBuYW1lOiBJbnN0YWxsIGRlcGVuZGVuY2llcwogICAgICAgIHJ1bjogbnBtIGNpCgogICAgICAtIG5hbWU6IEJ1aWxkIHdpdGggTmV4dC5qcwogICAgICAgIHJ1bjogbnBtIHJ1biBidWlsZAoKICAgICAgLSBuYW1lOiBVcGxvYWQgYXJ0aWZhY3QKICAgICAgICB1c2VzOiBhY3Rpb25zL3VwbG9hZC1wYWdlcy1hcnRpZmFjdEB2MwogICAgICAgIHdpdGg6CiAgICAgICAgICBwYXRoOiAuL291dAoKICBkZXBsb3k6CiAgICBlbnZpcm9ubWVudDoKICAgICAgbmFtZTogZ2l0aHViLXBhZ2VzCiAgICAgIHVybDogJHt7IHN0ZXBzLmRlcGxveW1lbnQub3V0cHV0cy5wYWdlX3VybCB9fQogICAgcnVucy1vbjogdWJ1bnR1LWxhdGVzdAogICAgbmVlZHM6IGJ1aWxkCiAgICBzdGVwczoKICAgICAgLSBuYW1lOiBEZXBsb3kgdG8gR2l0SHViIFBhZ2VzCiAgICAgICAgaWQ6IGRlcGxveW1lbnQKICAgICAgICB1c2VzOiBhY3Rpb25zL2RlcGxveS1wYWdlc0B2NAo=
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./www
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
