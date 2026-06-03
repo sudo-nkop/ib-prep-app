@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#003087" />
+  <meta name="description" content="Practice questions for IB Diploma students" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="IB Prep" />
+
+  <title>IB Prep</title>
+
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23003087'/><text x='16' y='22' text-anchor='middle' font-size='18' font-weight='900' font-family='Georgia,serif' fill='%23c9a227'>IB</text></svg>" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     SCREEN: HOME
+     ═══════════════════════════════════════ -->
+<div id="screen-home" class="screen">
+
+  <!-- Hero -->
+  <div class="home-hero">
+    <div class="logo-badge">
+      <div class="logo-icon">IB</div>
+    </div>
+    <h1>IB Prep</h1>
+    <p class="tagline">Diploma Programme · Practice &amp; Revision</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-row">
+    <div class="stat-cell">
+      <div class="stat-value" id="home-stat-answered">0</div>
+      <div class="stat-label">Answered</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-value" id="home-stat-accuracy">—</div>
+      <div class="stat-label">Accuracy</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-value" id="home-stat-mastered">0</div>
+      <div class="stat-label">Mastered</div>
+    </div>
+  </div>
+
+  <!-- Streak -->
+  <div id="streak-banner" class="streak-banner hidden">
+    <span class="streak-icon">🔥</span>
+    <span><span id="streak-value">0</span>-day streak — keep it up!</span>
+  </div>
+
+  <!-- Subjects -->
+  <div class="section-header">Subjects</div>
+  <div class="subjects-grid" id="subjects-grid">
+    <!-- populated by JS -->
+  </div>
+
+  <!-- Quick Actions -->
+  <div class="section-header">Quick Actions</div>
+  <div class="home-actions">
+    <button class="action-card" onclick="openAdminScreen()">
+      <div class="action-icon">➕</div>
+      <div class="action-title">Add Question</div>
+      <div class="action-desc">Contribute to the bank</div>
+    </button>
+    <button class="action-card" onclick="openRequestScreen('history-hl')">
+      <div class="action-icon">📬</div>
+      <div class="action-title">Request Content</div>
+      <div class="action-desc">Open a GitHub issue</div>
+    </button>
+  </div>
+
+</div><!-- /screen-home -->
+
+
+<!-- ═══════════════════════════════════════
+     SCREEN: SUBJECT
+     ═══════════════════════════════════════ -->
+<div id="screen-subject" class="screen">
+  <div class="app-header">
+    <button class="back-btn" aria-label="Back">&#8592;</button>
+    <span class="header-title sub-title">Subject</span>
+  </div>
+
+  <div class="subject-hero">
+    <div class="sub-color-bar"></div>
+    <h2 class="sub-title"></h2>
+    <div class="sub-badges"></div>
+  </div>
+
+  <div class="subject-stats">
+    <div class="stat-cell">
+      <div class="stat-value" id="sub-stat-total">—</div>
+      <div class="stat-label">Questions</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-value" id="sub-stat-done">—</div>
+      <div class="stat-label">Attempted</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-value" id="sub-stat-mastered">—</div>
+      <div class="stat-label">Mastered</div>
+    </div>
+  </div>
+
+  <div class="section-header">Practice Mode</div>
+  <div class="mode-buttons">
+    <button class="mode-btn primary btn-practice">
+      <span class="mode-icon">📝</span>
+      <span class="mode-name">Practice</span>
+      <span class="mode-desc">Untimed · explanation after each Q</span>
+    </button>
+    <button class="mode-btn btn-exam">
+      <span class="mode-icon">⏱</span>
+      <span class="mode-name">Exam Mode</span>
+      <span class="mode-desc">Timed by paper</span>
+    </button>
+    <button class="mode-btn btn-endless">
+      <span class="mode-icon">♾️</span>
+      <span class="mode-name">Endless</span>
+      <span class="mode-desc">All questions, shuffled</span>
+    </button>
+    <button class="mode-btn btn-request">
+      <span class="mode-icon">📬</span>
+      <span class="mode-name">Request Q</span>
+      <span class="mode-desc">Suggest a new question</span>
+    </button>
+  </div>
+
+  <div class="section-header">Topics</div>
+  <div class="topic-list">
+    <!-- populated by JS -->
+  </div>
+
+</div><!-- /screen-subject -->
+
+
+<!-- ═══════════════════════════════════════
+     SCREEN: SETUP
+     ═══════════════════════════════════════ -->
+<div id="screen-setup" class="screen">
+  <div class="app-header">
+    <button class="back-btn" aria-label="Back">&#8592;</button>
+    <span class="header-title setup-subject-name">Setup</span>
+  </div>
+
+  <div class="setup-content">
+
+    <div class="filter-section">
+      <div class="filter-label">Mode</div>
+      <div class="chip-group" id="setup-modes"></div>
+    </div>
+
+    <div class="filter-section" id="setup-paper-section">
+      <div class="filter-label">Paper</div>
+      <div class="chip-group" id="setup-papers"></div>
+    </div>
+
+    <div class="filter-section">
+      <div class="filter-label">Level</div>
+      <div class="chip-group" id="setup-levels"></div>
+    </div>
+
+    <div class="filter-section">
+      <div class="filter-label">Format</div>
+      <div class="chip-group" id="setup-formats"></div>
+    </div>
+
+    <div class="filter-section">
+      <div class="filter-label">Topics</div>
+      <div class="chip-group" id="setup-topics"></div>
+    </div>
+
+  </div>
+
+  <div class="setup-footer">
+    <div class="q-count-label" id="setup-q-count">0 questions available</div>
+    <button class="btn btn-primary" id="setup-start-btn">Start Session →</button>
+  </div>
+
+</div><!-- /screen-setup -->
+
+
+<!-- ═══════════════════════════════════════
+     SCREEN: QUIZ
+     ═══════════════════════════════════════ -->
+<div id="screen-quiz" class="screen">
+
+  <!-- Fixed quiz header -->
+  <div class="quiz-header">
+    <div class="quiz-header-top">
+      <span class="quiz-subject-name"></span>
+      <span class="quiz-timer hidden"></span>
+    </div>
+    <div class="quiz-progress-bar">
+      <div class="quiz-progress-fill" style="width:0%"></div>
+    </div>
+    <div class="quiz-progress-label">1 / 1</div>
+  </div>
+
+  <!-- Scrollable body -->
+  <div class="quiz-body">
+    <div class="question-meta"></div>
+    <div class="essay-context hidden"></div>
+    <div class="question-prompt"></div>
+
+    <!-- MCQ choices -->
+    <div class="choices-list"></div>
+
+    <!-- Short answer / Essay textarea -->
+    <textarea
+      class="answer-textarea hidden"
+      placeholder="Write your answer here. For essays, include: thesis, two areas of knowledge (with specific examples), and a nuanced conclusion..."
+      rows="8"
+    ></textarea>
+
+    <!-- Feedback / mark scheme panel -->
+    <div class="feedback-panel hidden"></div>
+  </div>
+
+  <!-- Fixed bottom toolbar -->
+  <div class="quiz-toolbar">
+    <div class="toolbar-left">
+      <button class="toolbar-btn btn-prev" aria-label="Previous question">← Prev</button>
+    </div>
+    <div class="toolbar-center">
+      <button class="toolbar-btn primary-action btn-submit">Submit</button>
+      <button class="toolbar-btn primary-action btn-next hidden">Next →</button>
+    </div>
+    <div class="toolbar-right">
+      <button class="toolbar-btn btn-flag" aria-label="Flag for review">🚩</button>
+      <button class="toolbar-btn btn-nav-overlay" aria-label="Question navigator">☰</button>
+      <button class="toolbar-btn" onclick="endQuiz()" aria-label="End quiz">End</button>
+    </div>
+  </div>
+
+</div><!-- /screen-quiz -->
+
+
+<!-- Question navigator overlay -->
+<div id="q-nav-overlay" class="q-nav-overlay" onclick="if(event.target===this)closeNavOverlay()">
+  <div class="q-nav-panel">
+    <div class="q-nav-title">Question Navigator — tap to jump</div>
+    <div class="q-nav-grid"></div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     SCREEN: RESULTS
+     ═══════════════════════════════════════ -->
+<div id="screen-results" class="screen">
+  <div class="app-header">
+    <button class="back-btn" aria-label="Back">&#8592;</button>
+    <span class="header-title">Results</span>
+  </div>
+
+  <div class="results-hero">
+    <div class="results-score-ring">
+      <div class="score-pct">0%</div>
+      <div class="score-sub">0/0</div>
+    </div>
+    <div class="results-subject-name" style="font-size:0.82rem;color:var(--text-muted);margin-bottom:6px;"></div>
+    <div class="results-verdict">Session complete</div>
+    <div class="results-detail"></div>
+  </div>
+
+  <div class="results-breakdown">
+    <!-- populated by JS -->
+  </div>
+
+  <div class="results-actions">
+    <button class="btn btn-primary btn-retry">↩ Try Again</button>
+    <button class="btn btn-secondary btn-home">← Back to Home</button>
+  </div>
+
+  <div class="review-list">
+    <!-- populated by JS -->
+  </div>
+
+</div><!-- /screen-results -->
+
+
+<!-- ═══════════════════════════════════════
+     SCREEN: ADMIN
+     ═══════════════════════════════════════ -->
+<div id="screen-admin" class="screen">
+  <div class="app-header">
+    <button class="back-btn" aria-label="Back">&#8592;</button>
+    <span class="header-title">Add Question</span>
+  </div>
+
+  <form id="admin-form" class="admin-form" onsubmit="return false">
+
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label" for="admin-subject">Subject</label>
+        <select class="form-select" id="admin-subject"></select>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="admin-topic">Topic</label>
+        <select class="form-select" id="admin-topic"></select>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label" for="admin-paper">Paper</label>
+        <select class="form-select" id="admin-paper">
+          <option value="1">Paper 1</option>
+          <option value="2">Paper 2</option>
+          <option value="3">Paper 3</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="admin-level">Level</label>
+        <select class="form-select" id="admin-level">
+          <option value="SL">SL</option>
+          <option value="HL">HL</option>
+          <option value="Both">Both</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label" for="admin-format">Format</label>
+        <select class="form-select" id="admin-format">
+          <option value="MCQ">MCQ</option>
+          <option value="ShortAnswer">Short Answer</option>
+          <option value="Essay">Essay</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="admin-marks">Marks</label>
+        <input class="form-input" type="number" id="admin-marks" min="1" max="20" value="1" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="admin-command">Command Term</label>
+      <input class="form-input" type="text" id="admin-command" placeholder="e.g. identify, explain, discuss" />
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="admin-prompt">Question Prompt *</label>
+      <textarea class="form-textarea" id="admin-prompt" placeholder="Write the full question text here. Use $...$ for inline math and $$...$$ for display math." rows="5"></textarea>
+    </div>
+
+    <div id="admin-choices-section">
+      <div class="form-group">
+        <label class="form-label">Answer Choices (MCQ)</label>
+        <div class="choices-fields">
+          <div class="choice-field-row">
+            <span class="choice-field-label">A</span>
+            <input class="form-input" type="text" id="admin-choice-a" placeholder="Choice A" />
+          </div>
+          <div class="choice-field-row">
+            <span class="choice-field-label">B</span>
+            <input class="form-input" type="text" id="admin-choice-b" placeholder="Choice B" />
+          </div>
+          <div class="choice-field-row">
+            <span class="choice-field-label">C</span>
+            <input class="form-input" type="text" id="admin-choice-c" placeholder="Choice C (optional)" />
+          </div>
+          <div class="choice-field-row">
+            <span class="choice-field-label">D</span>
+            <input class="form-input" type="text" id="admin-choice-d" placeholder="Choice D (optional)" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group" id="admin-answer-section">
+      <label class="form-label" for="admin-answer">Correct Answer</label>
+      <select class="form-select" id="admin-answer">
+        <option value="A">A</option>
+        <option value="B">B</option>
+        <option value="C">C</option>
+        <option value="D">D</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="admin-markscheme">Mark Scheme *</label>
+      <textarea class="form-textarea" id="admin-markscheme" placeholder="IB-style mark scheme. Use bullet points for short answer / essay questions." rows="5"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="admin-explanation">Explanation / Model Notes (optional)</label>
+      <textarea class="form-textarea" id="admin-explanation" placeholder="Additional explanation or model answer notes." rows="4"></textarea>
+    </div>
+
+    <div id="admin-toast" class="admin-toast">✓ Question saved successfully!</div>
+
+    <button type="button" class="btn btn-primary" id="admin-save-btn">Save Question</button>
+
+  </form>
+</div><!-- /screen-admin -->
+
+
+<!-- ═══════════════════════════════════════
+     SCREEN: REQUEST
+     ═══════════════════════════════════════ -->
+<div id="screen-request" class="screen">
+  <div class="app-header">
+    <button class="back-btn" aria-label="Back">&#8592;</button>
+    <span class="header-title">Request Content</span>
+  </div>
+
+  <div class="request-content">
+    <div class="request-info">
+      <strong>How this works:</strong> Filling in this form will open a pre-filled GitHub issue in a new tab. You'll need a GitHub account to submit. The maintainer will review and add quality questions to the bank.
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="req-subject">Subject</label>
+      <select class="form-select" id="req-subject"></select>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="req-type">Request Type</label>
+      <select class="form-select" id="req-type">
+        <option value="More MCQ questions">More MCQ questions</option>
+        <option value="Short Answer questions">Short Answer questions</option>
+        <option value="Essay questions">Essay questions</option>
+        <option value="New topic coverage">New topic coverage</option>
+        <option value="Correction to existing question">Correction to existing question</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="req-topic">Topic / Specific Area</label>
+      <input class="form-input" type="text" id="req-topic" placeholder="e.g. The Cold War, Integration, Circular Motion…" />
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="req-details">Additional Details</label>
+      <textarea class="form-textarea" id="req-details" placeholder="Any specific questions, subtopics, or notes for the maintainer." rows="4"></textarea>
+    </div>
+
+    <button class="btn btn-primary" id="req-submit-btn">Open GitHub Issue →</button>
+    <p class="text-xs text-muted text-center" style="margin-top:8px;">Opens in a new tab. GitHub account required.</p>
+  </div>
+</div><!-- /screen-request -->
+
+
+<!-- App script -->
+<script src="app.js"></script>
+
+</body>
+</html>
