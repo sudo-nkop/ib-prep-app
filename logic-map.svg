@@ -1,0 +1,245 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1100" font-family="system-ui,-apple-system,sans-serif">
+  <rect width="1000" height="1100" fill="#0f172a" rx="14"/>
+
+  <!-- Title -->
+  <text x="500" y="38" text-anchor="middle" fill="#f1f5f9" font-size="20" font-weight="800">app.js — Logic Map</text>
+  <text x="500" y="58" text-anchor="middle" fill="#475569" font-size="11">1 851 lines · every section colour-coded by responsibility</text>
+
+  <!-- ═══ LEGEND ═══ -->
+  <rect x="20" y="72" width="960" height="28" rx="6" fill="#1e293b"/>
+  <circle cx="46" cy="86" r="7" fill="#1d4ed8"/><text x="58" y="90" fill="#94a3b8" font-size="10">Data / Storage</text>
+  <circle cx="160" cy="86" r="7" fill="#059669"/><text x="172" y="90" fill="#94a3b8" font-size="10">Navigation</text>
+  <circle cx="260" cy="86" r="7" fill="#7c3aed"/><text x="272" y="90" fill="#94a3b8" font-size="10">Screens / Render</text>
+  <circle cx="380" cy="86" r="7" fill="#b45309"/><text x="392" y="90" fill="#94a3b8" font-size="10">Quiz Engine</text>
+  <circle cx="480" cy="86" r="7" fill="#dc2626"/><text x="492" y="90" fill="#94a3b8" font-size="10">Answer Handling</text>
+  <circle cx="610" cy="86" r="7" fill="#0891b2"/><text x="622" y="90" fill="#94a3b8" font-size="10">Personalisation</text>
+  <circle cx="730" cy="86" r="7" fill="#475569"/><text x="742" y="90" fill="#94a3b8" font-size="10">Utilities</text>
+  <circle cx="810" cy="86" r="7" fill="#be185d"/><text x="822" y="90" fill="#94a3b8" font-size="10">Events / Boot</text>
+
+  <!-- ═══ ROW 1: CONSTANTS + STORAGE ═══ -->
+  <!-- Constants -->
+  <rect x="20" y="114" width="220" height="130" rx="8" fill="#1e293b" stroke="#1d4ed8" stroke-width="1.5"/>
+  <rect x="20" y="114" width="220" height="24" rx="8" fill="#1d4ed8"/>
+  <rect x="20" y="130" width="220" height="8" fill="#1d4ed8"/>
+  <text x="130" y="130" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">Constants &amp; State</text>
+  <text x="36" y="152" fill="#94a3b8" font-size="10">SUBJECTS[7]  — id, name, color, group, level</text>
+  <text x="36" y="167" fill="#94a3b8" font-size="10">STORAGE_KEYS — bucket names for localStorage</text>
+  <text x="36" y="182" fill="#94a3b8" font-size="10">MASTERY_THRESHOLD = 3 correct answers</text>
+  <text x="36" y="197" fill="#94a3b8" font-size="10">PRACTICE_LIMIT = 15 · TIMED_LIMIT = 10</text>
+  <text x="36" y="212" fill="#64748b" font-size="10">allQuestions[]  screenStack[]  session  subjectState</text>
+  <text x="36" y="227" fill="#64748b" font-size="10">setupState  toastTimeout</text>
+
+  <!-- Storage layer -->
+  <rect x="254" y="114" width="230" height="130" rx="8" fill="#1e293b" stroke="#1d4ed8" stroke-width="1.5"/>
+  <rect x="254" y="114" width="230" height="24" rx="8" fill="#1d4ed8"/>
+  <rect x="254" y="130" width="230" height="8" fill="#1d4ed8"/>
+  <text x="369" y="130" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">Storage Layer (localStorage)</text>
+  <text x="270" y="152" fill="#94a3b8" font-size="10">loadStore(key, fallback)  /  saveStore(key, value)</text>
+  <text x="270" y="167" fill="#94a3b8" font-size="10">getProgress()  recordQuestionAnswer(id, correct)</text>
+  <text x="270" y="182" fill="#94a3b8" font-size="10">isMastered(id)  ← correct ≥ 3</text>
+  <text x="270" y="197" fill="#94a3b8" font-size="10">getStats()  recordGlobalAnswer()  recordSession()</text>
+  <text x="270" y="212" fill="#94a3b8" font-size="10">updateStreak()  ensureStreakUpdated()</text>
+  <text x="270" y="227" fill="#94a3b8" font-size="10">getFlagged()  toggleFlagged(id)</text>
+
+  <!-- Custom Questions -->
+  <rect x="498" y="114" width="220" height="130" rx="8" fill="#1e293b" stroke="#1d4ed8" stroke-width="1.5"/>
+  <rect x="498" y="114" width="220" height="24" rx="8" fill="#1d4ed8"/>
+  <rect x="498" y="130" width="220" height="8" fill="#1d4ed8"/>
+  <text x="608" y="130" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">Data Loading</text>
+  <text x="514" y="152" fill="#94a3b8" font-size="10">loadQuestions()  ← fetch('data/questions.json')</text>
+  <text x="514" y="167" fill="#94a3b8" font-size="10">mergeCustomIntoPool()  ← splices user Qs in</text>
+  <text x="514" y="182" fill="#94a3b8" font-size="10">getCustomQuestions()  addCustomQuestion(q)</text>
+  <text x="514" y="197" fill="#94a3b8" font-size="10">saveCustomQuestions(qs)</text>
+  <text x="514" y="212" fill="#94a3b8" font-size="10">showDataLoadError()  ← shown if fetch fails</text>
+
+  <!-- Subject Helpers -->
+  <rect x="732" y="114" width="248" height="130" rx="8" fill="#1e293b" stroke="#1d4ed8" stroke-width="1.5"/>
+  <rect x="732" y="114" width="248" height="24" rx="8" fill="#1d4ed8"/>
+  <rect x="732" y="130" width="248" height="8" fill="#1d4ed8"/>
+  <text x="856" y="130" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">Subject Helpers</text>
+  <text x="748" y="152" fill="#94a3b8" font-size="10">getSubjectById(id)</text>
+  <text x="748" y="167" fill="#94a3b8" font-size="10">getQuestionsForSubject(id, topicFilter)</text>
+  <text x="748" y="178" fill="#64748b" font-size="9">  → filters by works (author match) then topic</text>
+  <text x="748" y="193" fill="#94a3b8" font-size="10">getTopicsForSubject(id)  ← unique sorted list</text>
+  <text x="748" y="208" fill="#94a3b8" font-size="10">getSubjectStats(id)</text>
+  <text x="748" y="219" fill="#64748b" font-size="9">  → {total, answered, mastered, accuracy, correct}</text>
+
+  <!-- ═══ ROW 2: NAVIGATION + HOME ═══ -->
+  <rect x="20" y="262" width="220" height="110" rx="8" fill="#1e293b" stroke="#059669" stroke-width="1.5"/>
+  <rect x="20" y="262" width="220" height="24" rx="8" fill="#059669"/>
+  <rect x="20" y="278" width="220" height="8" fill="#059669"/>
+  <text x="130" y="278" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">Navigation (Screen Stack)</text>
+  <text x="36" y="300" fill="#94a3b8" font-size="10">showScreen(id, push?)  ← swaps active div</text>
+  <text x="36" y="315" fill="#94a3b8" font-size="10">goBack()  ← pops stack, re-renders dest</text>
+  <text x="36" y="330" fill="#94a3b8" font-size="10">navigateHome()  ← resets stack to ['home']</text>
+  <text x="36" y="348" fill="#64748b" font-size="9">Stack: ['home'] → ['home','subject'] → ['home','subject','quiz']</text>
+
+  <rect x="254" y="262" width="230" height="110" rx="8" fill="#1e293b" stroke="#7c3aed" stroke-width="1.5"/>
+  <rect x="254" y="262" width="230" height="24" rx="8" fill="#7c3aed"/>
+  <rect x="254" y="278" width="230" height="8" fill="#7c3aed"/>
+  <text x="369" y="278" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">Home Screen</text>
+  <text x="270" y="300" fill="#94a3b8" font-size="10">renderHome()  ← fills stats + subject tiles</text>
+  <text x="270" y="315" fill="#94a3b8" font-size="10">buildSubjectTile(subj, stats)</text>
+  <text x="270" y="330" fill="#64748b" font-size="9">  → color, name, group, answered/total, accuracy</text>
+  <text x="270" y="345" fill="#64748b" font-size="9">  → only shows getActiveSubjects() (from profile)</text>
+  <text x="270" y="362" fill="#64748b" font-size="9">  → click → openSubjectScreen(id)</text>
+
+  <rect x="498" y="262" width="482" height="110" rx="8" fill="#1e293b" stroke="#7c3aed" stroke-width="1.5"/>
+  <rect x="498" y="262" width="482" height="24" rx="8" fill="#7c3aed"/>
+  <rect x="498" y="278" width="482" height="8" fill="#7c3aed"/>
+  <text x="739" y="278" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">Subject Screen</text>
+  <text x="514" y="300" fill="#94a3b8" font-size="10">openSubjectScreen(id)  — resets mode/topics, calls renderSubjectScreen()</text>
+  <text x="514" y="315" fill="#94a3b8" font-size="10">renderSubjectScreen()  — top bar, accent line, meta row, stats, mode btns, chips</text>
+  <text x="514" y="330" fill="#94a3b8" font-size="10">renderWorksInfo(id)  — shows selected prescribed texts strip with Edit link</text>
+  <text x="514" y="345" fill="#94a3b8" font-size="10">renderTopicChips()  — All + per-topic toggle chips  →  updateStartButton()</text>
+  <text x="514" y="360" fill="#64748b" font-size="9">updateStartButton()  — counts Qs for current mode/filter, disables if 0</text>
+
+  <!-- ═══ ROW 3: QUIZ ENGINE ═══ -->
+  <rect x="20" y="390" width="470" height="170" rx="8" fill="#1e293b" stroke="#b45309" stroke-width="1.5"/>
+  <rect x="20" y="390" width="470" height="24" rx="8" fill="#b45309"/>
+  <rect x="20" y="406" width="470" height="8" fill="#b45309"/>
+  <text x="255" y="406" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">Quiz Engine</text>
+  <text x="36" y="428" fill="#94a3b8" font-size="10">startQuiz(subjectId, mode, topicFilter)</text>
+  <text x="52" y="441" fill="#64748b" font-size="9">→ getQuestionsForSubject()  →  shuffle()  →  slice by mode limit</text>
+  <text x="52" y="454" fill="#64748b" font-size="9">→ builds session{}  →  showScreen('quiz')  →  renderQuizQuestion()</text>
+  <text x="36" y="469" fill="#94a3b8" font-size="10">startMixedPractice()  ← 20 Qs from all active subjects</text>
+  <text x="36" y="484" fill="#94a3b8" font-size="10">renderQuizQuestion()  ← master render function</text>
+  <text x="52" y="497" fill="#64748b" font-size="9">→ header (subject, counter, timer)  →  progress bar  →  flag state</text>
+  <text x="52" y="510" fill="#64748b" font-size="9">→ renderQuestionMeta(q)  →  prompt text + renderMath()</text>
+  <text x="52" y="523" fill="#64748b" font-size="9">→ if MCQ: renderMCQOptions()   else: renderShortAnswerSection()</text>
+  <text x="36" y="540" fill="#94a3b8" font-size="10">renderQuestionMeta(q)  ← topic · format · commandTerm · marks tags</text>
+  <text x="36" y="553" fill="#94a3b8" font-size="10">renderMCQOptions(q)  ·  renderShortAnswerSection(q)</text>
+
+  <!-- Timer -->
+  <rect x="504" y="390" width="476" height="170" rx="8" fill="#1e293b" stroke="#b45309" stroke-width="1.5"/>
+  <rect x="504" y="390" width="476" height="24" rx="8" fill="#b45309"/>
+  <rect x="504" y="406" width="476" height="8" fill="#b45309"/>
+  <text x="742" y="406" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">Answer Handling + Timer + Navigation</text>
+
+  <text x="520" y="428" fill="#f87171" font-size="10" font-weight="700">MCQ</text>
+  <text x="520" y="441" fill="#94a3b8" font-size="10">handleMCQChoice(q, chosen)  ← fires on option tap</text>
+  <text x="536" y="454" fill="#64748b" font-size="9">→ grades instantly  →  colors btns green/red  →  revealMarkScheme()  →  showNextButton()</text>
+
+  <text x="520" y="470" fill="#f87171" font-size="10" font-weight="700">Essay / Short Answer</text>
+  <text x="520" y="483" fill="#94a3b8" font-size="10">handleShowAnswer(q)  →  revealMarkScheme()  +  show self-mark btns</text>
+  <text x="520" y="496" fill="#94a3b8" font-size="10">handleSelfMark(q, correct)  →  record  +  showNextButton()</text>
+
+  <text x="520" y="512" fill="#f87171" font-size="10" font-weight="700">Navigation</text>
+  <text x="520" y="525" fill="#94a3b8" font-size="10">nextQuestion()  ← idx++ or finishSession()</text>
+  <text x="520" y="538" fill="#94a3b8" font-size="10">finishSession()  ← stop timer · record · showScreen('results')</text>
+  <text x="520" y="551" fill="#94a3b8" font-size="10">abortSession()  ←  back button during quiz</text>
+
+  <text x="740" y="512" fill="#f87171" font-size="10" font-weight="700">Timer</text>
+  <text x="740" y="525" fill="#94a3b8" font-size="10">startSessionTimer()  ← setInterval every 1s</text>
+  <text x="740" y="538" fill="#94a3b8" font-size="10">renderTimerDisplay()  ← M:SS  +  warn/danger class</text>
+  <text x="740" y="551" fill="#64748b" font-size="9">≤60s → .warning (amber)   ≤30s → .danger (red)</text>
+
+  <!-- ═══ ROW 4: RESULTS + ADMIN + REQUEST ═══ -->
+  <rect x="20" y="578" width="310" height="150" rx="8" fill="#1e293b" stroke="#7c3aed" stroke-width="1.5"/>
+  <rect x="20" y="578" width="310" height="24" rx="8" fill="#7c3aed"/>
+  <rect x="20" y="594" width="310" height="8" fill="#7c3aed"/>
+  <text x="175" y="594" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">Results Screen</text>
+  <text x="36" y="616" fill="#94a3b8" font-size="10">renderResultsScreen()</text>
+  <text x="52" y="629" fill="#64748b" font-size="9">→ tally correct/answered  →  pct%</text>
+  <text x="52" y="642" fill="#64748b" font-size="9">→ animate score circle via CSS --pct variable</text>
+  <text x="52" y="655" fill="#64748b" font-size="9">→ getVerdict(pct)  →  5-tier emoji verdict</text>
+  <text x="52" y="668" fill="#64748b" font-size="9">→ renderTopicBreakdown()  →  per-topic bars</text>
+  <text x="36" y="683" fill="#94a3b8" font-size="10">renderTopicBreakdown(questions, answers)</text>
+  <text x="52" y="696" fill="#64748b" font-size="9">→ green ≥70%  amber ≥40%  red &lt;40%  · animated width</text>
+  <text x="36" y="712" fill="#94a3b8" font-size="10">mastered count  ·  duration  ·  mode label</text>
+
+  <rect x="344" y="578" width="298" height="150" rx="8" fill="#1e293b" stroke="#7c3aed" stroke-width="1.5"/>
+  <rect x="344" y="578" width="298" height="24" rx="8" fill="#7c3aed"/>
+  <rect x="344" y="594" width="298" height="8" fill="#7c3aed"/>
+  <text x="493" y="594" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">Admin Screen</text>
+  <text x="360" y="616" fill="#94a3b8" font-size="10">renderAdminScreen()  ← populates subject dropdown</text>
+  <text x="360" y="631" fill="#94a3b8" font-size="10">submitAdminForm()</text>
+  <text x="376" y="644" fill="#64748b" font-size="9">→ validate topic / prompt / markScheme</text>
+  <text x="376" y="657" fill="#64748b" font-size="9">→ build question obj with generated id</text>
+  <text x="376" y="670" fill="#64748b" font-size="9">→ if MCQ: add choices{A,B,C,D} + answer</text>
+  <text x="376" y="683" fill="#64748b" font-size="9">→ addCustomQuestion(q)  →  mergeCustomIntoPool()</text>
+  <text x="360" y="698" fill="#94a3b8" font-size="10">updateAdminMCQVisibility()  ← toggle MCQ fields</text>
+  <text x="360" y="713" fill="#94a3b8" font-size="10">showAdminToast(msg)  ·  highlightInvalid(fieldId)</text>
+
+  <rect x="656" y="578" width="324" height="150" rx="8" fill="#1e293b" stroke="#7c3aed" stroke-width="1.5"/>
+  <rect x="656" y="578" width="324" height="24" rx="8" fill="#7c3aed"/>
+  <rect x="656" y="594" width="324" height="8" fill="#7c3aed"/>
+  <text x="818" y="594" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">Request Screen</text>
+  <text x="672" y="616" fill="#94a3b8" font-size="10">renderRequestScreen()  ← fills subject dropdown</text>
+  <text x="672" y="631" fill="#94a3b8" font-size="10">openGithubIssue()</text>
+  <text x="688" y="644" fill="#64748b" font-size="9">→ reads subject + type + description</text>
+  <text x="688" y="657" fill="#64748b" font-size="9">→ builds title: "[Content Request] Subject — Type"</text>
+  <text x="688" y="670" fill="#64748b" font-size="9">→ builds body: markdown with subject/type/desc</text>
+  <text x="688" y="683" fill="#64748b" font-size="9">→ encodes to github.com/.../issues/new?title=&amp;body=</text>
+  <text x="688" y="698" fill="#64748b" font-size="9">→ window.open(url, '_blank')  ← no server needed</text>
+
+  <!-- ═══ ROW 5: PERSONALISATION ═══ -->
+  <rect x="20" y="746" width="960" height="200" rx="8" fill="#1e293b" stroke="#0891b2" stroke-width="1.5"/>
+  <rect x="20" y="746" width="960" height="24" rx="8" fill="#0891b2"/>
+  <rect x="20" y="762" width="960" height="8" fill="#0891b2"/>
+  <text x="500" y="762" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">Personalisation System</text>
+
+  <!-- col 1 -->
+  <text x="36" y="784" fill="#22d3ee" font-size="10" font-weight="700">Profile (localStorage key: ib_profile)</text>
+  <text x="36" y="798" fill="#94a3b8" font-size="10">getDefaultProfile()  ← all 7 subjects active, no works</text>
+  <text x="36" y="812" fill="#94a3b8" font-size="10">loadProfile() / saveProfile(p)</text>
+  <text x="36" y="826" fill="#94a3b8" font-size="10">getActiveSubjects()  ← filters SUBJECTS by profile.active</text>
+  <text x="36" y="840" fill="#94a3b8" font-size="10">getSubjectLevel(id)  ← 'SL'|'HL'|'Both'</text>
+  <text x="36" y="854" fill="#94a3b8" font-size="10">getSelectedWorks(id) ← array of work IDs</text>
+  <text x="36" y="870" fill="#22d3ee" font-size="10" font-weight="700">PRESCRIBED_TEXTS</text>
+  <text x="36" y="884" fill="#64748b" font-size="9">spanish-a-lit: Lorca, García Márquez, Allende, Borges, Neruda (7 works)</text>
+  <text x="36" y="897" fill="#64748b" font-size="9">english-b-hl: Orwell, Hosseini, Dickens, Atwood, Achebe (5 works)</text>
+  <text x="36" y="912" fill="#64748b" font-size="9">Filtering: question prompt+markScheme searched for author surname / title</text>
+  <text x="36" y="928" fill="#64748b" font-size="9">Fallback: if no Qs match, show all Qs (never strand the user)</text>
+
+  <!-- col 2 -->
+  <text x="360" y="784" fill="#22d3ee" font-size="10" font-weight="700">Setup Wizard (3 steps)</text>
+  <text x="360" y="798" fill="#94a3b8" font-size="10">openSetup(isSettings)  ← entry point</text>
+  <text x="360" y="812" fill="#64748b" font-size="9">  clones profile to draft  →  computeSetupSteps()  →  renderSetupStep()</text>
+  <text x="360" y="826" fill="#94a3b8" font-size="10">Step 1: renderSubjectSelectionStep()</text>
+  <text x="376" y="839" fill="#64748b" font-size="9">  2×N grid of cards  ←→ toggle draft.subjects[id].active</text>
+  <text x="360" y="853" fill="#94a3b8" font-size="10">Step 2: renderLevelStep()</text>
+  <text x="376" y="866" fill="#64748b" font-size="9">  SL/HL chips for subjects where level='Both' (e.g. MAA)</text>
+  <text x="360" y="880" fill="#94a3b8" font-size="10">Step 3: renderWorksStep()  (only if lit subject active)</text>
+  <text x="376" y="893" fill="#64748b" font-size="9">  checklist of prescribed works per lit subject</text>
+  <text x="360" y="907" fill="#94a3b8" font-size="10">setDots(prefix, step, total)  ← progress indicator dots</text>
+  <text x="360" y="921" fill="#94a3b8" font-size="10">computeSetupSteps(draft)  ← 2 or 3 depending on lit</text>
+
+  <!-- col 3 -->
+  <text x="700" y="784" fill="#22d3ee" font-size="10" font-weight="700">Wizard Navigation</text>
+  <text x="700" y="798" fill="#94a3b8" font-size="10">setupNext()  ← Next / Save button</text>
+  <text x="716" y="811" fill="#64748b" font-size="9">  step 1: validate ≥1 subject active</text>
+  <text x="716" y="824" fill="#64748b" font-size="9">  step &lt; total: step++  →  re-render</text>
+  <text x="716" y="837" fill="#64748b" font-size="9">  step = total: mark configured=true  →  saveProfile()  →  finishSetup()</text>
+  <text x="700" y="851" fill="#94a3b8" font-size="10">setupBack()  ← Back button (step--)</text>
+  <text x="700" y="865" fill="#94a3b8" font-size="10">finishSetup()</text>
+  <text x="716" y="878" fill="#64748b" font-size="9">  isSettings=true  →  navigateHome()</text>
+  <text x="716" y="891" fill="#64748b" font-size="9">  first launch    →  showScreen('home')  + renderHome()</text>
+  <text x="700" y="907" fill="#22d3ee" font-size="10" font-weight="700">Dual mode</text>
+  <text x="700" y="921" fill="#64748b" font-size="9">Same wizard renders in screen-setup (onboarding)</text>
+  <text x="700" y="934" fill="#64748b" font-size="9">and screen-settings (⚙️ edit from home)</text>
+
+  <!-- ═══ ROW 6: UTILITIES + EVENTS ═══ -->
+  <rect x="20" y="964" width="440" height="118" rx="8" fill="#1e293b" stroke="#475569" stroke-width="1.5"/>
+  <rect x="20" y="964" width="440" height="24" rx="8" fill="#334155"/>
+  <rect x="20" y="980" width="440" height="8" fill="#334155"/>
+  <text x="240" y="980" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">Utilities</text>
+  <text x="36" y="1002" fill="#94a3b8" font-size="10">renderMath(el)  ← KaTeX renderMathInElement · $…$ and $$…$$</text>
+  <text x="36" y="1016" fill="#94a3b8" font-size="10">showToast(msg, type)  ← floating div · fades after 2.8s</text>
+  <text x="36" y="1030" fill="#94a3b8" font-size="10">escHtml(str) / escAttr(str)  ← XSS-safe string escaping</text>
+  <text x="36" y="1044" fill="#94a3b8" font-size="10">shuffle(arr)  ← Fisher-Yates in-place shuffle</text>
+  <text x="36" y="1058" fill="#94a3b8" font-size="10">formatNumber(n)  ← 1234 → "1.2k"</text>
+  <text x="36" y="1072" fill="#94a3b8" font-size="10">formatDuration(secs)  ← 125 → "2m 5s"</text>
+
+  <rect x="474" y="964" width="506" height="118" rx="8" fill="#1e293b" stroke="#be185d" stroke-width="1.5"/>
+  <rect x="474" y="964" width="506" height="24" rx="8" fill="#be185d"/>
+  <rect x="474" y="980" width="506" height="8" fill="#be185d"/>
+  <text x="727" y="980" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">Event Wiring + Boot</text>
+  <text x="490" y="1002" fill="#94a3b8" font-size="10">wireEvents()  ← all addEventListener calls in one place</text>
+  <text x="506" y="1015" fill="#64748b" font-size="9">setup wizard btns · home (settings⚙, practice-all, add-q, request)</text>
+  <text x="506" y="1028" fill="#64748b" font-size="9">subject (back, mode-btns, start)  ·  quiz (back, flag, show-answer, self-mark, next)</text>
+  <text x="506" y="1041" fill="#64748b" font-size="9">results (practice-again, back-subjects)  ·  admin (back, format-change, submit)</text>
+  <text x="490" y="1056" fill="#94a3b8" font-size="10">handleKeydown(e)  ← A/B/C/D · Space=Next · F=Flag · Esc=Back</text>
+  <text x="490" y="1071" fill="#94a3b8" font-size="10">init()  ← registerSW · wireEvents · loadQuestions · check profile → setup or home</text>
+  <text x="490" y="1085" fill="#64748b" font-size="9">document.addEventListener('DOMContentLoaded', init)  ← boot entry point</text>
+</svg>
