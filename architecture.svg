@@ -1,0 +1,189 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 720" font-family="system-ui, -apple-system, sans-serif">
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#64748b"/>
+    </marker>
+    <marker id="arr-blue" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#3b82f6"/>
+    </marker>
+    <marker id="arr-grn" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#22c55e"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="720" fill="#0f172a" rx="12"/>
+
+  <!-- Title -->
+  <text x="450" y="36" text-anchor="middle" fill="#f1f5f9" font-size="18" font-weight="800">IB Prep App — Architecture</text>
+  <text x="450" y="54" text-anchor="middle" fill="#64748b" font-size="11">Vanilla JS PWA · No build step · Deployed to GitHub Pages</text>
+
+  <!-- ══ BROWSER ZONE ══ -->
+  <rect x="20" y="70" width="530" height="580" rx="10" fill="#0f1e38" stroke="#1e40af" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="36" y="92" fill="#3b82f6" font-size="11" font-weight="700" letter-spacing="1">BROWSER  (Client — everything runs here)</text>
+
+  <!-- index.html box -->
+  <rect x="40" y="104" width="200" height="56" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="140" y="126" text-anchor="middle" fill="#f1f5f9" font-size="12" font-weight="700">index.html</text>
+  <text x="140" y="142" text-anchor="middle" fill="#94a3b8" font-size="10">Shell · 6 screen &lt;div&gt;s</text>
+  <text x="140" y="155" text-anchor="middle" fill="#64748b" font-size="9">KaTeX CDN · links app.js + styles.css</text>
+
+  <!-- styles.css box -->
+  <rect x="260" y="104" width="180" height="56" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="350" y="126" text-anchor="middle" fill="#f1f5f9" font-size="12" font-weight="700">styles.css</text>
+  <text x="350" y="142" text-anchor="middle" fill="#94a3b8" font-size="10">Dark theme design system</text>
+  <text x="350" y="155" text-anchor="middle" fill="#64748b" font-size="9">1 337 lines · CSS variables · responsive</text>
+
+  <!-- app.js -->
+  <rect x="40" y="190" width="490" height="220" rx="8" fill="#162032" stroke="#1d4ed8" stroke-width="1.5"/>
+  <text x="285" y="210" text-anchor="middle" fill="#60a5fa" font-size="12" font-weight="800">app.js  (1 851 lines — all application logic)</text>
+
+  <!-- app.js sections -->
+  <!-- Row 1 -->
+  <rect x="56" y="220" width="140" height="44" rx="6" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="126" y="237" text-anchor="middle" fill="#f1f5f9" font-size="10" font-weight="700">Navigation Stack</text>
+  <text x="126" y="250" text-anchor="middle" fill="#94a3b8" font-size="9">showScreen() / goBack()</text>
+  <text x="126" y="261" text-anchor="middle" fill="#64748b" font-size="9">screenStack array</text>
+
+  <rect x="210" y="220" width="140" height="44" rx="6" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="280" y="237" text-anchor="middle" fill="#f1f5f9" font-size="10" font-weight="700">Quiz Engine</text>
+  <text x="280" y="250" text-anchor="middle" fill="#94a3b8" font-size="9">MCQ auto-grade</text>
+  <text x="280" y="261" text-anchor="middle" fill="#64748b" font-size="9">Self-mark · Timer · Flags</text>
+
+  <rect x="364" y="220" width="152" height="44" rx="6" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="440" y="237" text-anchor="middle" fill="#f1f5f9" font-size="10" font-weight="700">Personalisation</text>
+  <text x="440" y="250" text-anchor="middle" fill="#94a3b8" font-size="9">Setup wizard · Profile</text>
+  <text x="440" y="261" text-anchor="middle" fill="#64748b" font-size="9">Subject · Level · Works</text>
+
+  <!-- Row 2 -->
+  <rect x="56" y="276" width="140" height="44" rx="6" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="126" y="293" text-anchor="middle" fill="#f1f5f9" font-size="10" font-weight="700">Progress Tracking</text>
+  <text x="126" y="306" text-anchor="middle" fill="#94a3b8" font-size="9">Per-question records</text>
+  <text x="126" y="317" text-anchor="middle" fill="#64748b" font-size="9">Mastery (3 correct) · Streak</text>
+
+  <rect x="210" y="276" width="140" height="44" rx="6" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="280" y="293" text-anchor="middle" fill="#f1f5f9" font-size="10" font-weight="700">Results Screen</text>
+  <text x="280" y="306" text-anchor="middle" fill="#94a3b8" font-size="9">Score circle · Verdict</text>
+  <text x="280" y="317" text-anchor="middle" fill="#64748b" font-size="9">Topic breakdown bars</text>
+
+  <rect x="364" y="276" width="152" height="44" rx="6" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="440" y="293" text-anchor="middle" fill="#f1f5f9" font-size="10" font-weight="700">Admin / Request</text>
+  <text x="440" y="306" text-anchor="middle" fill="#94a3b8" font-size="9">Add custom questions</text>
+  <text x="440" y="317" text-anchor="middle" fill="#64748b" font-size="9">GitHub Issues pre-fill</text>
+
+  <!-- Row 3 -->
+  <rect x="56" y="332" width="140" height="44" rx="6" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="126" y="349" text-anchor="middle" fill="#f1f5f9" font-size="10" font-weight="700">KaTeX Rendering</text>
+  <text x="126" y="362" text-anchor="middle" fill="#94a3b8" font-size="9">renderMathInElement()</text>
+  <text x="126" y="373" text-anchor="middle" fill="#64748b" font-size="9">$…$ and $$…$$ syntax</text>
+
+  <rect x="210" y="332" width="140" height="44" rx="6" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="280" y="349" text-anchor="middle" fill="#f1f5f9" font-size="10" font-weight="700">Keyboard Shortcuts</text>
+  <text x="280" y="362" text-anchor="middle" fill="#94a3b8" font-size="9">A/B/C/D · Space=Next</text>
+  <text x="280" y="373" text-anchor="middle" fill="#64748b" font-size="9">F=Flag · Esc=Back</text>
+
+  <rect x="364" y="332" width="152" height="44" rx="6" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="440" y="349" text-anchor="middle" fill="#f1f5f9" font-size="10" font-weight="700">Question Filtering</text>
+  <text x="440" y="362" text-anchor="middle" fill="#94a3b8" font-size="9">By topic · work · level</text>
+  <text x="440" y="373" text-anchor="middle" fill="#64748b" font-size="9">Practice / Timed / Endless</text>
+
+  <!-- localStorage box -->
+  <rect x="40" y="430" width="490" height="60" rx="8" fill="#1a2a1a" stroke="#166534" stroke-width="1.5"/>
+  <text x="285" y="452" text-anchor="middle" fill="#4ade80" font-size="11" font-weight="700">localStorage  (in-browser database)</text>
+  <text x="285" y="467" text-anchor="middle" fill="#94a3b8" font-size="10">ib_profile · ib_progress · ib_stats · ib_flagged · ib_custom_qs</text>
+  <text x="285" y="480" text-anchor="middle" fill="#64748b" font-size="9">Persists between sessions · No server needed · User-specific</text>
+
+  <!-- sw.js box -->
+  <rect x="40" y="510" width="230" height="56" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="155" y="532" text-anchor="middle" fill="#f1f5f9" font-size="12" font-weight="700">sw.js  (Service Worker)</text>
+  <text x="155" y="547" text-anchor="middle" fill="#94a3b8" font-size="10">Cache-first for shell files</text>
+  <text x="155" y="558" text-anchor="middle" fill="#64748b" font-size="9">Offline support · Auto-update</text>
+
+  <!-- manifest.json box -->
+  <rect x="300" y="510" width="230" height="56" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="415" y="532" text-anchor="middle" fill="#f1f5f9" font-size="12" font-weight="700">manifest.json  (PWA)</text>
+  <text x="415" y="547" text-anchor="middle" fill="#94a3b8" font-size="10">Install to home screen</text>
+  <text x="415" y="558" text-anchor="middle" fill="#64748b" font-size="9">IB blue theme · standalone display</text>
+
+  <!-- Screens list -->
+  <rect x="40" y="585" width="490" height="52" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="285" y="602" text-anchor="middle" fill="#94a3b8" font-size="10" font-weight="700">6 Screens (all rendered as &lt;div&gt; swaps in one HTML file)</text>
+  <text x="285" y="618" text-anchor="middle" fill="#64748b" font-size="10">Setup/Onboarding · Home · Subject · Quiz · Results · Admin · Request</text>
+  <text x="285" y="630" text-anchor="middle" fill="#64748b" font-size="9">Navigation via screen stack — no page reloads, no router library</text>
+
+  <!-- ══ GITHUB PAGES / CDN ZONE ══ -->
+  <rect x="580" y="70" width="300" height="340" rx="10" fill="#1a1a0f" stroke="#a16207" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="596" y="92" fill="#ca8a04" font-size="11" font-weight="700" letter-spacing="1">GITHUB PAGES  (Static Host — no server)</text>
+
+  <!-- Repo structure -->
+  <rect x="600" y="104" width="260" height="190" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="730" y="124" text-anchor="middle" fill="#f59e0b" font-size="11" font-weight="700">Repository: sudo-nkop/ib-prep-app</text>
+
+  <text x="616" y="144" fill="#94a3b8" font-size="10" font-weight="700">www/</text>
+  <text x="632" y="159" fill="#64748b" font-size="10">index.html</text>
+  <text x="632" y="173" fill="#64748b" font-size="10">app.js</text>
+  <text x="632" y="187" fill="#64748b" font-size="10">styles.css</text>
+  <text x="632" y="201" fill="#64748b" font-size="10">sw.js · manifest.json</text>
+  <text x="632" y="215" fill="#64748b" font-size="10">data/questions.json  (105 Qs)</text>
+  <text x="632" y="229" fill="#64748b" font-size="10">icons/</text>
+
+  <text x="616" y="248" fill="#94a3b8" font-size="10" font-weight="700">data/questions/</text>
+  <text x="632" y="263" fill="#64748b" font-size="10">history-hl.json · history-sl.json · maa.json</text>
+  <text x="632" y="277" fill="#64748b" font-size="10">physics-sl.json · tok.json · spanish-a-lit.json</text>
+  <text x="632" y="291" fill="#64748b" font-size="10">english-b-hl.json  ← source truth (15 Qs each)</text>
+
+  <!-- GitHub Actions box -->
+  <rect x="600" y="314" width="260" height="80" rx="8" fill="#1a1f2e" stroke="#4f46e5" stroke-width="1"/>
+  <text x="730" y="333" text-anchor="middle" fill="#818cf8" font-size="11" font-weight="700">GitHub Actions (CI/CD)</text>
+  <text x="730" y="349" text-anchor="middle" fill="#94a3b8" font-size="10">.github/workflows/deploy.yml</text>
+  <text x="730" y="363" text-anchor="middle" fill="#64748b" font-size="10">push to main → upload www/ → deploy</text>
+  <text x="730" y="377" text-anchor="middle" fill="#64748b" font-size="9">No build step · Pure file copy</text>
+
+  <!-- ══ EXTERNAL SERVICES ══ -->
+  <rect x="580" y="430" width="300" height="220" rx="10" fill="#1a0f1a" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="596" y="452" fill="#a855f7" font-size="11" font-weight="700" letter-spacing="1">EXTERNAL SERVICES</text>
+
+  <!-- KaTeX CDN -->
+  <rect x="600" y="464" width="120" height="50" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="660" y="482" text-anchor="middle" fill="#f1f5f9" font-size="10" font-weight="700">KaTeX CDN</text>
+  <text x="660" y="496" text-anchor="middle" fill="#94a3b8" font-size="9">Math rendering</text>
+  <text x="660" y="507" text-anchor="middle" fill="#64748b" font-size="9">jsdelivr.net</text>
+
+  <!-- GitHub Issues -->
+  <rect x="740" y="464" width="120" height="50" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+  <text x="800" y="482" text-anchor="middle" fill="#f1f5f9" font-size="10" font-weight="700">GitHub Issues</text>
+  <text x="800" y="496" text-anchor="middle" fill="#94a3b8" font-size="9">Content requests</text>
+  <text x="800" y="507" text-anchor="middle" fill="#64748b" font-size="9">Pre-filled URL only</text>
+
+  <!-- No backend note -->
+  <rect x="600" y="530" width="260" height="106" rx="8" fill="#1a0f0f" stroke="#7f1d1d" stroke-width="1"/>
+  <text x="730" y="550" text-anchor="middle" fill="#f87171" font-size="11" font-weight="700">⚠ No Backend Server</text>
+  <text x="730" y="567" text-anchor="middle" fill="#94a3b8" font-size="10">There is no API, database, or</text>
+  <text x="730" y="581" text-anchor="middle" fill="#94a3b8" font-size="10">server-side code in this app.</text>
+  <text x="730" y="598" text-anchor="middle" fill="#64748b" font-size="10">All data lives in:</text>
+  <text x="730" y="612" text-anchor="middle" fill="#64748b" font-size="10">• questions.json (served as static file)</text>
+  <text x="730" y="626" text-anchor="middle" fill="#64748b" font-size="10">• localStorage (user's browser only)</text>
+
+  <!-- ══ ARROWS ══ -->
+  <!-- Browser fetches from GitHub Pages -->
+  <line x1="550" y1="300" x2="598" y2="200" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr-blue)" stroke-dasharray="5,3"/>
+  <text x="560" y="260" fill="#3b82f6" font-size="9" transform="rotate(-28,560,260)">HTTP GET (first load)</text>
+
+  <!-- SW intercepts -->
+  <line x1="155" y1="510" x2="155" y2="492" stroke="#64748b" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- app.js ↔ localStorage -->
+  <line x1="285" y1="410" x2="285" y2="430" stroke="#22c55e" stroke-width="1.5" marker-end="url(#arr-grn)"/>
+  <text x="298" y="424" fill="#22c55e" font-size="9">read / write</text>
+
+  <!-- app.js reads questions.json -->
+  <line x1="530" y1="305" x2="598" y2="230" stroke="#f59e0b" stroke-width="1.5" marker-end="url(#arr)" stroke-dasharray="4,3"/>
+  <text x="545" y="278" fill="#f59e0b" font-size="9">fetch()</text>
+
+  <!-- GitHub Actions deploy -->
+  <line x1="730" y1="314" x2="730" y2="296" stroke="#4f46e5" stroke-width="1.5" marker-end="url(#arr-blue)"/>
+
+  <!-- Request screen → GitHub Issues -->
+  <line x1="530" y1="375" x2="738" y2="480" stroke="#7c3aed" stroke-width="1" marker-end="url(#arr)" stroke-dasharray="4,3"/>
+  <text x="620" y="420" fill="#a855f7" font-size="9">opens new tab</text>
+</svg>
