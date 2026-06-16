@@ -224,6 +224,14 @@
         </div>
       </div>
 
+      <!-- Paper filter -->
+      <div id="paper-filter-section">
+        <span class="topics-label">Paper</span>
+        <div id="paper-chips" class="topic-chips">
+          <!-- Chips rendered by JS -->
+        </div>
+      </div>
+
       <!-- Topic filter -->
       <div>
         <span class="topics-label">Topics</span>
@@ -294,10 +302,17 @@
         </button>
       </div>
 
+      <!-- Calculator indicator (shown per-question) -->
+      <div id="calc-indicator" class="calc-indicator" style="display:none;"></div>
+
       <!-- Mark scheme reveal -->
       <div id="mark-scheme-box" class="mark-scheme-box">
         <div class="mark-scheme-heading">Mark Scheme</div>
         <div id="mark-scheme-text" class="mark-scheme-text"></div>
+        <div id="workings-section" class="workings-section" style="display:none;">
+          <div class="workings-heading">Worked Solution</div>
+          <div id="workings-text" class="workings-text"></div>
+        </div>
       </div>
 
       <!-- Self-mark buttons (for non-MCQ) -->
@@ -382,9 +397,33 @@
         Back
       </button>
       <div>
-        <div style="font-size:1rem;font-weight:700;">Add Question</div>
+        <div style="font-size:1rem;font-weight:700;">Question Bank</div>
         <div class="text-muted" style="font-size:0.75rem;">Saved locally on this device</div>
       </div>
+    </div>
+
+    <!-- Batch Import Section -->
+    <div class="import-section" style="margin:16px 16px 0;">
+      <div class="import-header">
+        <span style="font-size:0.95rem;font-weight:600;">Batch Import</span>
+        <span class="text-muted" style="font-size:0.75rem;">Upload a JSON file of questions</span>
+      </div>
+      <div class="import-body">
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+          <label class="btn btn-secondary" style="cursor:pointer;font-size:0.85rem;padding:8px 14px;">
+            📂 Choose JSON File
+            <input type="file" id="import-file-input" accept=".json,application/json" style="display:none;">
+          </label>
+          <button id="btn-export-questions" class="btn btn-ghost" style="font-size:0.85rem;padding:8px 14px;">
+            ⬇ Export Custom Qs
+          </button>
+        </div>
+        <div id="import-result" class="import-result" style="display:none;"></div>
+      </div>
+    </div>
+
+    <div style="margin:16px 16px 0;border-top:1px solid var(--border);padding-top:16px;">
+      <div style="font-size:0.95rem;font-weight:600;margin-bottom:12px;">Add Single Question</div>
     </div>
 
     <form id="admin-form" style="display:flex;flex-direction:column;gap:16px;padding:0 16px 32px;" onsubmit="return false;">

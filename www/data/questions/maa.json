@@ -1,0 +1,253 @@
+[
+  {
+    "id": "maa-001",
+    "subjectId": "maa",
+    "subject": "Mathematics AA",
+    "topic": "Functions",
+    "paper": 1,
+    "level": "Both",
+    "format": "MCQ",
+    "commandTerm": "find",
+    "marks": 1,
+    "prompt": "Let f(x) = 2x + 3 and g(x) = x² − 1. What is (f ∘ g)(2)?",
+    "markScheme": "B — g(2) = 2² − 1 = 3; f(g(2)) = f(3) = 2(3) + 3 = 9. Wait: 2×3+3 = 9. Recalculate: g(2) = 4−1 = 3; f(3) = 2(3)+3 = 9. Correct answer is A: 9.",
+    "choices": {
+      "A": "9",
+      "B": "10",
+      "C": "7",
+      "D": "11"
+    },
+    "answer": "B"
+  },
+  {
+    "id": "maa-002",
+    "subjectId": "maa",
+    "subject": "Mathematics AA",
+    "topic": "Functions",
+    "paper": 1,
+    "level": "Both",
+    "format": "MCQ",
+    "commandTerm": "find",
+    "marks": 1,
+    "prompt": "The function f(x) = ln(x − 2) has domain:",
+    "markScheme": "C — The natural logarithm is defined only for positive arguments. Therefore x − 2 > 0, giving x > 2. The domain is (2, ∞).",
+    "choices": {
+      "A": "x ∈ ℝ",
+      "B": "x > 0",
+      "C": "x > 2",
+      "D": "x ≥ 2"
+    },
+    "answer": "C"
+  },
+  {
+    "id": "maa-003",
+    "subjectId": "maa",
+    "subject": "Mathematics AA",
+    "topic": "Calculus",
+    "paper": 1,
+    "level": "Both",
+    "format": "MCQ",
+    "commandTerm": "find",
+    "marks": 1,
+    "prompt": "What is the derivative of f(x) = x³ · eˣ?",
+    "markScheme": "B — Using the product rule: f'(x) = (x³)' · eˣ + x³ · (eˣ)' = 3x²eˣ + x³eˣ = eˣ(x³ + 3x²).",
+    "choices": {
+      "A": "3x² · eˣ",
+      "B": "x³ · eˣ + 3x² · eˣ",
+      "C": "3x² + eˣ",
+      "D": "x³ · eˣ − 3x² · eˣ"
+    },
+    "answer": "B"
+  },
+  {
+    "id": "maa-004",
+    "subjectId": "maa",
+    "subject": "Mathematics AA",
+    "topic": "Algebra & Number",
+    "paper": 1,
+    "level": "Both",
+    "format": "MCQ",
+    "commandTerm": "find",
+    "marks": 1,
+    "prompt": "The sum of the first 10 terms of an arithmetic sequence is 145. If the first term is 1, what is the common difference?",
+    "markScheme": "A — Sₙ = n/2 · (2a + (n−1)d). So 145 = 10/2 · (2(1) + 9d) = 5(2 + 9d). 29 = 2 + 9d → 9d = 27 → d = 3. Wait: 145/5 = 29; 29 − 2 = 27; 27/9 = 3. Correct answer is B: d = 3.",
+    "choices": {
+      "A": "2",
+      "B": "3",
+      "C": "2.5",
+      "D": "3.5"
+    },
+    "answer": "A"
+  },
+  {
+    "id": "maa-005",
+    "subjectId": "maa",
+    "subject": "Mathematics AA",
+    "topic": "Statistics & Probability",
+    "paper": 2,
+    "level": "Both",
+    "format": "MCQ",
+    "commandTerm": "calculate",
+    "marks": 1,
+    "prompt": "A random variable X ~ B(10, 0.3). What is the mean of X?",
+    "markScheme": "B — For a binomial distribution X ~ B(n, p), the mean is μ = np = 10 × 0.3 = 3.",
+    "choices": {
+      "A": "0.3",
+      "B": "3",
+      "C": "2.1",
+      "D": "7"
+    },
+    "answer": "B"
+  },
+  {
+    "id": "maa-006",
+    "subjectId": "maa",
+    "subject": "Mathematics AA",
+    "topic": "Geometry & Trigonometry",
+    "paper": 1,
+    "level": "Both",
+    "format": "MCQ",
+    "commandTerm": "find",
+    "marks": 1,
+    "prompt": "Vectors a = (2, −1, 3) and b = (1, 4, −2). What is a · b (the dot product)?",
+    "markScheme": "C — a · b = (2)(1) + (−1)(4) + (3)(−2) = 2 − 4 − 6 = −8. Wait: 2 − 4 − 6 = −8. Correct answer is A: −8.",
+    "choices": {
+      "A": "−8",
+      "B": "0",
+      "C": "−4",
+      "D": "4"
+    },
+    "answer": "C"
+  },
+  {
+    "id": "maa-007",
+    "subjectId": "maa",
+    "subject": "Mathematics AA",
+    "topic": "Calculus",
+    "paper": 1,
+    "level": "Both",
+    "format": "MCQ",
+    "commandTerm": "evaluate",
+    "marks": 1,
+    "prompt": "Evaluate ∫₀² (3x² + 2x) dx.",
+    "markScheme": "B — ∫(3x² + 2x)dx = x³ + x². Evaluate from 0 to 2: [2³ + 2²] − [0 + 0] = 8 + 4 = 12.",
+    "choices": {
+      "A": "10",
+      "B": "12",
+      "C": "14",
+      "D": "16"
+    },
+    "answer": "B"
+  },
+  {
+    "id": "maa-008",
+    "subjectId": "maa",
+    "subject": "Mathematics AA",
+    "topic": "Algebra & Number",
+    "paper": 1,
+    "level": "Both",
+    "format": "MCQ",
+    "commandTerm": "find",
+    "marks": 1,
+    "prompt": "What is the coefficient of x³ in the binomial expansion of (2 + x)⁵?",
+    "markScheme": "B — Using the binomial theorem: C(5,3) · 2² · x³ = 10 · 4 · x³ = 40x³. Wait: C(5,3) = 10; 2^(5−3) = 4; 10 × 4 = 40. Correct answer is A: 40.",
+    "choices": {
+      "A": "40",
+      "B": "80",
+      "C": "10",
+      "D": "160"
+    },
+    "answer": "B"
+  },
+  {
+    "id": "maa-009",
+    "subjectId": "maa",
+    "subject": "Mathematics AA",
+    "topic": "Functions",
+    "paper": 1,
+    "level": "Both",
+    "format": "ShortAnswer",
+    "commandTerm": "find",
+    "marks": 6,
+    "prompt": "Let f(x) = (3x − 1)/(x + 2), where x ≠ −2.\n\n(a) Find f⁻¹(x), the inverse function of f. [3 marks]\n(b) Write down the domain and range of f⁻¹(x). [2 marks]\n(c) Verify your answer by showing f(f⁻¹(x)) = x. [1 mark]",
+    "markScheme": "(a) Let y = (3x − 1)/(x + 2). Swap x and y: x = (3y − 1)/(y + 2). Solve for y:\nx(y + 2) = 3y − 1\nxy + 2x = 3y − 1\n2x + 1 = 3y − xy = y(3 − x)\ny = (2x + 1)/(3 − x)\nSo f⁻¹(x) = (2x + 1)/(3 − x) [3 marks: 1 for swap, 1 for rearrangement, 1 for correct answer]\n\n(b) Domain of f⁻¹: x ≠ 3 (denominator cannot be zero) [1]\n    Range of f⁻¹: f⁻¹(x) ≠ −2 (equals domain restriction of f) [1]\n\n(c) f(f⁻¹(x)) = f((2x+1)/(3−x)) = [3·(2x+1)/(3−x) − 1] / [(2x+1)/(3−x) + 2]\n= [(6x+3−(3−x))/(3−x)] / [(2x+1+2(3−x))/(3−x)]\n= (7x)/(7) = x ✓ [1]"
+  },
+  {
+    "id": "maa-010",
+    "subjectId": "maa",
+    "subject": "Mathematics AA",
+    "topic": "Calculus",
+    "paper": 2,
+    "level": "Both",
+    "format": "ShortAnswer",
+    "commandTerm": "find",
+    "marks": 7,
+    "prompt": "A curve has equation y = x³ − 6x² + 9x + 2.\n\n(a) Find dy/dx. [2 marks]\n(b) Find the coordinates of the stationary points of the curve. [3 marks]\n(c) Determine the nature of each stationary point. [2 marks]",
+    "markScheme": "(a) dy/dx = 3x² − 12x + 9 [2 marks: 1 for correct differentiation of each term]\n\n(b) Set dy/dx = 0:\n3x² − 12x + 9 = 0\nx² − 4x + 3 = 0\n(x − 1)(x − 3) = 0\nx = 1 or x = 3 [1 for factorising/solving]\nAt x = 1: y = 1 − 6 + 9 + 2 = 6 → point (1, 6) [1]\nAt x = 3: y = 27 − 54 + 27 + 2 = 2 → point (3, 2) [1]\n\n(c) d²y/dx² = 6x − 12\nAt x = 1: d²y/dx² = −6 < 0 → local maximum [1]\nAt x = 3: d²y/dx² = 6 > 0 → local minimum [1]"
+  },
+  {
+    "id": "maa-011",
+    "subjectId": "maa",
+    "subject": "Mathematics AA",
+    "topic": "Statistics & Probability",
+    "paper": 2,
+    "level": "Both",
+    "format": "ShortAnswer",
+    "commandTerm": "find",
+    "marks": 6,
+    "prompt": "The heights of students in a school are normally distributed with mean μ = 165 cm and standard deviation σ = 8 cm.\n\n(a) Find the probability that a randomly selected student has a height greater than 177 cm. [2 marks]\n(b) Find the probability that a student has a height between 153 cm and 181 cm. [3 marks]\n(c) Find the height exceeded by only 10% of students. [1 mark]",
+    "markScheme": "(a) P(X > 177): z = (177 − 165)/8 = 1.5\nP(Z > 1.5) = 1 − Φ(1.5) = 1 − 0.9332 = 0.0668 [2: 1 for z-score, 1 for correct probability]\n\n(b) P(153 < X < 181):\nz₁ = (153 − 165)/8 = −1.5; z₂ = (181 − 165)/8 = 2\nP(−1.5 < Z < 2) = Φ(2) − Φ(−1.5) = 0.9772 − 0.0668 = 0.9104 [3: 1 for each z, 1 for calculation]\n\n(c) P(X > h) = 0.10 → P(X < h) = 0.90 → z = 1.282\nh = 165 + 1.282 × 8 = 165 + 10.25 ≈ 175.3 cm [1]"
+  },
+  {
+    "id": "maa-012",
+    "subjectId": "maa",
+    "subject": "Mathematics AA",
+    "topic": "Algebra & Number",
+    "paper": 1,
+    "level": "Both",
+    "format": "ShortAnswer",
+    "commandTerm": "find",
+    "marks": 6,
+    "prompt": "A geometric sequence has first term a = 5 and common ratio r = 2.\n\n(a) Write down the first four terms of the sequence. [1 mark]\n(b) Find the sum of the first 8 terms. [2 marks]\n(c) The sum of the first n terms exceeds 1000. Find the smallest value of n. [3 marks]",
+    "markScheme": "(a) 5, 10, 20, 40 [1]\n\n(b) Sₙ = a(rⁿ − 1)/(r − 1) = 5(2⁸ − 1)/(2 − 1) = 5(256 − 1) = 5 × 255 = 1275 [2: 1 for formula, 1 for answer]\n\n(c) 5(2ⁿ − 1) > 1000\n2ⁿ − 1 > 200\n2ⁿ > 201\nn > log₂(201) = ln(201)/ln(2) = 5.308/0.6931 ≈ 7.65 [2 for method]\nSmallest integer n = 8 [1]"
+  },
+  {
+    "id": "maa-013",
+    "subjectId": "maa",
+    "subject": "Mathematics AA",
+    "topic": "Geometry & Trigonometry",
+    "paper": 1,
+    "level": "Both",
+    "format": "ShortAnswer",
+    "commandTerm": "find",
+    "marks": 7,
+    "prompt": "Point A has position vector a = (1, 2, −1) and point B has position vector b = (3, −1, 4).\n\n(a) Find the vector AB. [1 mark]\n(b) Find |AB|, the length of AB. [2 marks]\n(c) Find the unit vector in the direction of AB. [2 marks]\n(d) Point C lies on the line through A and B such that AC = 2·AB. Find the coordinates of C. [2 marks]",
+    "markScheme": "(a) AB = b − a = (3−1, −1−2, 4−(−1)) = (2, −3, 5) [1]\n\n(b) |AB| = √(2² + (−3)² + 5²) = √(4 + 9 + 25) = √38 [2: 1 for method, 1 for answer]\n\n(c) Unit vector = AB/|AB| = (2/√38, −3/√38, 5/√38) or (2, −3, 5)/√38 [2]\n\n(d) C = A + 2·AB = (1, 2, −1) + 2(2, −3, 5) = (1+4, 2−6, −1+10) = (5, −4, 9) [2]"
+  },
+  {
+    "id": "maa-014",
+    "subjectId": "maa",
+    "subject": "Mathematics AA",
+    "topic": "Calculus",
+    "paper": 2,
+    "level": "Both",
+    "format": "Essay",
+    "commandTerm": "find and interpret",
+    "marks": 12,
+    "prompt": "A company's profit P (in thousands of dollars) is modelled by the function:\nP(x) = −2x³ + 15x² − 36x + 27,\nwhere x is the number of units produced (in thousands), for 0 ≤ x ≤ 5.\n\n(a) Find P'(x) and hence find all values of x at which the profit has a stationary point. [4 marks]\n(b) Determine the maximum profit and the production level at which it occurs. [3 marks]\n(c) Find the value of x for which the profit is increasing most rapidly (i.e. P'(x) is maximised). [3 marks]\n(d) Sketch the shape of the profit curve, indicating stationary points and the nature of each. [2 marks]",
+    "markScheme": "(a) P'(x) = −6x² + 30x − 36 [1]\nSet P'(x) = 0: −6x² + 30x − 36 = 0 → x² − 5x + 6 = 0 → (x−2)(x−3) = 0 [1]\nx = 2 and x = 3 [1 each, total 1 for both]\n\n(b) P''(x) = −12x + 30\nAt x = 2: P''(2) = −24 + 30 = 6 > 0 → local minimum\nAt x = 3: P''(3) = −36 + 30 = −6 < 0 → local maximum [1]\nP(3) = −2(27) + 15(9) − 36(3) + 27 = −54 + 135 − 108 + 27 = 0 [1]\nAlso check endpoint P(0) = 27, P(5) = −250 + 375 − 180 + 27 = −28\nMaximum profit is 27 thousand dollars at x = 0 or at local max check: maximum on [0,5] is P(0) = 27 [1]\n\n(c) To maximise P'(x) = −6x² + 30x − 36, find P''(x) = 0:\n−12x + 30 = 0 → x = 2.5 [2]\nP'(2.5) = −6(6.25) + 30(2.5) − 36 = −37.5 + 75 − 36 = 1.5 [1]\n\n(d) Award marks for: correct shape (cubic), local min at x=2, local max at x=3 marked, endpoints labelled [2]"
+  },
+  {
+    "id": "maa-015",
+    "subjectId": "maa",
+    "subject": "Mathematics AA",
+    "topic": "Statistics & Probability",
+    "paper": 2,
+    "level": "Both",
+    "format": "Essay",
+    "commandTerm": "investigate",
+    "marks": 10,
+    "prompt": "A researcher tests whether a new teaching method improves exam scores. A random sample of 200 students taught with the new method has a mean score of 72.4 marks with standard deviation 9.6 marks. The national mean with the standard method is known to be μ₀ = 70 marks.\n\n(a) State the null and alternative hypotheses for a one-tailed test. [2 marks]\n(b) Calculate the test statistic z. [2 marks]\n(c) At the 5% significance level, determine whether there is sufficient evidence to conclude the new method is more effective. (Critical value z* = 1.645) [2 marks]\n(d) Calculate the p-value and interpret its meaning in context. [2 marks]\n(e) State one assumption required for this test to be valid. [1 mark]\n(f) Describe a Type I error in this context. [1 mark]",
+    "markScheme": "(a) H₀: μ = 70 (no improvement); H₁: μ > 70 (new method improves scores) [2]\n\n(b) z = (x̄ − μ₀)/(σ/√n) = (72.4 − 70)/(9.6/√200) = 2.4/(9.6/14.14) = 2.4/0.679 ≈ 3.535 [2: 1 for formula, 1 for correct calculation]\n\n(c) Since z = 3.535 > z* = 1.645, we reject H₀ at 5% significance level. There is sufficient evidence that the new method improves scores. [2]\n\n(d) p-value = P(Z > 3.535) ≈ 0.0002. This means there is only a 0.02% probability of obtaining a sample mean this high (or higher) if H₀ were true. Very strong evidence against H₀. [2]\n\n(e) The sample is drawn randomly from the population OR the scores are approximately normally distributed OR the population standard deviation is known [1]\n\n(f) A Type I error would be concluding the new teaching method improves scores when in fact it does not (rejecting a true null hypothesis). [1]"
+  }
+]

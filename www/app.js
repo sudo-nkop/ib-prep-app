@@ -7,24 +7,57 @@
 'use strict';
 
 // ── Subjects ────────────────────────────────────────────────
+// status: 'active' = full question bank, shown prominently
+//         'beta'   = limited questions, shown with Coming Soon badge
 const SUBJECTS = [
-  { id: 'history-hl',    name: 'History HL',            group: 3, level: 'HL',   color: '#b45309' },
-  { id: 'history-sl',    name: 'History SL',            group: 3, level: 'SL',   color: '#d97706' },
-  { id: 'maa',           name: 'Mathematics AA',         group: 5, level: 'Both', color: '#1d4ed8' },
-  { id: 'physics-sl',    name: 'Physics SL',            group: 4, level: 'SL',   color: '#7c3aed' },
-  { id: 'tok',           name: 'Theory of Knowledge',   group: 0, level: 'Both', color: '#059669' },
-  { id: 'english-b-hl', name: 'English B HL',           group: 2, level: 'HL',   color: '#dc2626' },
-  { id: 'spanish-a-lit', name: 'Literatura Española A', group: 1, level: 'Both', color: '#ea580c' },
+  {
+    id: 'maa', name: 'Mathematics AA', group: 5, level: 'Both', color: '#1d4ed8',
+    status: 'active',
+    topics: ['Numbers & Algebra', 'Functions', 'Geometry & Trigonometry', 'Statistics & Probability', 'Calculus'],
+  },
+  {
+    id: 'physics-sl', name: 'Physics SL', group: 4, level: 'SL', color: '#7c3aed',
+    status: 'active',
+    topics: ['Measurements & Uncertainties', 'Mechanics', 'Thermal Physics', 'Waves', 'Electricity & Magnetism', 'Circular Motion & Gravitation', 'Atomic, Nuclear & Particle Physics'],
+  },
+  {
+    id: 'history-hl', name: 'History HL', group: 3, level: 'HL', color: '#b45309',
+    status: 'beta',
+    topics: ['Rights and Protest', 'Move to Global War', 'Authoritarian States', 'The Cold War'],
+  },
+  {
+    id: 'history-sl', name: 'History SL', group: 3, level: 'SL', color: '#d97706',
+    status: 'beta',
+    topics: ['Rights and Protest', 'Move to Global War', 'Causes of World War I'],
+  },
+  {
+    id: 'tok', name: 'Theory of Knowledge', group: 0, level: 'Both', color: '#059669',
+    status: 'beta',
+    topics: ['Knowledge & the Knower', 'Knowledge & Language', 'Knowledge & Technology', 'Knowledge & Politics', 'Core Theme'],
+  },
+  {
+    id: 'english-b-hl', name: 'English B HL', group: 2, level: 'HL', color: '#dc2626',
+    status: 'beta',
+    topics: ['Text Analysis', 'Written Production', 'Listening Comprehension', 'Literary Works', 'Visual Stimulus'],
+  },
+  {
+    id: 'spanish-a-lit', name: 'Literatura Española A', group: 1, level: 'Both', color: '#ea580c',
+    status: 'beta',
+    topics: ['Análisis literario', 'Prosa narrativa', 'Poesía', 'Teatro', 'Obras prescritas', 'Comentario textual'],
+  },
 ];
 
 // ── Constants ────────────────────────────────────────────────
 const STORAGE_KEYS = {
   PROGRESS:       'ib_progress',       // { questionId: { correct: n, attempts: n } }
-  CUSTOM_QS:      'ib_custom_qs',      // array of custom questions added by user
+  CUSTOM_QS:      'ib_custom_qs',      // legacy: array of custom questions
   STATS:          'ib_stats',          // global stats object
   FLAGGED:        'ib_flagged',        // set of flagged question ids
   SESSION_RESULT: 'ib_session_result', // last session result for display
 };
+
+// Per-subject imported questions key prefix: ib_imported_<subjectId>
+const IMPORTED_KEY = (subjectId) => `ib_imported_${subjectId}`;
 
 const MASTERY_THRESHOLD = 3;    // correct answers needed to master a question
 const PRACTICE_LIMIT    = 15;   // max questions in practice mode
@@ -34,6 +67,7 @@ const TIMED_SECS_PER_Q  = 90;   // seconds per question in timed mode
 // ── Application State ────────────────────────────────────────
 let allQuestions = [];          // all loaded questions (remote + custom)
 let screenStack  = [];          // navigation stack of screen IDs
+const subjectQCache = {};       // cache: subjectId → Question[] (bundled)
 
 // Current quiz session
 let session = null;
@@ -57,6 +91,7 @@ let subjectState = {
   subjectId:      null,
   mode:           'practice',
   selectedTopics: new Set(),
+  paperFilter:    null,   // null = all, false = Paper 1 (no calc), true = Paper 2 (calc)
 };
 
 // ── Storage Helpers ──────────────────────────────────────────
@@ -208,15 +243,71 @@ function addCustomQuestion(q) {
   mergeCustomIntoPool();
 }
 
+// ── Imported Questions (batch import per subject) ────────────
+function getImportedQuestions(subjectId) {
+  return loadStore(IMPORTED_KEY(subjectId), []);
+}
+
+function saveImportedQuestions(subjectId, qs) {
+  saveStore(IMPORTED_KEY(subjectId), qs);
+}
+
+function mergeImportedIntoPool(subjectId) {
+  const imported = getImportedQuestions(subjectId);
+  // Remove old imported questions for this subject
+  allQuestions = allQuestions.filter(q => !(q._imported && q.subjectId === subjectId));
+  allQuestions = allQuestions.concat(imported.map(q => ({ ...q, _imported: true })));
+}
+
 // ── Data Loading ─────────────────────────────────────────────
-async function loadQuestions() {
+let questionIndex = null;  // map: subjectId → filename
+
+async function loadQuestionIndex() {
+  try {
+    const res = await fetch('data/questions/index.json');
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    questionIndex = await res.json();
+  } catch (e) {
+    console.warn('No question index found, falling back to legacy questions.json:', e);
+    questionIndex = null;
+  }
+}
+
+async function loadSubjectQuestions(subjectId) {
+  if (subjectQCache[subjectId]) return;  // already loaded
+
+  if (questionIndex && questionIndex[subjectId]) {
+    try {
+      const res = await fetch(`data/questions/${questionIndex[subjectId]}`);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      if (Array.isArray(data)) {
+        subjectQCache[subjectId] = data;
+        // Merge into allQuestions pool
+        allQuestions = allQuestions.filter(q => q.subjectId !== subjectId || q._custom || q._imported);
+        allQuestions = allQuestions.concat(data);
+        mergeImportedIntoPool(subjectId);
+      }
+    } catch (e) {
+      console.error(`Failed to load questions for ${subjectId}:`, e);
+      subjectQCache[subjectId] = [];
+    }
+  } else {
+    subjectQCache[subjectId] = [];
+  }
+}
+
+async function loadAllSubjectQuestions() {
+  // Legacy fallback: load the monolithic file
   try {
     const res = await fetch('data/questions.json');
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
-    if (!Array.isArray(data)) throw new Error('Invalid format');
-    allQuestions = data;
-    console.log(`Loaded ${allQuestions.length} questions from server`);
+    if (Array.isArray(data)) {
+      allQuestions = data;
+      // Mark all subjects as cached
+      for (const s of SUBJECTS) subjectQCache[s.id] = data.filter(q => q.subjectId === s.id);
+    }
   } catch (e) {
     console.error('Failed to load questions.json:', e);
     allQuestions = [];
@@ -225,14 +316,22 @@ async function loadQuestions() {
   mergeCustomIntoPool();
 }
 
+async function loadQuestions() {
+  await loadQuestionIndex();
+  if (questionIndex) {
+    // Lazy loading mode — load active subjects at startup for home screen stats
+    const activeSubjects = SUBJECTS.filter(s => s.status === 'active');
+    await Promise.all(activeSubjects.map(s => loadSubjectQuestions(s.id)));
+  } else {
+    await loadAllSubjectQuestions();
+  }
+  mergeCustomIntoPool();
+}
+
 function mergeCustomIntoPool() {
-  // Remove previously-merged custom questions
   allQuestions = allQuestions.filter(q => !q._custom);
-  // Add current custom questions
   const custom = getCustomQuestions();
-  allQuestions = allQuestions.concat(
-    custom.map(q => ({ ...q, _custom: true }))
-  );
+  allQuestions = allQuestions.concat(custom.map(q => ({ ...q, _custom: true })));
 }
 
 function showDataLoadError() {
@@ -252,7 +351,7 @@ function getSubjectById(id) {
   return SUBJECTS.find(s => s.id === id) || null;
 }
 
-function getQuestionsForSubject(subjectId, topicFilter = null) {
+function getQuestionsForSubject(subjectId, topicFilter = null, paperFilter = null) {
   let qs = allQuestions.filter(q => q.subjectId === subjectId);
 
   // Filter by prescribed works if user has selected specific texts
@@ -262,13 +361,11 @@ function getQuestionsForSubject(subjectId, topicFilter = null) {
       const texts = PRESCRIBED_TEXTS[subjectId];
       const selectedTitles  = selectedIds.map(id => texts.find(t => t.id === id)?.title  || '').filter(Boolean);
       const selectedAuthors = selectedIds.map(id => texts.find(t => t.id === id)?.author || '').filter(Boolean);
-      // Keep a question if its prompt or markScheme mentions any selected author/title
       qs = qs.filter(q => {
         const haystack = ((q.prompt || '') + ' ' + (q.markScheme || '') + ' ' + (q.topic || '')).toLowerCase();
         return selectedTitles.some(t => haystack.includes(t.toLowerCase()))
           || selectedAuthors.some(a => haystack.includes(a.split(' ').pop().toLowerCase()));
       });
-      // Fallback: if filter yields nothing, return all questions (don't leave user stranded)
       if (qs.length === 0) {
         qs = allQuestions.filter(q => q.subjectId === subjectId);
       }
@@ -278,6 +375,16 @@ function getQuestionsForSubject(subjectId, topicFilter = null) {
   if (topicFilter && topicFilter.size > 0) {
     qs = qs.filter(q => topicFilter.has(q.topic));
   }
+
+  // Paper filter: paperFilter = true → calculator allowed, false → no calculator
+  if (paperFilter !== null && paperFilter !== undefined) {
+    qs = qs.filter(q => {
+      if (q.calculator !== undefined) return q.calculator === paperFilter;
+      // Legacy questions without calculator field: use paper number
+      return paperFilter ? (q.paper === 2) : (q.paper === 1);
+    });
+  }
+
   return qs;
 }
 
@@ -385,19 +492,17 @@ function renderHome() {
 
 function buildSubjectTile(subj, sstats) {
   const tile = document.createElement('button');
-  tile.className = 'subject-tile';
+  const isBeta = subj.status === 'beta';
+  tile.className = 'subject-tile' + (isBeta ? ' subject-tile-beta' : '');
   tile.style.setProperty('--subject-color', subj.color);
   tile.setAttribute('role', 'listitem');
   tile.setAttribute('aria-label', subj.name);
 
-  const progressPct = sstats.total > 0
-    ? Math.round((sstats.answered / sstats.total) * 100)
-    : 0;
-
   tile.innerHTML = `
     <span class="subject-tile-badge">${escHtml(subj.level)}</span>
+    ${isBeta ? '<span class="beta-badge">Beta</span>' : ''}
     <div class="subject-tile-name">${escHtml(subj.name)}</div>
-    <div class="subject-tile-meta">Group ${subj.group} &middot; ${sstats.total} questions</div>
+    <div class="subject-tile-meta">Group ${subj.group} &middot; ${sstats.total} question${sstats.total !== 1 ? 's' : ''}</div>
     <div class="subject-tile-stats">
       ${sstats.answered}/${sstats.total} answered &middot; ${sstats.accuracy}% accuracy
     </div>
@@ -408,10 +513,21 @@ function buildSubjectTile(subj, sstats) {
 }
 
 // ── SUBJECT SCREEN ───────────────────────────────────────────
-function openSubjectScreen(subjectId) {
+async function openSubjectScreen(subjectId) {
   subjectState.subjectId      = subjectId;
   subjectState.mode           = 'practice';
   subjectState.selectedTopics = new Set();
+  subjectState.paperFilter    = null;
+
+  // Load this subject's questions if not yet cached
+  if (!subjectQCache[subjectId]) {
+    showScreen('subject');
+    const nameEl = document.getElementById('subject-name-text');
+    if (nameEl) nameEl.textContent = 'Loading…';
+    await loadSubjectQuestions(subjectId);
+    mergeCustomIntoPool();
+  }
+
   renderSubjectScreen();
   showScreen('subject');
 }
@@ -451,6 +567,9 @@ function renderSubjectScreen() {
   // Prescribed works info (for lit subjects)
   renderWorksInfo(subj.id);
 
+  // Paper filter chips (only for subjects with calculator distinction)
+  renderPaperChips();
+
   // Topic chips
   renderTopicChips();
 
@@ -482,6 +601,44 @@ function renderWorksInfo(subjectId) {
   } else {
     const names = selectedIds.map(id => texts.find(t => t.id === id)?.title || id);
     strip.innerHTML = `<span>📚 ${escHtml(names.join(' · '))}</span><button style="margin-left:auto;font-size:0.75rem;color:var(--primary);background:none;border:none;cursor:pointer;" onclick="openSetup(true)">Edit</button>`;
+  }
+}
+
+function renderPaperChips() {
+  const section = document.getElementById('paper-filter-section');
+  if (!section) return;
+
+  // Only show for subjects that have the calculator field on any question
+  const qs = allQuestions.filter(q => q.subjectId === subjectState.subjectId);
+  const hasCalcField = qs.some(q => q.calculator !== undefined);
+
+  if (!hasCalcField) {
+    section.style.display = 'none';
+    return;
+  }
+  section.style.display = '';
+
+  const chipsEl = document.getElementById('paper-chips');
+  chipsEl.innerHTML = '';
+
+  const options = [
+    { label: 'All Papers', value: null },
+    { label: '📵 Paper 1 (No Calc)', value: false },
+    { label: '🖩 Paper 2 (Calculator)', value: true },
+  ];
+
+  for (const opt of options) {
+    const chip = document.createElement('button');
+    chip.type = 'button';
+    const isSelected = subjectState.paperFilter === opt.value;
+    chip.className = 'chip' + (isSelected ? ' selected' : '');
+    chip.textContent = opt.label;
+    chip.addEventListener('click', () => {
+      subjectState.paperFilter = opt.value;
+      renderPaperChips();
+      updateStartButton();
+    });
+    chipsEl.appendChild(chip);
   }
 }
 
@@ -526,11 +683,10 @@ function renderTopicChips() {
 }
 
 function updateStartButton() {
-  let qs = getQuestionsForSubject(subjectState.subjectId, subjectState.selectedTopics);
+  let qs = getQuestionsForSubject(subjectState.subjectId, subjectState.selectedTopics, subjectState.paperFilter);
   const startBtn = document.getElementById('start-btn');
   let count = qs.length;
 
-  // Apply mode-based limits for display
   if (subjectState.mode === 'practice') count = Math.min(count, PRACTICE_LIMIT);
   if (subjectState.mode === 'timed')    count = Math.min(count, TIMED_LIMIT);
   if (subjectState.mode === 'mastery')  count = Math.min(qs.filter(q => !isMastered(q.id)).length, PRACTICE_LIMIT);
@@ -540,8 +696,8 @@ function updateStartButton() {
 }
 
 // ── QUIZ ENGINE ──────────────────────────────────────────────
-function startQuiz(subjectId, mode, topicFilter) {
-  let qs = getQuestionsForSubject(subjectId, topicFilter);
+function startQuiz(subjectId, mode, topicFilter, paperFilter) {
+  let qs = getQuestionsForSubject(subjectId, topicFilter, paperFilter);
 
   if (qs.length === 0) {
     showToast('No questions available for the selected filters.', 'warn');
@@ -643,6 +799,9 @@ function renderQuizQuestion() {
   const qIsFlagged = session.flags.has(q.id);
   document.getElementById('flag-btn').classList.toggle('flagged', qIsFlagged);
 
+  // ── Calculator indicator ──
+  renderCalcIndicator(q);
+
   // ── Question metadata ──
   renderQuestionMeta(q);
 
@@ -677,6 +836,25 @@ function renderQuizQuestion() {
   // immediately show the result state
   if (session.answers[q.id] !== undefined) {
     restoreAnsweredState(q);
+  }
+}
+
+function renderCalcIndicator(q) {
+  const el = document.getElementById('calc-indicator');
+  if (!el) return;
+
+  if (q.calculator === undefined) {
+    el.style.display = 'none';
+    return;
+  }
+
+  el.style.display = 'flex';
+  if (q.calculator) {
+    el.className = 'calc-indicator calc-allowed';
+    el.textContent = '🖩 Calculator allowed (Paper 2)';
+  } else {
+    el.className = 'calc-indicator calc-forbidden';
+    el.textContent = '📵 No calculator (Paper 1)';
   }
 }
 
@@ -806,10 +984,27 @@ function handleSelfMark(q, correct) {
 function revealMarkScheme(q) {
   const box = document.getElementById('mark-scheme-box');
   const textEl = document.getElementById('mark-scheme-text');
+  const workingsSection = document.getElementById('workings-section');
+  const workingsText = document.getElementById('workings-text');
 
   box.classList.add('visible');
   textEl.textContent = q.markScheme || 'No mark scheme provided.';
+
+  if (q.workings && workingsSection && workingsText) {
+    workingsSection.style.display = '';
+    workingsText.innerHTML = formatWorkings(q.workings);
+  } else if (workingsSection) {
+    workingsSection.style.display = 'none';
+  }
+
   renderMath(box);
+}
+
+function formatWorkings(text) {
+  // Highlight IB mark markers: [M1], [A1], [R1], [AG], [C1], [FT], [N2] etc.
+  const escaped = escHtml(text);
+  return escaped.replace(/\[([MARAGCFTNacmnftg0-9]{1,3})\]/g,
+    '<span class="mark-token">[$1]</span>');
 }
 
 function showNextButton() {
@@ -1041,18 +1236,159 @@ function renderTopicBreakdown(questions, answers) {
 
 // ── ADMIN SCREEN ─────────────────────────────────────────────
 function renderAdminScreen() {
-  // Populate subject dropdown
   const sel = document.getElementById('admin-subject');
   sel.innerHTML = SUBJECTS.map(s =>
     `<option value="${escAttr(s.id)}">${escHtml(s.name)}</option>`
   ).join('');
 
-  // Reset form
   const form = document.getElementById('admin-form');
   if (form) form.reset();
 
   updateAdminMCQVisibility();
   hideAdminToast();
+  resetImportResult();
+}
+
+// ── Batch Import ─────────────────────────────────────────────
+function validateImportQuestion(q, index) {
+  const errors = [];
+  if (!q.id)        errors.push('missing id');
+  if (!q.subjectId) errors.push('missing subjectId');
+  if (!q.topic)     errors.push('missing topic');
+  if (!q.format)    errors.push('missing format');
+  if (!q.prompt)    errors.push('missing prompt');
+  if (q.marks == null) errors.push('missing marks');
+  if (q.format === 'MCQ') {
+    if (!q.choices || typeof q.choices !== 'object') errors.push('MCQ missing choices');
+    if (!q.answer) errors.push('MCQ missing answer');
+  }
+  return errors;
+}
+
+function importQuestionsFromFile(file) {
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    let data;
+    try {
+      data = JSON.parse(e.target.result);
+    } catch {
+      showImportResult({ error: 'Invalid JSON file — could not parse.' });
+      return;
+    }
+
+    if (!Array.isArray(data)) {
+      showImportResult({ error: 'File must contain a JSON array of questions.' });
+      return;
+    }
+
+    const results = { added: 0, duplicates: 0, errors: [] };
+
+    // Group by subjectId
+    const bySubject = {};
+    for (const [i, q] of data.entries()) {
+      const errs = validateImportQuestion(q, i);
+      if (errs.length > 0) {
+        results.errors.push(`Q${i + 1} (${q.id || 'no id'}): ${errs.join(', ')}`);
+        continue;
+      }
+      bySubject[q.subjectId] = bySubject[q.subjectId] || [];
+      bySubject[q.subjectId].push(q);
+    }
+
+    // Merge per subject
+    for (const [subjectId, qs] of Object.entries(bySubject)) {
+      const existing = getImportedQuestions(subjectId);
+      const existingIds = new Set(existing.map(q => q.id));
+      // Also deduplicate against bundled questions
+      const bundled = subjectQCache[subjectId] || [];
+      const bundledIds = new Set(bundled.map(q => q.id));
+
+      const toAdd = [];
+      for (const q of qs) {
+        if (existingIds.has(q.id) || bundledIds.has(q.id)) {
+          results.duplicates++;
+        } else {
+          toAdd.push(q);
+          existingIds.add(q.id);
+          results.added++;
+        }
+      }
+
+      if (toAdd.length > 0) {
+        saveImportedQuestions(subjectId, [...existing, ...toAdd]);
+        mergeImportedIntoPool(subjectId);
+      }
+    }
+
+    showImportResult(results);
+    // Refresh home if visible
+    if (screenStack[screenStack.length - 1] === 'home') renderHome();
+  };
+  reader.readAsText(file);
+}
+
+function exportCustomQuestions() {
+  // Collect all imported + custom questions
+  const all = [];
+  for (const s of SUBJECTS) {
+    all.push(...getImportedQuestions(s.id));
+  }
+  all.push(...getCustomQuestions());
+
+  if (all.length === 0) {
+    showToast('No custom or imported questions to export.', 'warn');
+    return;
+  }
+
+  const blob = new Blob([JSON.stringify(all, null, 2)], { type: 'application/json' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = `ib-questions-export-${new Date().toISOString().slice(0, 10)}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast(`Exported ${all.length} questions.`);
+}
+
+function showImportResult(results) {
+  const el = document.getElementById('import-result');
+  if (!el) return;
+  el.style.display = '';
+
+  if (results.error) {
+    el.className = 'import-result import-result-error';
+    el.textContent = '❌ ' + results.error;
+    return;
+  }
+
+  let html = `<div class="import-summary">`;
+  html += `<span class="import-added">✅ ${results.added} added</span>`;
+  html += `<span class="import-dup">🔁 ${results.duplicates} duplicates</span>`;
+  if (results.errors.length > 0) {
+    html += `<span class="import-err">⚠️ ${results.errors.length} error${results.errors.length !== 1 ? 's' : ''}</span>`;
+  }
+  html += `</div>`;
+
+  if (results.errors.length > 0) {
+    html += `<ul class="import-error-list">`;
+    for (const err of results.errors.slice(0, 5)) {
+      html += `<li>${escHtml(err)}</li>`;
+    }
+    if (results.errors.length > 5) {
+      html += `<li>…and ${results.errors.length - 5} more</li>`;
+    }
+    html += `</ul>`;
+  }
+
+  el.className = 'import-result';
+  el.innerHTML = html;
+}
+
+function resetImportResult() {
+  const el = document.getElementById('import-result');
+  if (el) el.style.display = 'none';
+  const fileInput = document.getElementById('import-file-input');
+  if (fileInput) fileInput.value = '';
 }
 
 function updateAdminMCQVisibility() {
@@ -1335,6 +1671,7 @@ function wireEvents() {
       subjectState.subjectId,
       subjectState.mode,
       subjectState.selectedTopics,
+      subjectState.paperFilter,
     );
   });
 
@@ -1405,6 +1742,13 @@ function wireEvents() {
   document.getElementById('admin-format').addEventListener('change', updateAdminMCQVisibility);
 
   document.getElementById('admin-submit').addEventListener('click', submitAdminForm);
+
+  document.getElementById('import-file-input').addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (file) importQuestionsFromFile(file);
+  });
+
+  document.getElementById('btn-export-questions').addEventListener('click', exportCustomQuestions);
 
   // ── Request ───────────────────────────────────────────────
   document.getElementById('back-from-request').addEventListener('click', goBack);
@@ -1836,9 +2180,14 @@ async function init() {
   wireEvents();
   await loadQuestions();
 
+  // Merge any imported questions for loaded subjects
+  for (const s of SUBJECTS) {
+    if (subjectQCache[s.id]) mergeImportedIntoPool(s.id);
+  }
+  mergeCustomIntoPool();
+
   const profile = loadProfile();
   if (!profile || !profile.configured) {
-    // First launch — run onboarding
     openSetup(false);
   } else {
     screenStack = ['home'];
