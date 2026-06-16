@@ -1,0 +1,9 @@
+{
+  "history-hl": "questions/history-hl.json",
+  "history-sl": "questions/history-sl.json",
+  "maa": "questions/maa.json",
+  "physics-sl": "questions/physics-sl.json",
+  "tok": "questions/tok.json",
+  "english-b-hl": "questions/english-b-hl.json",
+  "spanish-a-lit": "questions/spanish-a-lit.json"
+}
